@@ -27,19 +27,24 @@ public class SplashScreenActivity extends AppCompatActivity {
         anim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
+                //overridePendingTransition(R.anim.fade_in, R.anim.bounce_inter);
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                overridePendingTransition(R.anim.bounce_inter, R.anim.zoom_out);
                 startActivity(intent);
+
                 finish();
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
+
             }
         });
 
         imageView.startAnimation(anim);
+
     }
 }
