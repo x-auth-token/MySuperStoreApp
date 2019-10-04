@@ -27,14 +27,14 @@ public class SplashScreenActivity extends AppCompatActivity {
         anim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                //overridePendingTransition(R.anim.fade_in, R.anim.bounce_inter);
+                overridePendingTransition(R.anim.fade_in, R.anim.zoom_out);
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                overridePendingTransition(R.anim.bounce_inter, R.anim.zoom_out);
-                startActivity(intent);
 
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.zoom_out);
                 finish();
             }
 
