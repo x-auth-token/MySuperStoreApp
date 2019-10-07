@@ -34,7 +34,7 @@ dependencies {
     // Adding Firebase and FirebaseUI Authentication
     implementation 'com.google.firebase:firebase-auth:19.0.0'
     implementation 'com.firebaseui:firebase-ui-auth:6.0.2'
-    implementation 'com.facebook.android:facebook-android-sdk:5.5.0'
+    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
     implementation 'com.firebaseui:firebase-ui:6.0.2'
     // Adding Junit5 Support
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
