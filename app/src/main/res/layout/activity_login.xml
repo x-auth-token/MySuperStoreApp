@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/registerEmailField"
+                android:id="@+id/activity_login_et_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -60,7 +60,7 @@
                 android:visibility="visible" />
 
             <EditText
-                android:id="@+id/registerPasswordField"
+                android:id="@+id/activity_login_et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -77,10 +77,22 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/activity_login_tv_notification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text='""' />
+
+            <Button
+                android:id="@+id/activity_login_btn_forgot_password"
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                android:background="@drawable/rounded_button"
+                android:fontFamily="sans-serif-thin"
+                android:text="Forgot Password?"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -95,7 +107,7 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/loginButton"
+                        android:id="@+id/activity_login_btn_login"
                         android:layout_width="match_parent"
                         android:layout_height="27dp"
                         android:layout_marginBottom="5dp"
@@ -111,50 +123,59 @@
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/registerButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="27dp"
-                        android:layout_marginBottom="5dp"
-                        android:alpha="0.95"
-                        android:background="@drawable/rounded_button"
-                        android:backgroundTint="#FF0AB104"
-                        android:fontFamily="sans-serif-thin"
-                        android:onClick="login"
-                        android:text="Register"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="#FFFFFF"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <Button
-                        android:id="@+id/facebookButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="27dp"
-                        android:layout_marginBottom="5dp"
-                        android:alpha="0.95"
-                        android:background="@drawable/rounded_button"
-                        android:backgroundTint="@color/com_facebook_blue"
-                        android:fontFamily="sans-serif-thin"
-                        android:onClick="login"
-                        android:text="Login with Facebook"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="#FFFFFF"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <Button
-                        android:id="@+id/googleButton"
+                        android:id="@+id/activity_login_btn_google_login"
                         android:layout_width="match_parent"
                         android:layout_height="27dp"
                         android:layout_marginBottom="5dp"
                         android:alpha="0.95"
                         android:background="@drawable/rounded_button"
                         android:backgroundTint="#FFFFFF"
-                        android:fontFamily="sans-serif-thin"
+                        android:drawableLeft="@drawable/googleg_standard_color_18"
+                        android:drawablePadding="24dp"
+                        android:fontFamily="@font/roboto_medium"
                         android:onClick="login"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
                         android:text="Sign in with Google"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="#000000"
+                        android:textColor="#4285F4"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/activity_login_btn_facebook_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="27dp"
+                        android:layout_marginBottom="5dp"
+                        android:alpha="0.95"
+                        android:background="@drawable/rounded_button"
+                        android:backgroundTint="#4267b2"
+                        android:drawableLeft="@drawable/f_logo"
+                        android:drawablePadding="10dp"
+
+                        android:fontFamily="sans-serif-thin"
+                        android:onClick="login"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="Login with Facebook"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+
+                    <Button
+                        android:id="@+id/activity_login_btn_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="27dp"
+                        android:layout_marginBottom="5dp"
+                        android:alpha="0.95"
+                        android:background="@drawable/rounded_button"
+                        android:fontFamily="sans-serif-thin"
+                        android:onClick="login"
+                        android:text="No Account? Create One"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="#FFFFFF"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -163,7 +184,7 @@
                         android:layout_height="wrap_content" />
 
                     <ProgressBar
-                        android:id="@+id/progressBar"
+                        android:id="@+id/activity_login_pb_progress"
                         style="?android:attr/progressBarStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
