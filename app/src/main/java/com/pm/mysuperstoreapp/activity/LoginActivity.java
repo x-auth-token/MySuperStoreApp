@@ -2,23 +2,18 @@ package com.pm.mysuperstoreapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.transition.Fade;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
-import android.transition.TransitionManager;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 
+import android.os.Bundle;
+
+import android.view.View;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.pm.mysuperstoreapp.R;
+
 
 public class LoginActivity extends AppCompatActivity {
 
-
-
+   private FirebaseAuth mAuth;
 
 
     @Override
@@ -28,6 +23,9 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+
+
     public void login(View view) {
+
     }
 }
