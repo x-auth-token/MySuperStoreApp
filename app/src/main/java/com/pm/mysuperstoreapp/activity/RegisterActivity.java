@@ -64,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     public void registerNewUser(View view) {
-            if (status == PASSED) {
+            //if (status == PASSED) {
                 mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -107,10 +107,10 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         });
 
-            } else {
-                notification.setTextColor(Color.parseColor("#FF0000"));
-                notification.setText(getString(R.string.not_all_fields_filled));
-            }
+            //} else {
+            //    notification.setTextColor(Color.parseColor("#FF0000"));
+            //    notification.setText(getString(R.string.not_all_fields_filled));
+            //}
     }
 
     // Cancel and get back to login page

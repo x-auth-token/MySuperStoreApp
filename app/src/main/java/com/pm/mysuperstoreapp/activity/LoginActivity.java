@@ -58,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
         switch(view.getId()) {
             case R.id.activity_login_btn_email_login:
+                emailLogin(view);
                 break;
             case R.id.activity_login_btn_google_login:
                 break;
@@ -68,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             case R.id.activity_login_btn_register:
                 Button b = (Button) view;
                 b.setTextColor(Color.parseColor("#C0C0C0"));
+
                 final Intent intent = new Intent(getApplicationContext(),
                         RegisterActivity.class);
                 startActivity(intent);
