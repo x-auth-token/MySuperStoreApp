@@ -7,21 +7,19 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import android.util.Patterns;
+import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.pm.mysuperstoreapp.R;
-
+import com.pm.mysuperstoreapp.utils.Utils;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -34,11 +32,6 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText lastname;
     private TextView notification;
     private ProgressBar progressBar;
-
-    final boolean PASSED = true;
-    final boolean FAILED = false;
-    boolean status = false;
-
 
 
     @Override
@@ -56,62 +49,70 @@ public class RegisterActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.activity_register_pb_progress);
 
 
-
-
     }
 
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 
     public void registerNewUser(View view) {
-            if (status == PASSED) {
-                mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
+        mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                if (task.isSuccessful()) {
+                        if (task.isSuccessful()) {
 
-                                    user = mAuth.getCurrentUser();
-                                    progressBar.setVisibility(View.VISIBLE);
-                                    user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            user = mAuth.getCurrentUser();
+                            progressBar.setVisibility(View.VISIBLE);
+                            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
 
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
 
-                                            if (task.isSuccessful()) {
-                                                progressBar.setVisibility(View.GONE);
-                                                notification.setTextColor(Color.parseColor("#FFFFFF"));
-                                                notification.setText(getString(R.string.registration_success) + " Email sent to: " + email.getText().toString());
-
+                                    if (task.isSuccessful()) {
+                                        progressBar.setVisibility(View.GONE);
+                                        //Utils.isValidEmail(email, findViewById(R.id.activity_register_et_fname));
+                                        //Utils.makeToast(findViewById(R.id.activity_register_et_fname), getString(R.string.registration_success) + getString(R.string.registration_success), "#FFFFFF");
+                                        //notification.setTextColor(Color.parseColor("#FFFFFF"));
+                                        // notification.setText(getString(R.string.registration_success) + " Email sent to: " + email.getText().toString());
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
                                                 final Intent intent = new Intent(getApplicationContext(),
                                                         LoginActivity.class);
                                                 startActivity(intent);
                                                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
                                                 finish();
-
-                                            } else {
-                                                notification.setTextColor(Color.parseColor("#FF0000"));
-                                                notification.setText(task.getException().getMessage().toString());
                                             }
-                                        }
-                                    });
+                                        }, 5000);
 
-                                } else {
 
-                                    notification.setTextColor(Color.parseColor("#FF0000"));
-                                    notification.setText(task.getException().getMessage().toString());
+                                    } else {
+                                        progressBar.setVisibility(View.GONE);
+                                        Utils.makeToast(findViewById(R.id.activity_register_et_fname), getString(R.string.registration_success) + getString(R.string.registration_success), "#FF0000");
+
+                                        //notification.setTextColor(Color.parseColor("#FF0000"));
+                                        //notification.setText(task.getException().getMessage().toString());
+                                    }
                                 }
+                            });
 
-                                // ...
-                            }
-                        });
+                        } else {
 
-            } else {
-                notification.setTextColor(Color.parseColor("#FF0000"));
-                notification.setText(getString(R.string.not_all_fields_filled));
-            }
-    }
+                            notification.setTextColor(Color.parseColor("#FF0000"));
+                            notification.setText(task.getException().getMessage().toString());
+                        }
+
+                        // ...
+                    }
+                });
+
+
+
+}
 
     // Cancel and get back to login page
     public void cancelRegistration(View view) {
@@ -125,42 +126,55 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void emailInputValidation(View view) {
 
-        if (email.equals("")) {
+        boolean status;
 
-                notification.setTextColor(Color.parseColor("#FF0000"));
-                notification.setText(getString(R.string.not_all_fields_filled));
+        status = Utils.isValidEmail(email, findViewById(R.id.activity_register_et_fname));
 
-            } else if (!isValidEmailFormat(email.getText().toString())) {
-
-                notification.setTextColor(Color.parseColor("#FF0000"));
-                notification.setText(getString(R.string.invalid_email_format));
-
-            } else {
-
-                status = PASSED;
-            }
-
-
-    }
-
-    // Checks email format correctness
-    private boolean isValidEmailFormat(CharSequence email) {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
-    public void saveUserToDB(FirebaseUser user) {
-
-    }
-
-
-    public void passwordInputValidation(View view) {
-
-        if (password.equals("")) {
-            notification.setTextColor(Color.parseColor("#FF0000"));
-            notification.setText(getString(R.string.not_all_fields_filled));
-        } else {
-            status = PASSED;
+        if (status) {
+            email.clearFocus();
+            password.requestFocus();
         }
 
     }
+
+     public void passwordInputValidation(View view) {
+
+        boolean status;
+
+        status = Utils.isValidPassword(password, findViewById(R.id.activity_register_et_fname));
+
+        if (status) {
+            password.clearFocus();
+            findViewById(R.id.activity_register_btn_register).requestFocus();
+        }
+
+    }
+
+    public void firsNameInputValidation(View view) {
+
+        boolean status;
+
+        status = Utils.isValidFirstLastName(firstname, findViewById(R.id.activity_register_et_fname));
+
+        if (status) {
+            firstname.clearFocus();
+            findViewById(R.id.activity_register_et_lname).requestFocus();
+        }
+
+    }
+
+    public void lastNameInputValidation(View view) {
+
+        boolean status;
+
+        status = Utils.isValidFirstLastName(lastname, findViewById(R.id.activity_register_et_lname));
+
+        if (status) {
+            lastname.clearFocus();
+            findViewById(R.id.activity_register_et_email).requestFocus();
+        }
+
+    }
+
+
 }

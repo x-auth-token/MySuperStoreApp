@@ -23,6 +23,9 @@
     <string name="registration_success">Registered Successfully!</string>
     <string name="invalid_email_format">Email Required!</string>
     <string name="not_all_fields_filled">All fields must be filled!</string>
+    <string name="email_required">Email Required!</string>
+    <string name="name_too_long">Name is too long!</string>
+    <string name="numeric_or_special_chars_provided">Only Alphabet characters allowed!</string>
     <!-- activity_register shared strings end -->
 
 </resources>
