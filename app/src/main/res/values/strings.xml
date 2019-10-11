@@ -21,6 +21,8 @@
     <string name="register_account">Register</string>
     <string name="cancel">Cancel</string>
     <string name="registration_success">Registered Successfully!</string>
+    <string name="invalid_email_format">Email Required!</string>
+    <string name="not_all_fields_filled">All fields must be filled!</string>
     <!-- activity_register shared strings end -->
 
 </resources>

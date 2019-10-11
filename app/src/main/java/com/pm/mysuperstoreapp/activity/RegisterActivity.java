@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -21,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.pm.mysuperstoreapp.R;
 
+
+
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -31,6 +34,12 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText lastname;
     private TextView notification;
     private ProgressBar progressBar;
+
+    final boolean PASSED = true;
+    final boolean FAILED = false;
+    boolean status = false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,59 +56,64 @@ public class RegisterActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.activity_register_pb_progress);
 
 
+
+
     }
+
+
+
 
     public void registerNewUser(View view) {
+            if (status == PASSED) {
+                mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
 
+                                if (task.isSuccessful()) {
 
+                                    user = mAuth.getCurrentUser();
+                                    progressBar.setVisibility(View.VISIBLE);
+                                    user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
 
-        mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
 
-                        if (task.isSuccessful()) {
+                                            if (task.isSuccessful()) {
+                                                progressBar.setVisibility(View.GONE);
+                                                notification.setTextColor(Color.parseColor("#FFFFFF"));
+                                                notification.setText(getString(R.string.registration_success) + " Email sent to: " + email.getText().toString());
 
-                            user = mAuth.getCurrentUser();
-                            progressBar.setVisibility(View.VISIBLE);
-                            user.sendEmailVerification() .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                final Intent intent = new Intent(getApplicationContext(),
+                                                        LoginActivity.class);
+                                                startActivity(intent);
+                                                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
+                                                finish();
 
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
+                                            } else {
+                                                notification.setTextColor(Color.parseColor("#FF0000"));
+                                                notification.setText(task.getException().getMessage().toString());
+                                            }
+                                        }
+                                    });
 
-                                    if (task.isSuccessful()) {
-                                        progressBar.setVisibility(View.GONE);
-                                        notification.setTextColor(Color.parseColor("#FFFFFF"));
-                                        //notification.setText(getString(R.string.registration_success) + " Email sent to: " + email.getText().toString());
-                                        notification.setText(getString(R.string.registration_success) + " Email sent to: " + email.getText().toString());
-                                    }
+                                } else {
+
+                                    notification.setTextColor(Color.parseColor("#FF0000"));
+                                    notification.setText(task.getException().getMessage().toString());
                                 }
-                            });;
-                            //notification.setTextColor(Color.parseColor("#FFFFFF"));
-                            //notification.setText(getString(R.string.registration_success));
 
-                            //Toast.makeText(RegisterActivity.this, "REG_OK", Toast.LENGTH_SHORT).show();
-                           /* final Intent intent = new Intent(getApplicationContext(),
-                                    MainActivity.class);
+                                // ...
+                            }
+                        });
 
-                            startActivity(intent);
-                            finish();*/
-
-                        } else {
-                            // If sign in fails, display a message to the user.
-                           // Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            //Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
-                                    //Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                            notification.setTextColor(Color.parseColor("#FF0000"));
-                            notification.setText(task.getException().getMessage().toString());
-                        }
-
-                        // ...
-                    }
-                });
+            } else {
+                notification.setTextColor(Color.parseColor("#FF0000"));
+                notification.setText(getString(R.string.not_all_fields_filled));
+            }
     }
 
+    // Cancel and get back to login page
     public void cancelRegistration(View view) {
         final Intent intent = new Intent(getApplicationContext(),
                 LoginActivity.class);
@@ -109,34 +123,44 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public void sendEmailVerificationWithContinueUrl() {
-        // [START send_email_verification_with_continue_url]
+    public void emailInputValidation(View view) {
+
+        if (email.equals("")) {
+
+                notification.setTextColor(Color.parseColor("#FF0000"));
+                notification.setText(getString(R.string.not_all_fields_filled));
+
+            } else if (!isValidEmailFormat(email.getText().toString())) {
+
+                notification.setTextColor(Color.parseColor("#FF0000"));
+                notification.setText(getString(R.string.invalid_email_format));
+
+            } else {
+
+                status = PASSED;
+            }
 
 
-        String url = "http://www.example.com/verify?uid=" + user.getUid();
-        ActionCodeSettings actionCodeSettings = ActionCodeSettings.newBuilder()
-                .setUrl(url)
-                .setAndroidPackageName("com.pm.mysuperstoreapp", false, null)
-                .build();
-
-        user.sendEmailVerification(actionCodeSettings)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            //Log.d(TAG, "Email sent.");
-                        }
-                    }
-                });
-
-        // [END send_email_verification_with_continue_url]
-        // [START localize_verification_email]
-        //auth.setLanguageCode("fr");
-        // To apply the default app language instead of explicitly setting it.
-        // auth.useAppLanguage();
-        // [END localize_verification_email]
     }
+
+    // Checks email format correctness
+    private boolean isValidEmailFormat(CharSequence email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
     public void saveUserToDB(FirebaseUser user) {
+
+    }
+
+
+    public void passwordInputValidation(View view) {
+
+        if (password.equals("")) {
+            notification.setTextColor(Color.parseColor("#FF0000"));
+            notification.setText(getString(R.string.not_all_fields_filled));
+        } else {
+            status = PASSED;
+        }
 
     }
 }
