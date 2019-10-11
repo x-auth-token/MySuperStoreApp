@@ -1,3 +1,26 @@
 <resources>
+
     <string name="app_name">MySuperStoreApp</string>
+
+    <!-- activity_login strings start -->
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="no_account_create_one">No Account? Create One.</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="login_with_facebook">Login with Facebook</string>
+    <!-- activity_login strings end -->
+
+    <!-- activity_login and activity_register shared strings start -->
+    <string name="email_hint">email@example.com</string>
+    <string name="password_hint">password</string>
+    <!-- activity_login and activity_register shared strings end -->
+
+    <!-- activity_register shared strings start -->
+    <string name="first_name_hint">First Name</string>
+    <string name="last_name_hint">Last Name</string>
+    <string name="register_account">Register</string>
+    <string name="cancel">Cancel</string>
+    <string name="registration_success">Registered Successfully!</string>
+    <!-- activity_register shared strings end -->
+
 </resources>

@@ -6,8 +6,10 @@
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_row="3"
     android:background="@drawable/grain"
     android:orientation="vertical"
+    android:weightSum="2"
     tools:context=".activity.LoginActivity">
 
     <include layout="@layout/base_layout" />
@@ -15,7 +17,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:orientation="horizontal">
 
         <Space
@@ -45,10 +46,11 @@
                 android:background="@drawable/rounded_text_field"
                 android:ems="10"
                 android:fontFamily="sans-serif-thin"
-                android:hint="email@example.com"
+                android:hint="@string/email_hint"
                 android:inputType="textEmailAddress"
                 android:outlineProvider="none"
                 android:singleLine="false"
+                android:text=""
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#000000"
@@ -68,19 +70,20 @@
                 android:background="@drawable/rounded_text_field"
                 android:ems="10"
                 android:fontFamily="sans-serif-thin"
-                android:hint="password"
+                android:hint="@string/password_hint"
                 android:inputType="textPassword"
+                android:text=""
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColorHint="#363434"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:autofillHints="" />
 
             <TextView
                 android:id="@+id/activity_login_tv_notification"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text='""' />
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/activity_login_btn_forgot_password"
@@ -88,7 +91,7 @@
                 android:layout_height="27dp"
                 android:background="@drawable/rounded_button"
                 android:fontFamily="sans-serif-thin"
-                android:text="Forgot Password?"
+                android:text="@string/forgot_password"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
@@ -101,22 +104,23 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="top|center_vertical"
                     android:orientation="vertical">
 
                     <Button
                         android:id="@+id/activity_login_btn_email_login"
                         android:layout_width="match_parent"
                         android:layout_height="27dp"
+                        android:layout_marginTop="30dp"
                         android:layout_marginBottom="5dp"
                         android:alpha="1"
                         android:background="@drawable/rounded_button"
                         android:backgroundTint="#FFA000"
                         android:fontFamily="sans-serif-thin"
                         android:onClick="login"
-                        android:text="Login"
+                        android:text="@string/login"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="#FFFFFF"
                         android:textSize="14sp"
@@ -130,16 +134,16 @@
                         android:alpha="0.95"
                         android:background="@drawable/rounded_button"
                         android:backgroundTint="#FFFFFF"
-                        android:drawableLeft="@drawable/googleg_standard_color_18"
+                        android:drawableStart="@drawable/googleg_standard_color_18"
                         android:drawablePadding="24dp"
                         android:fontFamily="@font/roboto_medium"
                         android:onClick="login"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-                        android:text="Sign in with Google"
+                        android:text="@string/sign_in_with_google"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="#4285F4"
-                        android:textSize="14dp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <Button
@@ -150,14 +154,14 @@
                         android:alpha="0.95"
                         android:background="@drawable/rounded_button"
                         android:backgroundTint="#4267b2"
-                        android:drawableLeft="@drawable/f_logo"
-                        android:drawablePadding="10dp"
 
+                        android:drawableStart="@drawable/f_logo"
+                        android:drawablePadding="10dp"
                         android:fontFamily="sans-serif-thin"
                         android:onClick="login"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-                        android:text="Login with Facebook"
+                        android:text="@string/login_with_facebook"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
@@ -173,7 +177,7 @@
                         android:background="@drawable/rounded_button"
                         android:fontFamily="sans-serif-thin"
                         android:onClick="login"
-                        android:text="No Account? Create One"
+                        android:text="@string/no_account_create_one"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
@@ -189,10 +193,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:indeterminateDrawable="@drawable/progress"
-                        android:visibility="invisible"/>
+                        android:visibility="invisible" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
                 </LinearLayout>
-
             </LinearLayout>
 
         </LinearLayout>
