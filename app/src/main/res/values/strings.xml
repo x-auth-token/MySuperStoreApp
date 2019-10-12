@@ -10,22 +10,45 @@
     <string name="login_with_facebook">Login with Facebook</string>
     <!-- activity_login strings end -->
 
-    <!-- activity_login and activity_register shared strings start -->
+    <!-- activity_login, activity_register shared strings start -->
     <string name="email_hint">email@example.com</string>
     <string name="password_hint">password</string>
     <!-- activity_login and activity_register shared strings end -->
 
-    <!-- activity_register shared strings start -->
+    <!-- activity_register strings start -->
     <string name="first_name_hint">First Name</string>
     <string name="last_name_hint">Last Name</string>
-    <string name="register_account">Register</string>
-    <string name="cancel">Cancel</string>
+    <string name="register_account_btn">Register</string>
+    <string name="cancel_btn">Cancel</string>
     <string name="registration_success">Registered Successfully!</string>
     <string name="invalid_email_format">Email Required!</string>
     <string name="not_all_fields_filled">All fields must be filled!</string>
     <string name="email_required">Email Required!</string>
     <string name="name_too_long">Name is too long!</string>
     <string name="numeric_or_special_chars_provided">Only Alphabet characters allowed!</string>
-    <!-- activity_register shared strings end -->
+    <string name="auth_failed">Invalid username or password!</string>
+    <string name="email_sent">Email sent to:</string>
+    <string name="email_not_verified">Please verify your email prior the login</string>
+
+    <string name="resend_verification_email_btn">Resend</string>
+    <string name="new_password_hint">new password</string>
+    <string name="confirm_password">confirm password</string>
+
+    <!-- activity_register strings end -->
+
+    <!-- activity_password_reset strings start -->
+    <string name="reset_password">Reset Password</string>
+    <!-- activity_password_reset strings end -->
+
+    <!-- activity_resend_verification_email strings start -->
+    <string name="resend_verification_email_prompt">We sent you verification email recently to the following email: </string>
+    <string name="resend_verification_now">Resend verification email now?</string>
+    <string name="google_auth_failed">Google sign in failed!</string>
+    <!-- activity_resend_verification_email strings end -->
+
+    <!-- Facebook values start -->
+    <string name="facebook_app_id">1201480366716191</string>
+    <string name="fb_login_protocol_scheme">fb1201480366716191</string>
+    <!-- Facebook values end -->
 
 </resources>

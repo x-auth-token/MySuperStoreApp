@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_register"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/grain"
+    android:orientation="vertical"
+    android:weightSum="2"
+    tools:context=".activity.ResendVerificationEmailActivity">
+
+    <include layout="@layout/base_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:alpha="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/activity_resend_verification_tv_prompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:autoSizeTextType="none"
+                android:autofillHints=""
+                android:background="@drawable/rounded_text_field"
+                android:backgroundTint="#77FFFFFF"
+                android:elegantTextHeight="false"
+                android:ems="10"
+                android:fontFamily="sans-serif-medium"
+                android:inputType="textMultiLine"
+                android:outlineProvider="none"
+                android:shadowColor="#000000"
+                android:shadowDx="10"
+                android:shadowDy="10"
+                android:shadowRadius="500"
+                android:singleLine="false"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#000000"
+                android:textColorHint="#363434"
+                android:textColorLink="#050505"
+                android:textIsSelectable="false"
+                android:textSize="20sp"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="top|center_vertical"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/activity_resend_verification_btn_resend"
+                        android:layout_width="match_parent"
+                        android:layout_height="27dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="5dp"
+                        android:alpha="0.95"
+                        android:background="@drawable/rounded_button"
+                        android:backgroundTint="#FFA000"
+                        android:fontFamily="sans-serif-thin"
+                        android:onClick="resendVerificationEmail"
+                        android:text="@string/resend_verification_email_btn"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+
+
+                    <Button
+                        android:id="@+id/activity_resend_verification_btn_cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="27dp"
+                        android:layout_marginBottom="5dp"
+                        android:alpha="0.95"
+                        android:background="@drawable/rounded_button"
+                        android:backgroundTint="#EF5350"
+                        android:fontFamily="sans-serif-thin"
+                        android:onClick="cancel"
+                        android:text="@string/cancel_btn"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <Space
+                        android:layout_width="85pt"
+                        android:layout_height="wrap_content" />
+
+                    <ProgressBar
+                        android:id="@+id/activity_passreset_pb_progress"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:indeterminateDrawable="@drawable/progress"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>
