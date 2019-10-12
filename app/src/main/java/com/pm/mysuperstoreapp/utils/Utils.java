@@ -64,7 +64,7 @@ public final class Utils {
     }
 
 
-    public static boolean isValidPassword(@org.jetbrains.annotations.NotNull EditText password, View view) {
+    /*public static boolean isValidPassword(@org.jetbrains.annotations.NotNull EditText password, View view) {
 
         if (password.getText().toString().isEmpty()) {
             Utils.makeToast(view, view.getResources().getString(R.string.not_all_fields_filled), "#FF0000");
@@ -72,7 +72,7 @@ public final class Utils {
             return true;
         }
         return false;
-    }
+    }*/
 
     public static boolean isValidFirstLastName(EditText firstOrLastName, View view) {
         final int MAX_NAME_LENGTH = 15;
