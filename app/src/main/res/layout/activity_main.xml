@@ -9,7 +9,7 @@
 
 
     android:orientation="vertical"
-    tools:context=".activity.MainActivity" >
+    tools:context=".activities.MainActivity" >
 
     <TableLayout
         android:layout_width="match_parent"

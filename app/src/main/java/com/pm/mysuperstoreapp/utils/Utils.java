@@ -19,13 +19,12 @@ import android.widget.Toast;
 
 
 import com.pm.mysuperstoreapp.R;
-import com.pm.mysuperstoreapp.activity.LoginActivity;
-import com.pm.mysuperstoreapp.activity.MainActivity;
+import com.pm.mysuperstoreapp.activities.LoginActivity;
+import com.pm.mysuperstoreapp.activities.MainActivity;
 
 import java.util.regex.Pattern;
 
 import static android.app.PendingIntent.getActivity;
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public final class Utils {

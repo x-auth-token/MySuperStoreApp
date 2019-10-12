@@ -11,11 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activity.ResendVerificationEmailActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ResetPasswordActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.RegisterActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.ResendVerificationEmailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.ResetPasswordActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.RegisterActivity" android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity.SplashScreenActivity"
+            android:name=".activities.SplashScreenActivity"
             android:theme="@style/SplashScreenTheme"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait">
+        <activity android:name=".activities.LoginActivity" android:screenOrientation="portrait">
 
             <!--
             <intent-filter>
@@ -34,7 +34,7 @@
             </intent-filter>
             -->
         </activity>
-        <activity android:name=".activity.MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.MainActivity" android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="preloaded_fonts"

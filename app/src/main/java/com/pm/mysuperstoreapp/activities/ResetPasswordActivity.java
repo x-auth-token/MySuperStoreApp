@@ -1,4 +1,4 @@
-package com.pm.mysuperstoreapp.activity;
+package com.pm.mysuperstoreapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

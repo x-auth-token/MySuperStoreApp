@@ -1,9 +1,8 @@
-package com.pm.mysuperstoreapp.activity;
+package com.pm.mysuperstoreapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.pm.mysuperstoreapp.R;
 

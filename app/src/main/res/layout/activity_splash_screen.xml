@@ -8,7 +8,7 @@
     android:background="@drawable/grain"
     android:orientation="vertical"
 
-    tools:context=".activity.SplashScreenActivity">
+    tools:context=".activities.SplashScreenActivity">
 
     <include layout="@layout/base_layout" />
     <LinearLayout
