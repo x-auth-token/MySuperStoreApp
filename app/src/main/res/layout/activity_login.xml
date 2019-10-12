@@ -10,7 +10,7 @@
     android:background="@drawable/grain"
     android:orientation="vertical"
     android:weightSum="2"
-    tools:context=".activity.LoginActivity">
+    tools:context=".activities.LoginActivity">
 
     <include layout="@layout/base_layout" />
 
@@ -48,8 +48,9 @@
                 android:fontFamily="sans-serif-thin"
                 android:hint="@string/email_hint"
                 android:inputType="textEmailAddress"
+                android:onClick="emailInputValidation"
                 android:outlineProvider="none"
-                android:singleLine="false"
+                android:singleLine="true"
                 android:text=""
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -67,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:alpha="0.7"
+                android:autofillHints=""
                 android:background="@drawable/rounded_text_field"
                 android:ems="10"
                 android:fontFamily="sans-serif-thin"
@@ -77,13 +79,12 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColorHint="#363434"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:autofillHints="" />
+                android:textStyle="bold" />
 
-            <TextView
+            <!--TextView
                 android:id="@+id/activity_login_tv_notification"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content" /-->
 
             <Button
                 android:id="@+id/activity_login_btn_forgot_password"
@@ -91,6 +92,7 @@
                 android:layout_height="27dp"
                 android:background="@drawable/rounded_button"
                 android:fontFamily="sans-serif-thin"
+                android:onClick="resetPassword"
                 android:text="@string/forgot_password"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="#FFFFFF"
@@ -119,7 +121,7 @@
                         android:background="@drawable/rounded_button"
                         android:backgroundTint="#FFA000"
                         android:fontFamily="sans-serif-thin"
-                        android:onClick="login"
+                        android:onClick="emailLogin"
                         android:text="@string/login"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="#FFFFFF"
@@ -137,7 +139,7 @@
                         android:drawableStart="@drawable/googleg_standard_color_18"
                         android:drawablePadding="24dp"
                         android:fontFamily="@font/roboto_medium"
-                        android:onClick="login"
+                        android:onClick="googleLogin"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
                         android:text="@string/sign_in_with_google"
@@ -158,7 +160,7 @@
                         android:drawableStart="@drawable/f_logo"
                         android:drawablePadding="10dp"
                         android:fontFamily="sans-serif-thin"
-                        android:onClick="login"
+                        android:onClick="facebookLogin"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
                         android:text="@string/login_with_facebook"
@@ -176,7 +178,7 @@
                         android:alpha="0.95"
                         android:background="@drawable/rounded_button"
                         android:fontFamily="sans-serif-thin"
-                        android:onClick="login"
+                        android:onClick="registerNewUser"
                         android:text="@string/no_account_create_one"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="#FFFFFF"

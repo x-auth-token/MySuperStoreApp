@@ -1,4 +1,4 @@
-package com.pm.mysuperstoreapp.model;
+package com.pm.mysuperstoreapp.models;
 
 public class User {
 

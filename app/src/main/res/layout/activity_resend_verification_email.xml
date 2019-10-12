@@ -8,7 +8,7 @@
     android:background="@drawable/grain"
     android:orientation="vertical"
     android:weightSum="2"
-    tools:context=".activities.RegisterActivity">
+    tools:context=".activities.ResendVerificationEmailActivity">
 
     <include layout="@layout/base_layout" />
 
@@ -34,110 +34,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <EditText
-                android:id="@+id/activity_register_et_fname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:alpha="0.7"
-                android:autofillHints=""
-                android:background="@drawable/rounded_text_field"
-                android:ems="10"
-                android:fontFamily="sans-serif-thin"
-                android:hint="@string/first_name_hint"
-                android:inputType="textPersonName"
-                android:onClick="firsNameInputValidation"
-                android:outlineProvider="none"
-                android:singleLine="false"
-                android:text=""
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#000000"
-                android:textColorHighlight="#70BDBA"
-                android:textColorHint="#363434"
-                android:textColorLink="#050505"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:visibility="visible" />
-
-            <EditText
-                android:id="@+id/activity_register_et_lname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:alpha="0.7"
-                android:autofillHints=""
-                android:background="@drawable/rounded_text_field"
-                android:ems="10"
-                android:fontFamily="sans-serif-thin"
-                android:hint="@string/last_name_hint"
-                android:inputType="textPersonName"
-                android:onClick="lastNameInputValidation"
-                android:outlineProvider="none"
-                android:singleLine="false"
-                android:text=""
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#000000"
-                android:textColorHighlight="#70BDBA"
-                android:textColorHint="#363434"
-                android:textColorLink="#050505"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:visibility="visible" />
-
-            <EditText
-                android:id="@+id/activity_register_et_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:alpha="0.7"
-                android:autofillHints=""
-                android:background="@drawable/rounded_text_field"
-                android:ems="10"
-                android:fontFamily="sans-serif-thin"
-                android:hint="@string/email_hint"
-                android:inputType="textEmailAddress"
-                android:outlineProvider="none"
-                android:text=""
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#000000"
-                android:textColorHighlight="#70BDBA"
-                android:textColorHint="#363434"
-                android:textColorLink="#050505"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:visibility="visible" />
-
-            <EditText
-                android:id="@+id/activity_register_et_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:alpha="0.7"
-                android:autofillHints=""
-                android:background="@drawable/rounded_text_field"
-                android:ems="10"
-                android:fontFamily="sans-serif-thin"
-                android:hint="@string/password_hint"
-                android:inputType="textPassword"
-                android:text=""
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColorHint="#363434"
-                android:textSize="18sp"
-                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/activity_register_tv_notification"
+                android:id="@+id/activity_resend_verification_tv_prompt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:gravity="center_vertical"
-                android:text=""
+                android:layout_marginBottom="5dp"
+                android:autoSizeTextType="none"
+                android:autofillHints=""
+                android:background="@drawable/rounded_text_field"
+                android:backgroundTint="#77FFFFFF"
+                android:elegantTextHeight="false"
+                android:ems="10"
+                android:fontFamily="sans-serif-medium"
+                android:inputType="textMultiLine"
+                android:outlineProvider="none"
+                android:shadowColor="#000000"
+                android:shadowDx="10"
+                android:shadowDy="10"
+                android:shadowRadius="500"
+                android:singleLine="false"
                 android:textAlignment="center"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#000000"
+                android:textColorHint="#363434"
+                android:textColorLink="#050505"
+                android:textIsSelectable="false"
+                android:textSize="20sp"
+                android:visibility="visible" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -152,23 +76,26 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/activity_register_btn_register"
+                        android:id="@+id/activity_resend_verification_btn_resend"
                         android:layout_width="match_parent"
                         android:layout_height="27dp"
+                        android:layout_marginTop="30dp"
                         android:layout_marginBottom="5dp"
                         android:alpha="0.95"
                         android:background="@drawable/rounded_button"
                         android:backgroundTint="#FFA000"
                         android:fontFamily="sans-serif-thin"
-                        android:onClick="registerNewUser"
-                        android:text="@string/register_account_btn"
+                        android:onClick="resendVerificationEmail"
+                        android:text="@string/resend_verification_email_btn"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
+
+
                     <Button
-                        android:id="@+id/activity_register_btn_cancel"
+                        android:id="@+id/activity_resend_verification_btn_cancel"
                         android:layout_width="match_parent"
                         android:layout_height="27dp"
                         android:layout_marginBottom="5dp"
@@ -176,7 +103,7 @@
                         android:background="@drawable/rounded_button"
                         android:backgroundTint="#EF5350"
                         android:fontFamily="sans-serif-thin"
-                        android:onClick="cancelRegistration"
+                        android:onClick="cancel"
                         android:text="@string/cancel_btn"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="#FFFFFF"
@@ -188,7 +115,7 @@
                         android:layout_height="wrap_content" />
 
                     <ProgressBar
-                        android:id="@+id/activity_register_pb_progress"
+                        android:id="@+id/activity_passreset_pb_progress"
                         style="?android:attr/progressBarStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
