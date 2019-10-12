@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
+repositories {
+    mavenCentral()
+}
 
 android {
     compileSdkVersion 29
@@ -19,7 +22,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/NOTICE'
+    }
 
 }
 
@@ -45,8 +52,13 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation files('libs/android-smart-image-view-1.0.0.jar')
     implementation 'com.google.android.material:material:1.0.0'
-
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
 
 
+    //Timur's implementations
+    implementation 'com.firebaseui:firebase-ui-storage:4.3.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
 }
