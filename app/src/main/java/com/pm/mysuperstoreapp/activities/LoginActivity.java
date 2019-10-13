@@ -193,10 +193,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void googleLogin(View view) {
-        signIn();
+        signInToGoogle();
     }
 
-    private void signIn() {
+    private void signInToGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }

@@ -25,7 +25,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_weight="0.3"
             android:alpha="1"
             android:gravity="center"
             android:orientation="vertical">
@@ -78,7 +78,7 @@
                     <Button
                         android:id="@+id/activity_resend_verification_btn_resend"
                         android:layout_width="match_parent"
-                        android:layout_height="27dp"
+                        android:layout_height="32dp"
                         android:layout_marginTop="30dp"
                         android:layout_marginBottom="5dp"
                         android:alpha="0.95"
@@ -93,11 +93,10 @@
                         android:textStyle="bold" />
 
 
-
                     <Button
                         android:id="@+id/activity_resend_verification_btn_cancel"
                         android:layout_width="match_parent"
-                        android:layout_height="27dp"
+                        android:layout_height="32dp"
                         android:layout_marginBottom="5dp"
                         android:alpha="0.95"
                         android:background="@drawable/rounded_button"
