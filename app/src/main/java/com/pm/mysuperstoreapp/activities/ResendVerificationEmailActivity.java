@@ -41,6 +41,12 @@ public class ResendVerificationEmailActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Utils.goToLoginActivity(findViewById(android.R.id.content));
+    }
+
     public void resendVerificationEmail(View view) {
         user.sendEmailVerification();
         Utils.makeToast(findViewById(R.id.activity_resend_verification_tv_prompt), getString(R.string.email_sent) + user.getEmail().toString(), "#FFFFFF");

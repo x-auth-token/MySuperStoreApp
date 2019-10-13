@@ -112,7 +112,13 @@ public class RegisterActivity extends AppCompatActivity {
             Utils.makeToast(findViewById(R.id.activity_register_et_fname), getString(R.string.not_all_fields_filled), "#FF0000");
         }
 
-}
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Utils.goToLoginActivity(findViewById(android.R.id.content));
+    }
 
     // Cancel and get back to login page
     public void cancelRegistration(View view) {
@@ -130,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void firsNameInputValidation(View view) {
 
-       if (Utils.isValidFirstLastName(firstname, findViewById(R.id.activity_register_et_fname))) {
+        if (Utils.isValidFirstLastName(firstname, findViewById(R.id.activity_register_et_fname))) {
             firstname.clearFocus();
             findViewById(R.id.activity_register_et_lname).requestFocus();
         }

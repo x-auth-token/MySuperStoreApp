@@ -42,6 +42,12 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Utils.goToLoginActivity(findViewById(android.R.id.content));
+    }
+
     public void emailInputValidation(View view) {
 
         InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

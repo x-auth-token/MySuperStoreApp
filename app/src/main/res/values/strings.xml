@@ -49,6 +49,9 @@
     <!-- Facebook values start -->
     <string name="facebook_app_id">1201480366716191</string>
     <string name="fb_login_protocol_scheme">fb1201480366716191</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Facebook values end -->
 
 </resources>

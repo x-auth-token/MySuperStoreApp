@@ -110,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+
     public void emailLogin(final View view) {
 
         if (!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
