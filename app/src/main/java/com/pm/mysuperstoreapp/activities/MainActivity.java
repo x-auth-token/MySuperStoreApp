@@ -2,9 +2,14 @@ package com.pm.mysuperstoreapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Icon;
+import android.media.Image;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -53,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        imageView = findViewById(R.id.image);
+       //imageView = findViewById(R.id.image);
         mMainViewPager = findViewById(R.id.main_view_pager);
         mMainNavigationBar = findViewById(R.id.bottom_navigation_menu_panel);
         mMainNavigationBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -76,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.nav_shopping_cart:
                 mMainViewPager.setCurrentItem(3, true);
-                
+
                 break;
 
         }
@@ -86,8 +91,11 @@ public class MainActivity extends AppCompatActivity {
         mMainNavigationBar = findViewById(R.id.bottom_navigation_menu_panel);
         BottomNavigationMenuView bottomNavigationMenuView =
                 (BottomNavigationMenuView) mMainNavigationBar.getChildAt(0);
+
         View v = bottomNavigationMenuView.getChildAt(3);
+
         BottomNavigationItemView itemView = (BottomNavigationItemView) v;
+
 
         View badge = LayoutInflater.from(this)
                 .inflate(R.layout.item_count_badge_layout, bottomNavigationMenuView, false);
@@ -96,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         itemView.addView(badge);
+
 
         if (show) {
 

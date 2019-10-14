@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -50,13 +52,27 @@ public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private CallbackManager callbackManager;
     private LoginManager fbLoginManager;
-    private Button btnLogin;
+    private Button btnEmailLogin;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        initViews();
+
+        password.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    btnEmailLogin.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
 
     }
 
@@ -66,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        initialize();
+
 
     }
 
@@ -90,7 +106,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void initialize() {
+
+    private void initViews() {
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -107,12 +124,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
+
         AppEventsLogger.activateApp(getApplication());
         FirebaseUser user = mAuth.getCurrentUser();
         email = findViewById(R.id.activity_login_et_email);
         password = findViewById(R.id.activity_login_et_password);
         progressBar = findViewById(R.id.activity_login_pb_progress);
-        btnLogin = findViewById(R.id.activity_login_btn_email_login);
+        btnEmailLogin = findViewById(R.id.activity_login_btn_email_login);
     }
 
     public void emailLogin(final View view) {

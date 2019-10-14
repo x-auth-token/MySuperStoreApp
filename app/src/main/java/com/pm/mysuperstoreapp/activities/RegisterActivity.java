@@ -42,13 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        firstname = findViewById(R.id.activity_register_et_fname);
-        lastname = findViewById(R.id.activity_register_et_lname);
-        email = findViewById(R.id.activity_register_et_email);
-        password = findViewById(R.id.activity_register_et_password);
-        //notification = findViewById(R.id.activity_register_tv_notification);
-        progressBar = findViewById(R.id.activity_register_pb_progress);
-        //btnRegister = findViewById(R.id.activity_register_btn_register);
+        initViews();
+
 
 
     }
@@ -59,6 +54,15 @@ public class RegisterActivity extends AppCompatActivity {
         super.onStop();
     }
 
+    private void initViews() {
+        firstname = findViewById(R.id.activity_register_et_fname);
+        lastname = findViewById(R.id.activity_register_et_lname);
+        email = findViewById(R.id.activity_register_et_email);
+        password = findViewById(R.id.activity_register_et_password);
+        //notification = findViewById(R.id.activity_register_tv_notification);
+        progressBar = findViewById(R.id.activity_register_pb_progress);
+        //btnRegister = findViewById(R.id.activity_register_btn_register);
+    }
     public void registerNewUser(View view) {
         if (!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
             mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
