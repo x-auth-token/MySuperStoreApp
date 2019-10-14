@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_register"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/grain"
@@ -25,7 +24,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_weight="0.3"
             android:alpha="1"
             android:gravity="center"
             android:orientation="vertical">
@@ -37,7 +36,7 @@
             <EditText
                 android:id="@+id/activity_register_et_fname"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_marginBottom="5dp"
                 android:alpha="0.7"
                 android:autofillHints=""
@@ -63,7 +62,7 @@
             <EditText
                 android:id="@+id/activity_register_et_lname"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_marginBottom="5dp"
                 android:alpha="0.7"
                 android:autofillHints=""
@@ -89,7 +88,7 @@
             <EditText
                 android:id="@+id/activity_register_et_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_marginBottom="5dp"
                 android:alpha="0.7"
                 android:autofillHints=""
@@ -113,7 +112,7 @@
             <EditText
                 android:id="@+id/activity_register_et_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_marginBottom="10dp"
                 android:alpha="0.7"
                 android:autofillHints=""
@@ -129,15 +128,6 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/activity_register_tv_notification"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:gravity="center_vertical"
-                android:text=""
-                android:textAlignment="center"
-                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -152,9 +142,9 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/activity_register_btn_register"
                         android:layout_width="match_parent"
-                        android:layout_height="27dp"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="30dp"
                         android:layout_marginBottom="5dp"
                         android:alpha="0.95"
                         android:background="@drawable/rounded_button"
@@ -168,9 +158,8 @@
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/activity_register_btn_cancel"
                         android:layout_width="match_parent"
-                        android:layout_height="27dp"
+                        android:layout_height="32dp"
                         android:layout_marginBottom="5dp"
                         android:alpha="0.95"
                         android:background="@drawable/rounded_button"

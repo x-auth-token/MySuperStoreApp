@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -50,13 +52,63 @@ public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private CallbackManager callbackManager;
     private LoginManager fbLoginManager;
-    private Button btnLogin;
+    private Button btnEmailLogin;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        initViews();
+
+        password.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    btnEmailLogin.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+    }
+
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+                Utils.makeToast(findViewById(R.id.activity_login_et_email), getString(R.string.google_auth_failed), "#FF0000");
+            }
+        }
+
+
+    }
+
+
+    private void initViews() {
+
         mAuth = FirebaseAuth.getInstance();
 
         //
@@ -72,43 +124,14 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
+
         AppEventsLogger.activateApp(getApplication());
-    }
-
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser user = mAuth.getCurrentUser();
         email = findViewById(R.id.activity_login_et_email);
         password = findViewById(R.id.activity_login_et_password);
         progressBar = findViewById(R.id.activity_login_pb_progress);
-        btnLogin = findViewById(R.id.activity_login_btn_email_login);
-
+        btnEmailLogin = findViewById(R.id.activity_login_btn_email_login);
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                Utils.makeToast(findViewById(R.id.activity_login_et_email), getString(R.string.google_auth_failed), "#FF0000");
-            }
-        }
-
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
 
     public void emailLogin(final View view) {
 
@@ -192,10 +215,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void googleLogin(View view) {
-        signIn();
+        signInToGoogle();
     }
 
-    private void signIn() {
+    private void signInToGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }

@@ -10,7 +10,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.pm.mysuperstoreapp"
-        minSdkVersion 26
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -48,7 +48,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:16.0.4'
     implementation 'com.google.firebase:firebase-firestore:21.1.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
 
@@ -58,6 +57,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'org.jetbrains:annotations-java5:15.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
 
 
     //Timur's implementations

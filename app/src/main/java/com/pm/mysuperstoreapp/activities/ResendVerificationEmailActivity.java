@@ -21,7 +21,7 @@ public class ResendVerificationEmailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resend_verification_email);
 
-        prompt = findViewById(R.id.activity_resend_verification_tv_prompt);
+        initViews();
 
         Intent intent = getIntent();
 
@@ -39,6 +39,16 @@ public class ResendVerificationEmailActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Utils.goToLoginActivity(findViewById(android.R.id.content));
+    }
+
+    private void initViews() {
+        prompt = findViewById(R.id.activity_resend_verification_tv_prompt);
     }
 
     public void resendVerificationEmail(View view) {

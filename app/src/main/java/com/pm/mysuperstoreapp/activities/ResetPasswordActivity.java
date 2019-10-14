@@ -29,8 +29,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_reset);
 
-        email = findViewById(R.id.activity_passreset_et_email);
-        progressBar = findViewById(R.id.activity_passreset_pb_progress);
+        initViews();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -42,6 +41,16 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Utils.goToLoginActivity(findViewById(android.R.id.content));
+    }
+
+    private void initViews() {
+        email = findViewById(R.id.activity_passreset_et_email);
+        progressBar = findViewById(R.id.activity_passreset_pb_progress);
+    }
     public void emailInputValidation(View view) {
 
         InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
