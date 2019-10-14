@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_register"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/grain"
@@ -76,7 +75,6 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/activity_resend_verification_btn_resend"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
                         android:layout_marginTop="30dp"
@@ -94,7 +92,6 @@
 
 
                     <Button
-                        android:id="@+id/activity_resend_verification_btn_cancel"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
                         android:layout_marginBottom="5dp"

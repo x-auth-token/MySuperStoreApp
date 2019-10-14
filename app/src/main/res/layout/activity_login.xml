@@ -3,7 +3,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_row="3"
@@ -87,7 +86,6 @@
                 android:layout_height="wrap_content" /-->
 
             <Button
-                android:id="@+id/activity_login_btn_forgot_password"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:background="@drawable/rounded_button"
@@ -129,7 +127,6 @@
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/activity_login_btn_google_login"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
                         android:layout_marginBottom="5dp"
@@ -149,7 +146,6 @@
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/activity_login_btn_facebook_login"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
                         android:layout_marginBottom="5dp"
@@ -171,7 +167,6 @@
 
 
                     <Button
-                        android:id="@+id/activity_login_btn_register"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
                         android:layout_marginBottom="5dp"

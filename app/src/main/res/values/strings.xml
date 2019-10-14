@@ -21,18 +21,14 @@
     <string name="register_account_btn">Register</string>
     <string name="cancel_btn">Cancel</string>
     <string name="registration_success">Registered Successfully!</string>
-    <string name="invalid_email_format">Email Required!</string>
     <string name="not_all_fields_filled">All fields must be filled!</string>
     <string name="email_required">Email Required!</string>
     <string name="name_too_long">Name is too long!</string>
     <string name="numeric_or_special_chars_provided">Only Alphabet characters allowed!</string>
     <string name="auth_failed">Invalid username or password!</string>
     <string name="email_sent">Email sent to:</string>
-    <string name="email_not_verified">Please verify your email prior the login</string>
 
     <string name="resend_verification_email_btn">Resend</string>
-    <string name="new_password_hint">new password</string>
-    <string name="confirm_password">confirm password</string>
 
     <!-- activity_register strings end -->
 
@@ -51,7 +47,6 @@
     <string name="fb_login_protocol_scheme">fb1201480366716191</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Facebook values end -->
 
 </resources>
