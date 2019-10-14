@@ -52,8 +52,11 @@ public class RecyclerViewCategoriesFragment extends Fragment {
                     final List<DocumentSnapshot> documents = result.getDocuments();
                     List<String> categories = new ArrayList<>();
                     for (DocumentSnapshot document : documents) {
+                        String name = document.getString("name");
+
                         String id = document.getReference().getId();
-                        categories.add(id);
+
+                        categories.add(name);
                     }
                     RecyclerView recyclerView = view.findViewById(R.id.rVShopNow);
                     recyclerView.setAdapter(new RecyclerViewCategoriesAdapter(categories));

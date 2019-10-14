@@ -2,14 +2,10 @@ package com.pm.mysuperstoreapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Icon;
-import android.media.Image;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -23,6 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.pm.mysuperstoreapp.R;
+import com.pm.mysuperstoreapp.adapters.MainDicountRibbonAdapter;
 import com.pm.mysuperstoreapp.adapters.MainFragmentAdapter;
 
 import com.pm.mysuperstoreapp.custom_views.NoSwipeViewPager;
@@ -32,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageView;
     public static NoSwipeViewPager mMainViewPager;
     BottomNavigationView mMainNavigationBar;
+    public static ViewPager mTopViewPager;
+    //int images[] = {R.drawable.apple, R.drawable.banana, R.drawable.orange};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +55,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mMainViewPager.setAdapter(new MainFragmentAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
+        //mTopViewPager.setAdapter(new MainDicountRibbonAdapter(MainActivity.this, images));
     }
 
     private void initViews() {
-       //imageView = findViewById(R.id.image);
+
+      //imageView = findViewById(R.id.image);
+
+
+        mTopViewPager = findViewById(R.id.top_view_pager);
+
         mMainViewPager = findViewById(R.id.main_view_pager);
         mMainNavigationBar = findViewById(R.id.bottom_navigation_menu_panel);
         mMainNavigationBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -74,15 +80,24 @@ public class MainActivity extends AppCompatActivity {
         int itemId = menuItem.getItemId();
         switch (itemId) {
             case R.id.nav_shop:
+                //mTopViewPager.setCurrentItem(0, true);
                 mMainViewPager.setCurrentItem(0, true);
                 break;
             case R.id.nav_hot_deals:
-                mMainViewPager.setCurrentItem(1, true);
+               mMainViewPager.setCurrentItem(1, true);
+                //mTopViewPager.setCurrentItem(1, true);
+                break;
+            case R.id.nav_favorites:
+                //mTopViewPager.setCurrentItem(2, true);
+                mMainViewPager.setCurrentItem(2, true);
                 break;
             case R.id.nav_shopping_cart:
+                //mTopViewPager.setCurrentItem(3, true);
                 mMainViewPager.setCurrentItem(3, true);
-
                 break;
+            case R.id.nav_my_account:
+                //mTopViewPager.setCurrentItem(4, true);
+                mMainViewPager.setCurrentItem(4, true);
 
         }
     }
