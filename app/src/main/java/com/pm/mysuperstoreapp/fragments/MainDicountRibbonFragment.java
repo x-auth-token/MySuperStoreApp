@@ -75,7 +75,7 @@ public class MainDicountRibbonFragment extends Fragment {
 
 
                     ViewPager pagerAdapter = view.findViewById(R.id.fLDiscountRibbon);
-                    pagerAdapter.setAdapter(new MainDicountRibbonAdapter(getContext(), discountImagesUrls));
+                    pagerAdapter.setAdapter(new MainDicountRibbonAdapter(, discountImagesUrls));
                     //pagerAdapter.setLayoutManager(new LinearLayoutManager(getContext()));
                 } else {
                     Log.d(TAG, "onComplete: ERROR could not fetch collection " + task.getException());

@@ -35,6 +35,8 @@ public class MainDicountRibbonAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    //TODO: Get images from Firebase Storage!
+
     @Override
     public int getCount() {
         return discountImagesUrls.size();
