@@ -1,16 +1,16 @@
 package com.pm.mysuperstoreapp.models;
 
-public class User {
+public abstract class AbstractUserModel {
 
     private double id;
     private String username;
     private String firstname;
     private String lastname;
 
-    public User() {
+    public AbstractUserModel() {
 
     }
-    public User(double id, String username, String firstname, String lastname) {
+    public AbstractUserModel(double id, String username, String firstname, String lastname) {
         this.id = id;
         this.username = username;
         this.firstname = firstname;
