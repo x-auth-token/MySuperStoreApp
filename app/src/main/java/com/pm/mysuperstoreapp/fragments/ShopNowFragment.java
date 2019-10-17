@@ -30,8 +30,8 @@ public class ShopNowFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        //return inflater.inflate(R.layout.fragment_shop_now, container, false);
-        return inflater.inflate(R.layout.fragment_shop_now_with_dicount_ribbon, container, false);
+        return inflater.inflate(R.layout.fragment_shop_now, container, false);
+        //return inflater.inflate(R.layout.fragment_shop_now_with_dicount_ribbon, container, false);
     }
 
 
@@ -42,8 +42,8 @@ public class ShopNowFragment extends Fragment {
 
         childFragmentManager = getChildFragmentManager();
         FragmentTransaction transaction = childFragmentManager.beginTransaction();
-        //transaction.add(R.id.fLShopNowMain, new RecyclerViewCategoriesFragment());
-        transaction.add(R.id.fLDiscountRibbon, new MainDicountRibbonFragment());
+        transaction.add(R.id.fLShopNowMain, new RecyclerViewCategoriesFragment());
+        //transaction.add(R.id.fLDiscountRibbon, new MainDicountRibbonFragment());
 
 
 
