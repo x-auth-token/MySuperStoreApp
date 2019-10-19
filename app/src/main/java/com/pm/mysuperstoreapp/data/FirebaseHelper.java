@@ -1,27 +1,5 @@
 package com.pm.mysuperstoreapp.data;
 
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.pm.mysuperstoreapp.R;
-import com.pm.mysuperstoreapp.adapters.MainDicountRibbonAdapter;
-import com.pm.mysuperstoreapp.adapters.RecyclerViewCategoriesAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 public class FirebaseHelper {
 
 
@@ -80,7 +58,7 @@ public class FirebaseHelper {
 
 
                             ViewPager pagerAdapter = view.findViewById(R.id.fLDiscountRibbon);
-                            pagerAdapter.setAdapter(new MainDicountRibbonAdapter(getContext(), discountImagesUrls));
+                            pagerAdapter.setAdapter(new ShopNowFlashDealsPagerAdapter(getContext(), discountImagesUrls));
                             //pagerAdapter.setLayoutManager(new LinearLayoutManager(getContext()));
                         } else {
                             Log.d(TAG, "onComplete: ERROR could not fetch collection " + task.getException());
@@ -136,7 +114,7 @@ public class FirebaseHelper {
 
 
                     ViewPager pagerAdapter = view.findViewById(R.id.fLDiscountRibbon);
-                    pagerAdapter.setAdapter(new MainDicountRibbonAdapter(getContext(), discountImagesUrls));
+                    pagerAdapter.setAdapter(new ShopNowFlashDealsPagerAdapter(getContext(), discountImagesUrls));
                     //pagerAdapter.setLayoutManager(new LinearLayoutManager(getContext()));
                 } else {
                     Log.d(TAG, "onComplete: ERROR could not fetch collection " + task.getException());

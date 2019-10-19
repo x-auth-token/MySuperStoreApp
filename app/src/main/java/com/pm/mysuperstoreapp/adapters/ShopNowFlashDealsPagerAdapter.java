@@ -14,20 +14,20 @@ import com.pm.mysuperstoreapp.R;
 
 import java.util.List;
 
-public class MainDicountRibbonAdapter extends PagerAdapter {
+public class ShopNowFlashDealsPagerAdapter extends PagerAdapter {
     Context context;
     //int images[];
     List<String> discountImagesUrls;
     LayoutInflater layoutInflater;
 
 
-    /*public MainDicountRibbonAdapter(Context context, int images[]) {
+    /*public ShopNowFlashDealsPagerAdapter(Context context, int images[]) {
         this.context = context;
         this.images = images;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }*/
 
-    public MainDicountRibbonAdapter(Context context, List<String> discountImagesUrls) {
+    public ShopNowFlashDealsPagerAdapter(Context context, List<String> discountImagesUrls) {
         this.context = context;
         this.discountImagesUrls = discountImagesUrls;
 
@@ -51,7 +51,7 @@ public class MainDicountRibbonAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, final int position) {
         View itemView = layoutInflater.inflate(R.layout.fragment_shop_now_flash_deals, container, false);
 
-        ImageView imageView = (ImageView) itemView.findViewById(R.id.avtivity_main_dicount_ribbon_image_view);
+       ImageView imageView = (ImageView) itemView.findViewById(R.id.iVHotDealPic);
         //imageView.setImageResource(discountImagesUrls.get(position));
 
         container.addView(itemView);

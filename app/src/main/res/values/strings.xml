@@ -43,8 +43,8 @@
     <!-- activity_resend_verification_email strings end -->
 
     <!-- Facebook values start -->
-    <string name="facebook_app_id">1201480366716191</string>
-    <string name="fb_login_protocol_scheme">fb1201480366716191</string>
+    <string name="facebook_app_id">1491611330994517</string>
+    <string name="fb_login_protocol_scheme">fb1491611330994517</string>
     <string name="no_internet_connection">No Internet Connection</string>
     <string name="no_internet_connection_prompt">Please check your Internet connection.</string>
     <string name="retry">RETRY</string>

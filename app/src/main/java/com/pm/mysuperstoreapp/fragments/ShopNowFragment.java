@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +31,24 @@ public class ShopNowFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_shop_now, container, false);
+        View view = inflater.inflate(R.layout.fragment_shop_now, container, false);
+
+        mViewModel = ViewModelProviders.of(this).get(TestViewModel.class);
+
+        childFragmentManager = getChildFragmentManager();
+        FragmentTransaction transaction = childFragmentManager.beginTransaction();
+        transaction.add(R.id.fLShopNowFlashDealsBannerFragment, new ShopNowFlashDealsFragment());
+        //transaction.add(R.id.fLFlashDeals, new ShopNowFlashDealsFragment());
+
+
+
+        transaction.addToBackStack(null);
+        transaction.commit();
+        childFragmentManager.executePendingTransactions();
+
+
+
+        return view;
         //return inflater.inflate(R.layout.fragment_shop_now_flash_deals, container, false);
     }
 
@@ -38,18 +56,18 @@ public class ShopNowFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(TestViewModel.class);
+        /*mViewModel = ViewModelProviders.of(this).get(TestViewModel.class);
 
-        //childFragmentManager = getChildFragmentManager();
-        //FragmentTransaction transaction = childFragmentManager.beginTransaction();
-        //transaction.add(R.id.constraintLayout, new RecyclerViewCategoriesFragment());
+        childFragmentManager = getChildFragmentManager();
+        FragmentTransaction transaction = childFragmentManager.beginTransaction();
+        transaction.add(R.id.fLShopNowFlashDealsBannerFragment, new ShopNowFlashDealsFragment());
         //transaction.add(R.id.fLFlashDeals, new ShopNowFlashDealsFragment());
 
 
 
-        //transaction.addToBackStack(null);
-        //transaction.commit();
-        //childFragmentManager.executePendingTransactions();
+        transaction.addToBackStack(null);
+        transaction.commit();
+        childFragmentManager.executePendingTransactions();*/
         // TODO: Use the ViewModel
     }
 

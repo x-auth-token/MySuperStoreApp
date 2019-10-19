@@ -19,12 +19,12 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class HotDealsRecyclerViewAdapter extends RecyclerView.Adapter<HotDealsRecyclerViewAdapter.ViewHolder> {
+public class HotDealsAdapter extends RecyclerView.Adapter<HotDealsAdapter.ViewHolder> {
 
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public HotDealsRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public HotDealsAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }

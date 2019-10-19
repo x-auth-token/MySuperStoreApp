@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -15,9 +16,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.pm.mysuperstoreapp.R;
 
 import com.pm.mysuperstoreapp.custom_views.NoSwipeViewPager;
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         initViews();
         initMainFragmentManager(savedInstanceState);
+
         //showItemCountBadge(true);
 
 
@@ -60,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mMainViewPager.setAdapter(new MainFragmentAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
-        //mTopViewPager.setAdapter(new MainDicountRibbonAdapter(MainActivity.this, images));
+        //mTopViewPager.setAdapter(new ShopNowFlashDealsPagerAdapter(MainActivity.this, images));
     }*/
 
     /*private void initMainFragmentAdapter() {
@@ -121,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
                 return true;
             case R.id.nav_favorites:
+
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fLMainFragmentContainer, new ProductPageFragment());
                 fragmentTransaction.addToBackStack(null);
@@ -134,10 +139,11 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.nav_my_account:
 
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fLMainFragmentContainer, new ProductPageFragment());
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                final Intent intent = new Intent(getApplicationContext(),
+                        LoginActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_right);
+                finish();
 
 
                 return true;

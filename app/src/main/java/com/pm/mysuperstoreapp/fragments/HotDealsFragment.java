@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pm.mysuperstoreapp.R;
-import com.pm.mysuperstoreapp.adapters.HotDealsRecyclerViewAdapter;
+import com.pm.mysuperstoreapp.adapters.HotDealsAdapter;
 import com.pm.mysuperstoreapp.fragments.dummy.DummyContent;
 import com.pm.mysuperstoreapp.fragments.dummy.DummyContent.DummyItem;
 
@@ -71,7 +71,7 @@ public class HotDealsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new HotDealsRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new HotDealsAdapter(DummyContent.ITEMS, mListener));
         }
         return view;
     }

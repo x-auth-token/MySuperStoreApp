@@ -64,7 +64,21 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        initViews();
+
+            password.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        btnEmailLogin.performClick();
+                        return true;
+                    }
+                    return false;
+                }
+            });
 
     }
 
@@ -74,19 +88,6 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        initViews();
-
-        password.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    btnEmailLogin.performClick();
-                    return true;
-                }
-                return false;
-            }
-        });
 
         if (!Utils.isNetworkConnected(findViewById(android.R.id.content))) {
 
@@ -158,6 +159,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void emailLogin(final View view) {
+
 
         if (!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
 
@@ -271,7 +273,11 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Utils.goToMainActivity(findViewById(android.R.id.content));
+    }
     public void facebookLogin(View view) {
         fbLoginManager.registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
@@ -292,7 +298,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
-        fbLoginManager.logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "user_friends"));
+        fbLoginManager.logInWithReadPermissions(LoginActivity.this, Arrays.asList("email","default"));
 
     }
 

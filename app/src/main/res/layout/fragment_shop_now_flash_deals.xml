@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:id="@+id/fLFlashDeals"
-    android:layout_height="match_parent">
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:id="@+id/fragment_shop_now_flash_deals"
 
-    <ImageView
+    android:layout_height="match_parent">
+    <!--AdapterViewFlipper
+        android:id="@+id/fCShopNowAdapterViewFlipper"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/avtivity_main_dicount_ribbon_image_view" />
+        android:autoStart="true"
+        android:flipInterval="300"
+        android:layout_height="match_parent"-->
+    <ImageView
+        android:id="@+id/iVFlashDealsPicture"
+        android:layout_width="match_parent"
+        android:scaleType="fitXY"
+        android:layout_height="match_parent" />
+
+
+
 
 </LinearLayout>
