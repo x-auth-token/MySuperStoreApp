@@ -49,6 +49,7 @@
     <string name="no_internet_connection_prompt">Please check your Internet connection.</string>
     <string name="retry">RETRY</string>
     <string name="dismiss">DISMISS</string>
+    <string name="flash_deals_banner">Flash Deals Banner</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
