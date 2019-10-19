@@ -49,7 +49,7 @@ public class MainDicountRibbonAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
-        View itemView = layoutInflater.inflate(R.layout.fragment_shop_now_with_dicount_ribbon, container, false);
+        View itemView = layoutInflater.inflate(R.layout.fragment_shop_now_flash_deals, container, false);
 
         ImageView imageView = (ImageView) itemView.findViewById(R.id.avtivity_main_dicount_ribbon_image_view);
         //imageView.setImageResource(discountImagesUrls.get(position));

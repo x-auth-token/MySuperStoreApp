@@ -1,7 +1,398 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fLShopNowMain"
+    android:id="@+id/fragment_shop_now_main_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ShopNowFragment" />
+    tools:context=".fragments.ShopNowFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:alpha="0.7"
+        android:background="#FFFFFF"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+
+
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:alpha="1"
+            android:layout_height="wrap_content">
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/fCShopNowTopViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:visibility="visible"/>
+
+
+            <SearchView
+                android:id="@+id/fCShopNowSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_corners_shape_background"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="#FFFFFF"
+                android:gravity="center_horizontal"
+                android:layout_below="@id/fCShopNowTopViewPager">
+
+            </SearchView>
+
+            <TextView
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fCShopNowSearch"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:ems="10"
+
+                android:fadeScrollbars="false"
+                android:gravity="bottom"
+                android:scrollbarAlwaysDrawHorizontalTrack="false"
+                android:scrollbars="none"
+                android:text="Categories"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:id="@+id/fCShopNowInnerHorizontalScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_below="@id/editText"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+
+                android:scrollbars="none">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="5dp">
+
+                    <ImageButton
+                        android:id="@+id/fCShopNowMeatImageButton"
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:background="@null"
+                        android:foregroundGravity="bottom"
+                        android:src="@mipmap/ic_shop_now_fragment_category_meat_round"
+                        android:text="Meat"
+                        android:textAlignment="gravity" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/fCShopNowMeatImageButton"
+                        android:layout_alignBaseline="@id/fCShopNowMeatImageButton"
+
+                        android:layout_alignStart="@id/fCShopNowMeatImageButton"
+                        android:layout_alignEnd="@id/fCShopNowMeatImageButton"
+
+                        android:layout_centerHorizontal="true"
+
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:text="Meat"
+                        android:textAlignment="gravity" />
+
+                    <ImageButton
+                        android:id="@+id/fCShopNowFishImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_toRightOf="@+id/fCShopNowMeatImageButton"
+                        android:background="@null"
+                        android:src="@mipmap/ic_shop_now_fragment_category_fish_round" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/fCShopNowFishImageButton"
+                        android:layout_alignBaseline="@id/fCShopNowFishImageButton"
+
+                        android:layout_alignStart="@id/fCShopNowFishImageButton"
+                        android:layout_alignEnd="@id/fCShopNowFishImageButton"
+
+                        android:layout_centerHorizontal="true"
+
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:text="Fish"
+                        android:textAlignment="gravity" />
+
+                    <ImageButton
+                        android:id="@+id/fCShopNowBakeryImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_toRightOf="@+id/fCShopNowFishImageButton"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:src="@mipmap/ic_shop_now_fragment_category_bakery_round" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/fCShopNowBakeryImageButton"
+                        android:layout_alignBaseline="@id/fCShopNowBakeryImageButton"
+
+                        android:layout_alignStart="@id/fCShopNowBakeryImageButton"
+                        android:layout_alignEnd="@id/fCShopNowBakeryImageButton"
+
+                        android:layout_centerHorizontal="true"
+
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:text="Bakery"
+                        android:textAlignment="gravity" />
+
+                    <ImageButton
+                        android:id="@+id/fCShopNowFruitsImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_toRightOf="@+id/fCShopNowBakeryImageButton"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:src="@mipmap/ic_shop_now_fragment_category_fruits_round" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/fCShopNowFruitsImageButton"
+                        android:layout_alignBaseline="@id/fCShopNowFruitsImageButton"
+
+                        android:layout_alignStart="@id/fCShopNowFruitsImageButton"
+                        android:layout_alignEnd="@id/fCShopNowFruitsImageButton"
+
+                        android:layout_centerHorizontal="true"
+
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:text="Fruits"
+                        android:textAlignment="gravity" />
+
+                    <ImageButton
+                        android:id="@+id/fCShopNowVegetablesImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_toRightOf="@+id/fCShopNowFruitsImageButton"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:src="@mipmap/ic_shop_now_fragment_category_vegetables_round" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/fCShopNowVegetablesImageButton"
+                        android:layout_alignBaseline="@id/fCShopNowVegetablesImageButton"
+
+                        android:layout_alignStart="@id/fCShopNowVegetablesImageButton"
+                        android:layout_alignEnd="@id/fCShopNowVegetablesImageButton"
+
+                        android:layout_centerHorizontal="true"
+
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:text="Vegetables"
+                        android:textAlignment="gravity" />
+
+                    <ImageButton
+                        android:id="@+id/fCShopNowAlcoholImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_toRightOf="@+id/fCShopNowVegetablesImageButton"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:src="@mipmap/ic_shop_now_fragment_category_alcohol_round" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/fCShopNowAlcoholImageButton"
+
+                        android:layout_alignBaseline="@id/fCShopNowAlcoholImageButton"
+                        android:layout_alignStart="@id/fCShopNowAlcoholImageButton"
+
+                        android:layout_alignEnd="@id/fCShopNowAlcoholImageButton"
+
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text="Alcohol"
+                        android:textAlignment="gravity" />
+
+                    <ImageButton
+                        android:id="@+id/fCShopNowBeveragesImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_toRightOf="@+id/fCShopNowAlcoholImageButton"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:src="@mipmap/ic_shop_now_fragment_category_beverages_round" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/fCShopNowBeveragesImageButton"
+                        android:layout_alignBaseline="@id/fCShopNowBeveragesImageButton"
+
+                        android:layout_alignStart="@id/fCShopNowBeveragesImageButton"
+                        android:layout_alignEnd="@id/fCShopNowBeveragesImageButton"
+
+                        android:layout_centerHorizontal="true"
+
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:text="Beverages"
+                        android:textAlignment="gravity" />
+
+
+                </RelativeLayout>
+
+                <!--<LinearLayout
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageButton"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:text="Meat"
+                        android:textSize="20dp"
+                        android:foregroundGravity="bottom"
+                        android:src="@mipmap/ic_shop_now_fragment_category_meat_round"
+                        android:textAlignment="gravity" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                    <ImageButton
+                        android:id="@+id/imageButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/app_ic_launcher_foreground" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/app_ic_launcher_foreground" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/app_ic_launcher_foreground" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/app_ic_launcher_foreground" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/app_ic_launcher_foreground" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/app_ic_launcher_foreground" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/app_ic_launcher_foreground" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/app_ic_launcher_foreground" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/app_ic_launcher_foreground" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/app_ic_launcher_foreground" />
+                </LinearLayout>-->
+            </HorizontalScrollView>
+
+            <!--LinearLayout
+                android:id="@+id/fLShopNowInnerLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/fCShopNowSearch"
+                android:orientation="horizontal"/-->
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/fCShopNowMidleViewPager"
+                android:layout_width="match_parent"
+                android:layout_below="@id/fCShopNowInnerHorizontalScrollView"
+                android:layout_height="wrap_content"
+                android:visibility="visible" />
+
+            <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/fCShopNowBottomViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/fCShopNowMidleViewPager"
+                    android:layout_height="500dp"
+                    android:visibility="visible" />
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</FrameLayout>

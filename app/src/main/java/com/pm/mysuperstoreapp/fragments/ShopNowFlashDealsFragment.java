@@ -9,28 +9,22 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.pm.mysuperstoreapp.R;
-import com.pm.mysuperstoreapp.activities.MainActivity;
 import com.pm.mysuperstoreapp.adapters.MainDicountRibbonAdapter;
-import com.pm.mysuperstoreapp.adapters.RecyclerViewCategoriesAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class MainDicountRibbonFragment extends Fragment {
+public class ShopNowFlashDealsFragment extends Fragment {
 
     private List<String> discountImagesUrls;
     public static final String TAG = "mytag";
@@ -74,7 +68,7 @@ public class MainDicountRibbonFragment extends Fragment {
                     }
 
 
-                    ViewPager pagerAdapter = view.findViewById(R.id.fLDiscountRibbon);
+                    ViewPager pagerAdapter = view.findViewById(R.id.fLFlashDeals);
                     pagerAdapter.setAdapter(new MainDicountRibbonAdapter(getContext(), discountImagesUrls));
                     //pagerAdapter.setLayoutManager(new LinearLayoutManager(getContext()));
                 } else {

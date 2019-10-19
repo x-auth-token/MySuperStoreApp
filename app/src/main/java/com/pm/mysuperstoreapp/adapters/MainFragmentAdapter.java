@@ -12,6 +12,7 @@ public class MainFragmentAdapter extends FragmentPagerAdapter {
 
     public MainFragmentAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
+
     }
 
     @NonNull
@@ -19,6 +20,7 @@ public class MainFragmentAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
+
                 return new ShopNowFragment();
             case 1:
                 return new Test1();

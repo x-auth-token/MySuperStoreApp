@@ -4,10 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -46,7 +51,6 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseUser user;
     private EditText email;
     private EditText password;
-    private TextView notification;
     private ProgressBar progressBar;
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
@@ -59,6 +63,16 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+
+    }
+
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
 
         initViews();
 
@@ -74,15 +88,25 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-    }
+        if (!Utils.isNetworkConnected(findViewById(android.R.id.content))) {
 
+           new AlertDialog.Builder(this).setTitle(R.string.no_internet_connection).setMessage(R.string.no_internet_connection_prompt).setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialogInterface, int i) {
 
+               }
+           }).setNegativeButton(R.string.dismiss, null).setIcon(android.R.drawable.ic_dialog_alert).show();
+            /*Utils.makeToast(findViewById(R.id.activity_login_et_email), getString(R.string.no_internet_connection), "#FF0000");
 
-    @Override
-    public void onStart() {
-        super.onStart();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
 
+                    finish();
+                }
+            }, 4000);*/
 
+        }
 
     }
 

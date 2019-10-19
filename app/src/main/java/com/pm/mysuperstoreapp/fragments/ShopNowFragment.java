@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.pm.mysuperstoreapp.R;
-import com.pm.mysuperstoreapp.adapters.MainDicountRibbonAdapter;
 import com.pm.mysuperstoreapp.models.TestViewModel;
 
 public class ShopNowFragment extends Fragment {
@@ -21,6 +20,7 @@ public class ShopNowFragment extends Fragment {
 
     public static FragmentManager childFragmentManager;
     private TestViewModel mViewModel;
+
 
 /*    public static ShopNowFragment newInstance() {
         return new ShopNowFragment();
@@ -31,7 +31,7 @@ public class ShopNowFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_shop_now, container, false);
-        //return inflater.inflate(R.layout.fragment_shop_now_with_dicount_ribbon, container, false);
+        //return inflater.inflate(R.layout.fragment_shop_now_flash_deals, container, false);
     }
 
 
@@ -40,16 +40,16 @@ public class ShopNowFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(TestViewModel.class);
 
-        childFragmentManager = getChildFragmentManager();
-        FragmentTransaction transaction = childFragmentManager.beginTransaction();
-        transaction.add(R.id.fLShopNowMain, new RecyclerViewCategoriesFragment());
-        //transaction.add(R.id.fLDiscountRibbon, new MainDicountRibbonFragment());
+        //childFragmentManager = getChildFragmentManager();
+        //FragmentTransaction transaction = childFragmentManager.beginTransaction();
+        //transaction.add(R.id.constraintLayout, new RecyclerViewCategoriesFragment());
+        //transaction.add(R.id.fLFlashDeals, new ShopNowFlashDealsFragment());
 
 
 
-        transaction.addToBackStack(null);
-        transaction.commit();
-        childFragmentManager.executePendingTransactions();
+        //transaction.addToBackStack(null);
+        //transaction.commit();
+        //childFragmentManager.executePendingTransactions();
         // TODO: Use the ViewModel
     }
 

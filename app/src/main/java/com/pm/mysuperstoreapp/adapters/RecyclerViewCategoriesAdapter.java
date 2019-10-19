@@ -53,7 +53,7 @@ public class RecyclerViewCategoriesAdapter extends RecyclerView.Adapter<Recycler
 
                 productFragment.setArguments(bundle);
 
-                transaction.replace(R.id.fLShopNowMain, productFragment);
+                transaction.replace(R.id.fragment_shop_now_main_frame, productFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
             }

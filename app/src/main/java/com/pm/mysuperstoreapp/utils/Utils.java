@@ -5,8 +5,12 @@ package com.pm.mysuperstoreapp.utils;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.util.Patterns;
 import android.view.Gravity;
 import android.view.View;
@@ -25,6 +29,7 @@ import com.pm.mysuperstoreapp.activities.MainActivity;
 import java.util.regex.Pattern;
 
 import static android.app.PendingIntent.getActivity;
+import static androidx.core.content.ContextCompat.getSystemService;
 
 
 public final class Utils {
@@ -32,10 +37,10 @@ public final class Utils {
     public static void makeToast(View view, String string, String color){
 
         int x = view.getLeft();
-        int y = view.getBottom() + 2*view.getHeight();
+        int y = view.getTop() + 3*view.getHeight();
 
         Toast toast = Toast.makeText(view.getContext(), string, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, x, y);
+        toast.setGravity(Gravity.RELATIVE_LAYOUT_DIRECTION, x, y);
         TextView toastMessage = toast.getView().findViewById(android.R.id.message);
         toastMessage.setTextColor(Color.parseColor(color));
         toast.show();
@@ -118,4 +123,19 @@ public final class Utils {
         activity.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
         activity.finish();
     }
+
+    public static boolean isNetworkConnected(View view) {
+        ConnectivityManager cm = (ConnectivityManager) view.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        Network activeNetwork = cm.getActiveNetwork();
+
+        if (cm != null) {
+
+            NetworkCapabilities networkCapabilities  = cm.getNetworkCapabilities(activeNetwork);
+
+            if (networkCapabilities != null) {
+                return (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI));
+            }
+        }
+        return false;
+     }
 }
