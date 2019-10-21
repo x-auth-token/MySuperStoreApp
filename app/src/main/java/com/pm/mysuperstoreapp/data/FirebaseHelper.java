@@ -2,7 +2,7 @@ package com.pm.mysuperstoreapp.data;
 
 public class FirebaseHelper {
 
-
+    //TODO:
     /*final CollectionReference dbStoreCollection = FirebaseFirestore.getInstance().collection("store");
     final DocumentReference docStoreDiscountsDocument = dbStoreCollection.document("discounts");
 

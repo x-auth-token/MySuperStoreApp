@@ -21,11 +21,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.pm.mysuperstoreapp.R;
 
 import com.pm.mysuperstoreapp.custom_views.NoSwipeViewPager;
+import com.pm.mysuperstoreapp.fragments.FavoritesFragment;
+import com.pm.mysuperstoreapp.fragments.MyAccountFragment;
 import com.pm.mysuperstoreapp.fragments.ProductPageFragment;
 import com.pm.mysuperstoreapp.fragments.ShopNowFragment;
+import com.pm.mysuperstoreapp.fragments.ShoppingCartFragment;
+import com.pm.mysuperstoreapp.utils.Utils;
+
+import java.text.DateFormatSymbols;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
     public static ViewPager mTopViewPager;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
-    //int images[] = {R.drawable.apple, R.drawable.banana, R.drawable.orange};
+    private FirebaseAuth firebaseAuth;
+
 
 
     @Override
@@ -50,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -125,31 +130,47 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
                 return true;
             case R.id.nav_favorites:
-
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fLMainFragmentContainer, new ProductPageFragment());
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                if (isAuthenticated()) {
+                    Utils.goToLoginActivity(findViewById(android.R.id.content));
+                } else {
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fLMainFragmentContainer, new FavoritesFragment());
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
                 return true;
             case R.id.nav_shopping_cart:
                 fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fLMainFragmentContainer, new ProductPageFragment());
+                fragmentTransaction.replace(R.id.fLMainFragmentContainer, new ShoppingCartFragment());
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 return true;
             case R.id.nav_my_account:
 
-                final Intent intent = new Intent(getApplicationContext(),
-                        LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_right);
-                finish();
+                if (isAuthenticated()) {
+                    Utils.goToLoginActivity(findViewById(android.R.id.content));
+                } else {
 
-
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fLMainFragmentContainer, new MyAccountFragment());
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                    
+                }
                 return true;
+
             default:
                 return false;
+
+
+
         }
+    }
+
+    private boolean isAuthenticated() {
+        FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
+
+        return (user == null) ? true : false;
     }
 
     private void showItemCountBadge(boolean show) {

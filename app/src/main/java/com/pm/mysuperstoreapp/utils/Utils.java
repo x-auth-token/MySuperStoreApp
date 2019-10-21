@@ -126,6 +126,29 @@ public final class Utils {
 
     public static boolean isNetworkConnected(View view) {
         ConnectivityManager cm = (ConnectivityManager) view.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+
+        // Disabled as it requires API 24+
+        /*ConnectivityManager.NetworkCallback networkCallback = new ConnectivityManager.NetworkCallback() {
+            @Override
+            public void onAvailable(Network network) {
+                super.onAvailable(network);
+                // this ternary operation is not quite true, because non-metered doesn't yet mean, that it's wifi
+                // nevertheless, for simplicity let's assume that's true
+                //Log.i("vvv", "connected to " + (manager.isActiveNetworkMetered() ? "LTE" : "WIFI"));
+            }
+
+            @Override
+            public void onLost(Network network) {
+                super.onLost(network);
+               // Log.i("vvv", "losing active connection");
+            }
+        };*/
+
+
+        //cm.registerDefaultNetworkCallback(networkCallback);
+
+
         Network activeNetwork = cm.getActiveNetwork();
 
         if (cm != null) {

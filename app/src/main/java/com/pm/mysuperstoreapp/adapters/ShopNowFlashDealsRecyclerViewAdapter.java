@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -28,7 +29,7 @@ public class ShopNowFlashDealsRecyclerViewAdapter extends RecyclerView.Adapter<R
 
     List<PictureViewModel> pictures;
     Context context;
- 
+
 
 
     public ShopNowFlashDealsRecyclerViewAdapter(Context context, List<PictureViewModel> pictures) {
@@ -100,7 +101,7 @@ public class ShopNowFlashDealsRecyclerViewAdapter extends RecyclerView.Adapter<R
 
             this.iVFlashDealsPicture = itemView.findViewById(R.id.iVFlashDealsPicture);
             //adapterViewFlipper = inflatedAdapterViewFlipper.findViewById(R.id.fCShopNowAdapterFlipperView);
-            ShopNowFlashDealsViewFlipperAdapter adapter = new ShopNowFlashDealsViewFlipperAdapter(context, pictures);
+            //ShopNowFlashDealsViewFlipperAdapter adapter = new ShopNowFlashDealsViewFlipperAdapter(context, pictures);
             //adapterViewFlipper.setAdapter(adapter);
         }
 

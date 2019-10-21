@@ -11,8 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,7 +45,6 @@ public class ShopNowFlashDealsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_shop_now, container, false);
-        View view2 = inflater.inflate(R.layout.fragment_shop_now_flash_deals_adapter_view_flipper, container, false);
         populateBanner(view);
 
 
@@ -81,9 +82,21 @@ public class ShopNowFlashDealsFragment extends Fragment {
 
 
                     RecyclerView recyclerView = view.findViewById(R.id.rVFlashDeals);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
+                    recyclerView.setLayoutManager(layoutManager);
+
 
                     recyclerView.setAdapter(new ShopNowFlashDealsRecyclerViewAdapter(getActivity(), pictures));
+
+                    /*RecyclerView.SmoothScroller smoothScroller = new LinearSmoothScroller(getActivity()) {
+                        @Override
+                        protected int getVerticalSnapPreference() {
+                            return LinearSmoothScroller.SNAP_TO_END;
+                        }
+                    };
+
+                    smoothScroller.setTargetPosition(pictures.size() + 1 );
+                    layoutManager.startSmoothScroll(smoothScroller);*/
 
                     PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
 

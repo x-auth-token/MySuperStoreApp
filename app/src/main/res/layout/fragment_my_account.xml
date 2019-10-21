@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:isScrollContainer="false"
+    android:nestedScrollingEnabled="false"
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    tools:context=".fragments.MyAccountFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:isScrollContainer="false"
+        android:nestedScrollingEnabled="false"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <ImageView
+            android:id="@+id/my_account_top_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+
+
+            android:layout_marginBottom="-200dp"
+            android:layoutDirection="inherit"
+            android:scaleType="fitXY"
+            android:visibility="visible"
+            app:srcCompat="@drawable/background_4153451_1920" />
+
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/my_account_top_frame"
+            android:background="#FFFFFF"
+            android:scaleType="fitXY" />
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/fragment_my_account_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="140dp"
+        android:cropToPadding="true"
+        android:onClick="onClick"
+        android:src="@drawable/com_facebook_profile_picture_blank_square"
+        app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
+
+    <Button
+        android:id="@+id/fragment_my_account_logout_button"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/rounded_corners_button"
+        android:backgroundTint="#EF5350"
+        android:onClick="onClick"
+        android:text="Logout"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+</FrameLayout>

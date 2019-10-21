@@ -97,15 +97,7 @@ public class LoginActivity extends AppCompatActivity {
 
                }
            }).setNegativeButton(R.string.dismiss, null).setIcon(android.R.drawable.ic_dialog_alert).show();
-            /*Utils.makeToast(findViewById(R.id.activity_login_et_email), getString(R.string.no_internet_connection), "#FF0000");
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                    finish();
-                }
-            }, 4000);*/
 
         }
 
