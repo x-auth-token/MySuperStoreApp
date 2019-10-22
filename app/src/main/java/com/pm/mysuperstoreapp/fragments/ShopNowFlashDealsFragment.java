@@ -10,23 +10,14 @@ import android.widget.AdapterViewFlipper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSmoothScroller;
-import androidx.recyclerview.widget.PagerSnapHelper;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SnapHelper;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.pm.mysuperstoreapp.R;
 import com.pm.mysuperstoreapp.adapters.ShopNowFlashDealsPagerAdapter;
-import com.pm.mysuperstoreapp.adapters.ShopNowFlashDealsRecyclerViewAdapter;
-import com.pm.mysuperstoreapp.adapters.ShopNowFlashDealsViewFlipperAdapter;
 import com.pm.mysuperstoreapp.models.PictureViewModel;
 
 import java.util.ArrayList;
@@ -36,8 +27,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
-import me.relex.circleindicator.CircleIndicator2;
-import me.relex.circleindicator.CircleIndicator3;
 
 public class ShopNowFlashDealsFragment extends Fragment {
 

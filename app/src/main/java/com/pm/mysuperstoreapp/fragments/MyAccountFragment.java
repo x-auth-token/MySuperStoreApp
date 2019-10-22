@@ -58,7 +58,6 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                              @Nullable Bundle savedInstanceState) {
 
 
-
         View view = inflater.inflate(R.layout.fragment_my_account, container, false);
         accountPhoto = view.findViewById(R.id.fragment_my_account_photo);
         accountPhoto.setOnClickListener(this);
@@ -78,17 +77,19 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
 
-                if (user == null) {
-                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-                    startActivity(intent);
-                    getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
-                    getActivity().finish();
+
+                FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
+                if (!isHidden()) {
+                    if (user == null) {
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                        getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
+                        getActivity().finish();
+                    }
                 }
             }
         };
-
 
 
         mViewModel = ViewModelProviders.of(this).get(MyAccountViewModel.class);
@@ -100,9 +101,9 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch(requestCode) {
+        switch (requestCode) {
             case 0:
-                if(resultCode == getActivity().RESULT_OK){
+                if (resultCode == getActivity().RESULT_OK) {
                     Uri selectedImage = data.getData();
                     //    Glide.with(getContext()).load(selectedImage).into(accountPhoto);
                     accountPhoto.setImageURI(selectedImage);
@@ -110,7 +111,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
 
                 break;
             case 1:
-                if(resultCode == getActivity().RESULT_OK){
+                if (resultCode == getActivity().RESULT_OK) {
                     Uri selectedImage = data.getData();
                     //Glide.with(getContext()).load(selectedImage).into(accountPhoto);
                     accountPhoto.setImageURI(selectedImage);
@@ -134,8 +135,6 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     }
 
 
-
-
     @Override
     public void onStop() {
         super.onStop();
@@ -143,7 +142,6 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     }
 
     private void logout(View view) {
-
 
 
         if (firebaseAuth != null) {
@@ -162,7 +160,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
 
     private void setProfilePicture(View view) {
 
-        final String[] options = { "Camera", "Gallery"};
+        final String[] options = {"Camera", "Gallery"};
 
         new AlertDialog.Builder(view.getContext()).setTitle(R.string.choose_picture_location).setItems(options, new DialogInterface.OnClickListener() {
             @Override
@@ -188,7 +186,6 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
 
 
     }
-
 
 
     @Override

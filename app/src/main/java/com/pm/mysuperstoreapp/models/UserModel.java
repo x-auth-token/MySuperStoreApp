@@ -3,16 +3,17 @@ package com.pm.mysuperstoreapp.models;
 public class UserModel {
 
     private double id;
-    private String username;
+    private String email;
+    private String profilePictureUrl;
     private String firstname;
     private String lastname;
 
     public UserModel() {
 
     }
-    public UserModel(double id, String username, String firstname, String lastname) {
+
+   public UserModel(double id, String email, String firstname, String lastname) {
         this.id = id;
-        this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
     }
@@ -23,14 +24,6 @@ public class UserModel {
 
     public void setId(double id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getFirstname() {
@@ -47,5 +40,20 @@ public class UserModel {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
     }
 }

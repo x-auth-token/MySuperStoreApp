@@ -45,13 +45,13 @@ public class FavoritesFragment extends Fragment {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
-
+                if (!isHidden()) {
                 if (user == null) {
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
                     getActivity().finish();
-                }
+                }}
             }
         };
 
@@ -62,9 +62,9 @@ public class FavoritesFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
-        firebaseAuth.addAuthStateListener(authStateListener);
-
+        if (!this.isHidden()) {
+            firebaseAuth.addAuthStateListener(authStateListener);
+        }
     }
 
     @Override
