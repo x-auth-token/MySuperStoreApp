@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.facebook.FacebookContentProvider;
 import com.facebook.login.widget.ProfilePictureView;
 import com.google.android.gms.auth.api.Auth;
@@ -57,7 +58,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                              @Nullable Bundle savedInstanceState) {
 
 
-        getActivity().findViewById(R.id.mActivityNestedScrollView).stopNestedScroll();
+
         View view = inflater.inflate(R.layout.fragment_my_account, container, false);
         accountPhoto = view.findViewById(R.id.fragment_my_account_photo);
         accountPhoto.setOnClickListener(this);
@@ -103,6 +104,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
             case 0:
                 if(resultCode == getActivity().RESULT_OK){
                     Uri selectedImage = data.getData();
+                    //    Glide.with(getContext()).load(selectedImage).into(accountPhoto);
                     accountPhoto.setImageURI(selectedImage);
                 }
 
@@ -110,6 +112,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
             case 1:
                 if(resultCode == getActivity().RESULT_OK){
                     Uri selectedImage = data.getData();
+                    //Glide.with(getContext()).load(selectedImage).into(accountPhoto);
                     accountPhoto.setImageURI(selectedImage);
                 }
                 break;

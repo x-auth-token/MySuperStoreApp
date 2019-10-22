@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mActivityNestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+
+    android:fillViewport="true">
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,22 +17,24 @@
     android:clipToPadding="false"
     tools:context=".fragments.ShopNowFragment">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:alpha="0.7"
-        android:background="#FFFFFF"
-        android:contentDescription="@string/flash_deals_banner" />
-
-    <!--ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="5dp"
 
 
-        android:layout_marginEnd="5dp"
-        android:clipChildren="false"-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:alpha="0.7"
+            android:background="#FFFFFF"
+            android:contentDescription="@string/flash_deals_banner" />
+
+        <!--ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+
+
+            android:layout_marginEnd="5dp"
+            android:clipChildren="false"-->
 
 
         <RelativeLayout
@@ -38,24 +48,31 @@
                 android:id="@+id/fLShopNowFlashDealsBannerFragment"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_centerHorizontal="true"
-                >
+                android:layout_centerHorizontal="true">
 
-                <androidx.recyclerview.widget.RecyclerView
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/fragment_shop_now_flash_deals_view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <!--<androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rVFlashDeals"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rVFlashDeals"/>
+                    android:layout_height="wrap_content" />-->
             </FrameLayout>
 
-
-
-            <me.relex.circleindicator.CircleIndicator2
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/fCShopNowCircleIndicator"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginBottom="20dp"
-                android:id="@+id/fCShopNowCircleIndicator"
                 android:layout_above="@+id/fCShopNowSearch"
-                />
+                android:layout_marginBottom="20dp" />
+            <!--<me.relex.circleindicator.CircleIndicator2
+                android:id="@+id/fCShopNowCircleIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_above="@+id/fCShopNowSearch"
+                android:layout_marginBottom="20dp" />-->
 
 
             <SearchView
@@ -326,6 +343,7 @@
         </RelativeLayout>
 
 
-    <!--/ScrollView-->
+
 
 </FrameLayout>
+</ScrollView>

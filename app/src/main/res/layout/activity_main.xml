@@ -14,13 +14,13 @@
     <!--ImageView
         android:id="@+id/image"
         android:layout_width="match_parent" -->
-    <androidx.core.widget.NestedScrollView
+    <!--<androidx.core.widget.NestedScrollView
 
         android:layout_width="match_parent"
         android:fillViewport="true"
         android:id="@+id/mActivityNestedScrollView"
         android:layout_above="@id/bottom_navigation_menu_panel"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent">-->
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                 android:layout_height="500dp"
                 android:visibility="visible" />
         </RelativeLayout-->
-    </androidx.core.widget.NestedScrollView>
+    <!--</androidx.core.widget.NestedScrollView>-->
 
     <!--com.pm.mysuperstoreapp.custom_views.NoSwipeViewPager
         android:id="@+id/main_view_pager"

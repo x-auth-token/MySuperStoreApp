@@ -10,14 +10,17 @@ import android.widget.Toast;
 
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.pm.mysuperstoreapp.R;
+import com.pm.mysuperstoreapp.models.PictureViewModel;
 
 import java.util.List;
 
 public class ShopNowFlashDealsPagerAdapter extends PagerAdapter {
     Context context;
     //int images[];
-    List<String> discountImagesUrls;
+    List<PictureViewModel> pictures;
     LayoutInflater layoutInflater;
 
 
@@ -27,9 +30,9 @@ public class ShopNowFlashDealsPagerAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }*/
 
-    public ShopNowFlashDealsPagerAdapter(Context context, List<String> discountImagesUrls) {
+    public ShopNowFlashDealsPagerAdapter(Context context, List<PictureViewModel> discountImagesUrls) {
         this.context = context;
-        this.discountImagesUrls = discountImagesUrls;
+        this.pictures = discountImagesUrls;
 
 
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -39,7 +42,7 @@ public class ShopNowFlashDealsPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return discountImagesUrls.size();
+        return pictures.size();
     }
 
     @Override
@@ -51,18 +54,25 @@ public class ShopNowFlashDealsPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, final int position) {
         View itemView = layoutInflater.inflate(R.layout.fragment_shop_now_flash_deals, container, false);
 
-       ImageView imageView = (ImageView) itemView.findViewById(R.id.iVHotDealPic);
-        //imageView.setImageResource(discountImagesUrls.get(position));
 
+
+        ImageView imageView = itemView.findViewById(R.id.iVFlashDealsPicture);
+
+
+
+
+       //ImageView imageView = (ImageView) itemView.findViewById(R.id.iVHotDealPic);
+        //imageView.setImageResource(discountImagesUrls.get(position));
+        Glide.with(this.context).load(pictures.get(position).getUrl()).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).placeholder(R.drawable.grain).into(imageView);
         container.addView(itemView);
 
         //listening to image click
-        imageView.setOnClickListener(new View.OnClickListener() {
+        /*imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "you clicked image " + (position + 1), Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
 
         return itemView;
     }
