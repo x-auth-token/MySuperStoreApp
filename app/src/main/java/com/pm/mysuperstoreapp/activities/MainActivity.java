@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -133,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 active = hotDealsFragment;
                 return true;
             case R.id.nav_favorites:
-                if (isAuthenticated()) {
+                if (!isAuthenticated()) {
                     Utils.goToLoginActivity(findViewById(android.R.id.content));
                 } else {
 
@@ -148,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.nav_my_account:
 
-                if (isAuthenticated()) {
+                if (!isAuthenticated()) {
                     Utils.goToLoginActivity(findViewById(android.R.id.content));
                 } else {
 
@@ -171,7 +173,26 @@ public class MainActivity extends AppCompatActivity {
     private boolean isAuthenticated() {
         FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
 
-        return (user == null) ? true : false;
+        return (user != null) ? true : false;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        if (mMainNavigationBar.getSelectedItemId() != R.id.nav_shop) {
+            mMainNavigationBar.setSelectedItemId(R.id.nav_shop);
+        } else {
+            new AlertDialog.Builder(this).setTitle(R.string.exit_warning).setMessage(R.string.exit_prompt).setPositiveButton(R.string.exit, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    MainActivity.this.finishAffinity();
+                }
+            }).setNegativeButton(R.string.dismiss, null).show();
+
+
+        }
+
     }
 
     private void showItemCountBadge(boolean show) {

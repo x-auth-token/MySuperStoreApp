@@ -2,6 +2,7 @@ package com.pm.mysuperstoreapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 
 import android.app.AlertDialog;
@@ -267,7 +268,9 @@ public class LoginActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
+
         super.onBackPressed();
+
         Utils.goToMainActivity(findViewById(android.R.id.content));
     }
     public void facebookLogin(View view) {

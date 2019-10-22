@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">MySuperStoreApp</string>
+    <string name="app_name">MySuperMarket</string>
 
     <!-- activity_login strings start -->
     <string name="login">Login</string>
@@ -51,6 +51,9 @@
     <string name="dismiss">DISMISS</string>
     <string name="flash_deals_banner">Flash Deals Banner</string>
     <string name="choose_picture_location">Choose</string>
+    <string name="exit_prompt">Are you sure that you want to exit?</string>
+    <string name="exit_warning">Exit</string>
+    <string name="exit">Exit</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
