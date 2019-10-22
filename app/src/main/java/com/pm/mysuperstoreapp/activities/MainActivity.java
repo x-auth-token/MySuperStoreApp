@@ -2,12 +2,12 @@ package com.pm.mysuperstoreapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -26,13 +26,12 @@ import com.pm.mysuperstoreapp.R;
 
 import com.pm.mysuperstoreapp.custom_views.NoSwipeViewPager;
 import com.pm.mysuperstoreapp.fragments.FavoritesFragment;
+import com.pm.mysuperstoreapp.fragments.HotDealsFragment;
 import com.pm.mysuperstoreapp.fragments.MyAccountFragment;
 import com.pm.mysuperstoreapp.fragments.ProductPageFragment;
 import com.pm.mysuperstoreapp.fragments.ShopNowFragment;
 import com.pm.mysuperstoreapp.fragments.ShoppingCartFragment;
 import com.pm.mysuperstoreapp.utils.Utils;
-
-import java.text.DateFormatSymbols;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private FirebaseAuth firebaseAuth;
+
+    final Fragment shopNowFragment = new ShopNowFragment();
+    final Fragment hotDealsFragment = new HotDealsFragment();
+    final Fragment favoritesFragment = new FavoritesFragment();
+    final Fragment shoppingCartFragment = new ShoppingCartFragment();
+    final Fragment myAccountFragment = new MyAccountFragment();
+
+    Fragment active = shopNowFragment;
 
 
 
@@ -80,10 +87,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             fragmentManager = getSupportFragmentManager();
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fLMainFragmentContainer, new ShopNowFragment());
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+            //fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentManager.beginTransaction().add(R.id.main_fragment_container, myAccountFragment, "MY_ACCOUNT_FRAGMENT").hide(myAccountFragment).commit();
+            fragmentManager.beginTransaction().add(R.id.main_fragment_container, shoppingCartFragment, "SHOPPING_CART_FRAGMENT").hide(shoppingCartFragment).commit();
+            fragmentManager.beginTransaction().add(R.id.main_fragment_container, favoritesFragment, "FAVORITES_FRAGMENT").hide(favoritesFragment).commit();
+            fragmentManager.beginTransaction().add(R.id.main_fragment_container, hotDealsFragment, "HOT_DEALS_FRAGMENT").hide(hotDealsFragment).commit();
+            fragmentManager.beginTransaction().add(R.id.main_fragment_container, shopNowFragment, "SHOP_NOW_FRAGMENT").commit();
+            //fragmentTransaction.replace(R.id.main_fragment_container, new ShopNowFragment());
+            //fragmentTransaction.addToBackStack(null);
+            //fragmentTransaction.commit();
         }
     }
 
@@ -115,35 +127,46 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_shop:
                 //mTopViewPager.setCurrentItem(0, true);
                 //mMainViewPager.setCurrentItem(0, true);
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fLMainFragmentContainer, new ShopNowFragment());
+                //fragmentTransaction = fragmentManager.beginTransaction();
+                /*fragmentTransaction.replace(R.id.main_fragment_container, new ShopNowFragment());
                 fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
+
+                fragmentManager.beginTransaction().hide(active).show(shopNowFragment).commit();
+                active = shopNowFragment;
 
                 return true;
             case R.id.nav_hot_deals:
                //mMainViewPager.setCurrentItem(1, true);
                 //mTopViewPager.setCurrentItem(1, true);
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fLMainFragmentContainer, new ProductPageFragment());
+                /*fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.main_fragment_container, new ProductPageFragment());
                 fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
+
+                fragmentManager.beginTransaction().hide(active).show(hotDealsFragment).commit();
+                active = hotDealsFragment;
                 return true;
             case R.id.nav_favorites:
                 if (isAuthenticated()) {
                     Utils.goToLoginActivity(findViewById(android.R.id.content));
                 } else {
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fLMainFragmentContainer, new FavoritesFragment());
+                    /*fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.main_fragment_container, new FavoritesFragment());
                     fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
+                    fragmentTransaction.commit();*/
+                    fragmentManager.beginTransaction().hide(active).show(favoritesFragment).commit();
+                    active = favoritesFragment;
                 }
                 return true;
             case R.id.nav_shopping_cart:
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fLMainFragmentContainer, new ShoppingCartFragment());
+                /*fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.main_fragment_container, new ShoppingCartFragment());
                 fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
+
+                fragmentManager.beginTransaction().hide(active).show(shoppingCartFragment).commit();
+                active = shoppingCartFragment;
                 return true;
             case R.id.nav_my_account:
 
@@ -151,10 +174,13 @@ public class MainActivity extends AppCompatActivity {
                     Utils.goToLoginActivity(findViewById(android.R.id.content));
                 } else {
 
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fLMainFragmentContainer, new MyAccountFragment());
+                    /*fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.main_fragment_container, new MyAccountFragment());
                     fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
+                    fragmentTransaction.commit();*/
+
+                    fragmentManager.beginTransaction().hide(active).show(myAccountFragment).commit();
+                    active = myAccountFragment;
 
                 }
                 return true;

@@ -40,7 +40,7 @@ public class HotDealsAdapter extends RecyclerView.Adapter<HotDealsAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         //holder.mImageView.findViewById(R.drawable.app_ic_launcher_background);
-        holder.mContentView.setText(mValues.get(position).content);
+//        holder.mContentView.setText(mValues.get(position).content); //TODO: Fix the crash
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
