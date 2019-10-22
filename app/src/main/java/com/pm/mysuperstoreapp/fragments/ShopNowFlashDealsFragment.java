@@ -46,7 +46,7 @@ public class ShopNowFlashDealsFragment extends Fragment {
     private AdapterViewFlipper adapterViewFlipper;
     private ViewPager viewPager;
     private List<PictureViewModel>  pictures;
-
+    private Timer timer;
 
 
     @Nullable
@@ -56,7 +56,7 @@ public class ShopNowFlashDealsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shop_now, container, false);
         populateBanner(view);
 
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.scheduleAtFixedRate(new SliderTimer(), 4000, 6000);
 
 
@@ -141,6 +141,17 @@ public class ShopNowFlashDealsFragment extends Fragment {
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        timer.cancel();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //timer.scheduleAtFixedRate(new SliderTimer(), 4000, 6000);
+    }
 
     private class SliderTimer extends TimerTask {
 

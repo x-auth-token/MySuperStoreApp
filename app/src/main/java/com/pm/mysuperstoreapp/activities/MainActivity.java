@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.fLMainFragmentContainer, new MyAccountFragment());
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
-                    
+
                 }
                 return true;
 
