@@ -2,9 +2,12 @@ package com.pm.mysuperstoreapp.fragments;
 
 import androidx.lifecycle.ViewModelProviders;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -42,6 +45,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class MyAccountFragment extends Fragment implements View.OnClickListener {
 
+    private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private MyAccountViewModel mViewModel;
     private ImageView accountPhoto;
     FirebaseAuth.AuthStateListener authStateListener;
@@ -103,14 +107,20 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
 
         switch (requestCode) {
             case 0:
-                if (resultCode == getActivity().RESULT_OK) {
-                    Uri selectedImage = data.getData();
-                    //    Glide.with(getContext()).load(selectedImage).into(accountPhoto);
-                    accountPhoto.setImageURI(selectedImage);
+                if (resultCode == Activity.RESULT_OK) {
+                    //TODO: add check if activity is null
+                    if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                    } else {
+                        Uri selectedCameraImage = data.getData();
+                        //    Glide.with(getContext()).load(selectedImage).into(accountPhoto);
+                        accountPhoto.setImageURI(selectedCameraImage);
+                    }
                 }
 
                 break;
             case 1:
+                //TODO: add check if activity is null
                 if (resultCode == getActivity().RESULT_OK) {
                     Uri selectedImage = data.getData();
                     //Glide.with(getContext()).load(selectedImage).into(accountPhoto);
