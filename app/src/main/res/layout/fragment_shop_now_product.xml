@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/iVProductImage"
+        android:uid="@+uid/iVProductImage"
         style="@style/MessengerButton.Blue"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -24,7 +24,7 @@
         tools:srcCompat="@tools:sample/avatars[5]" />
 
     <TextView
-        android:id="@+id/tVProductName"
+        android:uid="@+uid/tVProductName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -32,21 +32,21 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iVProductImage" />
+        app:layout_constraintTop_toBottomOf="@+uid/iVProductImage" />
 
     <TextView
-        android:id="@+id/tVProductPrice"
+        android:uid="@+uid/tVProductPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Price"
-        app:layout_constraintBottom_toBottomOf="@+id/tVProductName"
+        app:layout_constraintBottom_toBottomOf="@+uid/tVProductName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@+id/tVProductName"
-        app:layout_constraintTop_toTopOf="@+id/tVProductName" />
+        app:layout_constraintStart_toEndOf="@+uid/tVProductName"
+        app:layout_constraintTop_toTopOf="@+uid/tVProductName" />
 
     <Button
-        android:id="@+id/btnBuyAdd"
+        android:uid="@+uid/btnBuyAdd"
         style="@android:style/Widget.Material.Button.Borderless.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,18 +56,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tVProductName"
+        app:layout_constraintTop_toBottomOf="@+uid/tVProductName"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/tVProductDescription"
+        android:uid="@+uid/tVProductDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ProductDescription"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/btnBuyAdd"
+        app:layout_constraintBottom_toTopOf="@+uid/btnBuyAdd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tVProductName" />
+        app:layout_constraintTop_toBottomOf="@+uid/tVProductName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

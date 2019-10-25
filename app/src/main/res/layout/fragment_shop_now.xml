@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mActivityNestedScrollView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="none"
-
-    android:fillViewport="true">
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_shop_now_main_frame"
+    android:uid="@+uid/mActivityNestedScrollView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipChildren="false"
-    android:clipToPadding="false"
-    tools:context=".fragments.ShopNowFragment">
+    android:layout_height="wrap_content"
+    android:fillViewport="false"
 
+    android:scrollbars="none">
+
+    <FrameLayout
+        android:uid="@+uid/fragment_shop_now_main_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        tools:context=".fragments.ShopNowFragment">
 
 
         <ImageView
@@ -44,42 +43,74 @@
             android:alpha="1">
 
 
+            <androidx.appcompat.widget.Toolbar
+                android:uid="@+uid/tBarShopNowFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FF6D00"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                android:visibility="invisible" />
+
+            <ImageButton
+                android:uid="@+uid/iBGoBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="#00FFFFFF"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_back_arrow" />
+
+            <TextView
+                android:uid="@+uid/tVCategoryTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="@string/textview"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:visibility="gone" />
+
             <FrameLayout
-                android:id="@+id/fLShopNowFlashDealsBannerFragment"
+                android:uid="@+uid/fLShopNowFlashDealsBannerFragment"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                android:contextClickable="false"
+                android:textAlignment="center">
 
                 <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/fragment_shop_now_flash_deals_view_pager"
+                    android:uid="@+uid/fragment_shop_now_flash_deals_view_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:visibility="visible" />
 
                 <!--<androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rVFlashDeals"
+                    android:uid="@+uid/rVFlashDeals"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />-->
             </FrameLayout>
 
             <me.relex.circleindicator.CircleIndicator
-                android:id="@+id/fCShopNowCircleIndicator"
+                android:uid="@+uid/fCShopNowCircleIndicator"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_above="@+id/fCShopNowSearch"
+                android:layout_above="@+uid/fCShopNowSearch"
                 android:layout_marginBottom="20dp" />
             <!--<me.relex.circleindicator.CircleIndicator2
-                android:id="@+id/fCShopNowCircleIndicator"
+                android:uid="@+uid/fCShopNowCircleIndicator"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_above="@+id/fCShopNowSearch"
+                android:layout_above="@+uid/fCShopNowSearch"
                 android:layout_marginBottom="20dp" />-->
 
 
             <SearchView
-                android:id="@+id/fCShopNowSearch"
+                android:uid="@+uid/fCShopNowSearch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/fLShopNowFlashDealsBannerFragment"
+                android:layout_below="@uid/fLShopNowFlashDealsBannerFragment"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="-20dp"
                 android:layout_marginEnd="10dp"
@@ -91,10 +122,10 @@
             </SearchView>
 
             <TextView
-                android:id="@+id/editText"
+                android:uid="@+uid/txtCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/fCShopNowSearch"
+                android:layout_below="@uid/fCShopNowSearch"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:clickable="false"
@@ -104,212 +135,214 @@
                 android:gravity="bottom"
                 android:scrollbarAlwaysDrawHorizontalTrack="false"
                 android:scrollbars="none"
-                android:text="Categories"
+                android:text="@string/categories"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textStyle="bold" />
 
             <HorizontalScrollView
-                android:id="@+id/fCShopNowInnerHorizontalScrollView"
+                android:uid="@+uid/fCShopNowInnerHorizontalScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
-                android:layout_below="@id/editText"
+                android:layout_below="@uid/txtCategory"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
 
                 android:scrollbars="none">
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
 
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:paddingTop="5dp">
 
                     <ImageButton
-                        android:id="@+id/fCShopNowMeatImageButton"
+                        android:uid="@+uid/fCShopNowMeatImageButton"
                         style="@style/Widget.AppCompat.ImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
                         android:background="@null"
+                        android:contentDescription="@string/todo"
                         android:cropToPadding="false"
                         android:foregroundGravity="bottom"
+                        android:hapticFeedbackEnabled="true"
                         android:src="@mipmap/ic_shop_now_fragment_category_meat_round"
-                        android:text="Meat"
+                        android:text="@string/meat"
                         android:textAlignment="gravity" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/fCShopNowMeatImageButton"
-                        android:layout_alignBaseline="@id/fCShopNowMeatImageButton"
+                        android:layout_below="@+uid/fCShopNowMeatImageButton"
+                        android:layout_alignBaseline="@uid/fCShopNowMeatImageButton"
 
-                        android:layout_alignStart="@id/fCShopNowMeatImageButton"
-                        android:layout_alignEnd="@id/fCShopNowMeatImageButton"
+                        android:layout_alignStart="@uid/fCShopNowMeatImageButton"
+                        android:layout_alignEnd="@uid/fCShopNowMeatImageButton"
 
                         android:layout_centerHorizontal="true"
 
                         android:clickable="false"
                         android:gravity="center"
-                        android:text="Meat"
+                        android:text="@string/meat"
                         android:textAlignment="gravity" />
 
                     <ImageButton
-                        android:id="@+id/fCShopNowFishImageButton"
+                        android:uid="@+uid/fCShopNowFishImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_toRightOf="@+id/fCShopNowMeatImageButton"
+                        android:layout_toEndOf="@+uid/fCShopNowMeatImageButton"
                         android:background="@null"
                         android:src="@mipmap/ic_shop_now_fragment_category_fish_round" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/fCShopNowFishImageButton"
-                        android:layout_alignBaseline="@id/fCShopNowFishImageButton"
+                        android:layout_below="@+uid/fCShopNowFishImageButton"
+                        android:layout_alignBaseline="@uid/fCShopNowFishImageButton"
 
-                        android:layout_alignStart="@id/fCShopNowFishImageButton"
-                        android:layout_alignEnd="@id/fCShopNowFishImageButton"
+                        android:layout_alignStart="@uid/fCShopNowFishImageButton"
+                        android:layout_alignEnd="@uid/fCShopNowFishImageButton"
 
                         android:layout_centerHorizontal="true"
 
                         android:clickable="false"
                         android:gravity="center"
-                        android:text="Fish"
+                        android:text="@string/fish"
                         android:textAlignment="gravity" />
 
                     <ImageButton
-                        android:id="@+id/fCShopNowBakeryImageButton"
+                        android:uid="@+uid/fCShopNowBakeryImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_toRightOf="@+id/fCShopNowFishImageButton"
+                        android:layout_toEndOf="@+uid/fCShopNowFishImageButton"
                         android:background="@null"
                         android:src="@mipmap/ic_shop_now_fragment_category_bakery_round" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/fCShopNowBakeryImageButton"
-                        android:layout_alignBaseline="@id/fCShopNowBakeryImageButton"
+                        android:layout_below="@+uid/fCShopNowBakeryImageButton"
+                        android:layout_alignBaseline="@uid/fCShopNowBakeryImageButton"
 
-                        android:layout_alignStart="@id/fCShopNowBakeryImageButton"
-                        android:layout_alignEnd="@id/fCShopNowBakeryImageButton"
+                        android:layout_alignStart="@uid/fCShopNowBakeryImageButton"
+                        android:layout_alignEnd="@uid/fCShopNowBakeryImageButton"
 
                         android:layout_centerHorizontal="true"
 
                         android:clickable="false"
                         android:gravity="center"
-                        android:text="Bakery"
+                        android:text="@string/bakery"
                         android:textAlignment="gravity" />
 
                     <ImageButton
-                        android:id="@+id/fCShopNowFruitsImageButton"
+                        android:uid="@+uid/fCShopNowFruitsImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_toRightOf="@+id/fCShopNowBakeryImageButton"
+                        android:layout_toEndOf="@+uid/fCShopNowBakeryImageButton"
                         android:background="@null"
-                        android:contentDescription="TODO"
+                        android:contentDescription="@string/todo"
                         android:src="@mipmap/ic_shop_now_fragment_category_fruits_round" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/fCShopNowFruitsImageButton"
-                        android:layout_alignBaseline="@id/fCShopNowFruitsImageButton"
+                        android:layout_below="@+uid/fCShopNowFruitsImageButton"
+                        android:layout_alignBaseline="@uid/fCShopNowFruitsImageButton"
 
-                        android:layout_alignStart="@id/fCShopNowFruitsImageButton"
-                        android:layout_alignEnd="@id/fCShopNowFruitsImageButton"
+                        android:layout_alignStart="@uid/fCShopNowFruitsImageButton"
+                        android:layout_alignEnd="@uid/fCShopNowFruitsImageButton"
 
                         android:layout_centerHorizontal="true"
 
                         android:clickable="false"
                         android:gravity="center"
-                        android:text="Fruits"
+                        android:text="@string/fruits"
                         android:textAlignment="gravity" />
 
                     <ImageButton
-                        android:id="@+id/fCShopNowVegetablesImageButton"
+                        android:uid="@+uid/fCShopNowVegetablesImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_toRightOf="@+id/fCShopNowFruitsImageButton"
+                        android:layout_toEndOf="@+uid/fCShopNowFruitsImageButton"
                         android:background="@null"
                         android:src="@mipmap/ic_shop_now_fragment_category_vegetables_round" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/fCShopNowVegetablesImageButton"
-                        android:layout_alignBaseline="@id/fCShopNowVegetablesImageButton"
+                        android:layout_below="@+uid/fCShopNowVegetablesImageButton"
+                        android:layout_alignBaseline="@uid/fCShopNowVegetablesImageButton"
 
-                        android:layout_alignStart="@id/fCShopNowVegetablesImageButton"
-                        android:layout_alignEnd="@id/fCShopNowVegetablesImageButton"
+                        android:layout_alignStart="@uid/fCShopNowVegetablesImageButton"
+                        android:layout_alignEnd="@uid/fCShopNowVegetablesImageButton"
 
                         android:layout_centerHorizontal="true"
 
                         android:clickable="false"
                         android:gravity="center"
-                        android:text="Vegetables"
+                        android:text="@string/vegetables"
                         android:textAlignment="gravity" />
 
                     <ImageButton
-                        android:id="@+id/fCShopNowAlcoholImageButton"
+                        android:uid="@+uid/fCShopNowAlcoholImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_toRightOf="@+id/fCShopNowVegetablesImageButton"
+                        android:layout_toEndOf="@+uid/fCShopNowVegetablesImageButton"
                         android:background="@null"
                         android:src="@mipmap/ic_shop_now_fragment_category_alcohol_round" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/fCShopNowAlcoholImageButton"
+                        android:layout_below="@+uid/fCShopNowAlcoholImageButton"
 
-                        android:layout_alignBaseline="@id/fCShopNowAlcoholImageButton"
-                        android:layout_alignStart="@id/fCShopNowAlcoholImageButton"
+                        android:layout_alignBaseline="@uid/fCShopNowAlcoholImageButton"
+                        android:layout_alignStart="@uid/fCShopNowAlcoholImageButton"
 
-                        android:layout_alignEnd="@id/fCShopNowAlcoholImageButton"
+                        android:layout_alignEnd="@uid/fCShopNowAlcoholImageButton"
 
                         android:layout_centerHorizontal="true"
                         android:gravity="center"
-                        android:text="Alcohol"
+                        android:text="@string/alcohol"
                         android:textAlignment="gravity" />
 
                     <ImageButton
-                        android:id="@+id/fCShopNowBeveragesImageButton"
+                        android:uid="@+uid/fCShopNowBeveragesImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_toRightOf="@+id/fCShopNowAlcoholImageButton"
+                        android:layout_toEndOf="@+uid/fCShopNowAlcoholImageButton"
                         android:background="@null"
                         android:src="@mipmap/ic_shop_now_fragment_category_beverages_round" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/fCShopNowBeveragesImageButton"
-                        android:layout_alignBaseline="@id/fCShopNowBeveragesImageButton"
+                        android:layout_below="@+uid/fCShopNowBeveragesImageButton"
+                        android:layout_alignBaseline="@uid/fCShopNowBeveragesImageButton"
 
-                        android:layout_alignStart="@id/fCShopNowBeveragesImageButton"
-                        android:layout_alignEnd="@id/fCShopNowBeveragesImageButton"
+                        android:layout_alignStart="@uid/fCShopNowBeveragesImageButton"
+                        android:layout_alignEnd="@uid/fCShopNowBeveragesImageButton"
 
                         android:layout_centerHorizontal="true"
 
                         android:clickable="false"
                         android:gravity="center"
-                        android:text="Beverages"
+                        android:text="@string/beverages"
                         android:textAlignment="gravity" />
 
 
@@ -319,31 +352,36 @@
             </HorizontalScrollView>
 
             <!--LinearLayout
-                    android:id="@+id/fLShopNowInnerLinearLayout"
+                    android:uid="@+uid/fLShopNowInnerLinearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/fCShopNowSearch"
+                    android:layout_below="@uid/fCShopNowSearch"
                     android:orientation="horizontal"/-->
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/fCShopNowMidleViewPager"
+            <!--<androidx.viewpager.widget.ViewPager
+                android:uid="@+uid/fCShopNowMiddleViewPager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/fCShopNowInnerHorizontalScrollView"
-                android:visibility="visible" />
+                android:layout_below="@uid/fCShopNowInnerHorizontalScrollView"
+                android:visibility="visible" />-->
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/fCShopNowBottomViewPager"
+            <!--<androidx.viewpager.widget.ViewPager
+                android:uid="@+uid/fCShopNowBottomViewPager"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
-                android:layout_below="@id/fCShopNowMidleViewPager"
-                android:visibility="visible" />
+                android:layout_below="@uid/fCShopNowInnerHorizontalScrollView"
+                android:visibility="visible" />-->
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:uid="@+uid/fLShopNowMiddleFrameLayout"
+                android:layout_height="500dp"
+                android:layout_below="@uid/fCShopNowInnerHorizontalScrollView"
+                android:layout_alignParentBottom="true" />
 
 
         </RelativeLayout>
 
 
-
-
-</FrameLayout>
+    </FrameLayout>
 </ScrollView>

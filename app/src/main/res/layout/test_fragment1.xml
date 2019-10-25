@@ -6,7 +6,7 @@
     tools:context=".fragments.ShopNowFragment">
 
     <Button
-        android:id="@+id/button2"
+        android:uid="@+uid/button2"
         android:layout_width="426dp"
         android:layout_height="352dp"
         android:text="Button" />

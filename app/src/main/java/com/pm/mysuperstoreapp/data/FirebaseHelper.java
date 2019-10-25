@@ -24,7 +24,7 @@ public class FirebaseHelper {
                 for (DocumentSnapshot document : documents) {
                     String name = document.getString("name");
 
-                    String id = document.getReference().getId();
+                    String id = document.getReference().getUid();
 
                     categories.add(name);
                 }
@@ -74,7 +74,7 @@ public class FirebaseHelper {
                     {
                         String name = document.getString("name");
 
-                        String id = document.getReference().getId();
+                        String id = document.getReference().getUid();
 
                         categories.add(name);
                     }

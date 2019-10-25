@@ -21,7 +21,7 @@
         android:scrollbars="none">
 
         <ImageView
-            android:id="@+id/my_account_top_frame"
+            android:uid="@+uid/my_account_top_frame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -35,10 +35,10 @@
 
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:uid="@+uid/imageView5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/my_account_top_frame"
+            android:layout_below="@uid/my_account_top_frame"
             android:background="#FFFFFF"
             android:scaleType="fitXY" />
 
@@ -46,7 +46,7 @@
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/fragment_my_account_photo"
+        android:uid="@+uid/fragment_my_account_photo"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="center|top"
@@ -63,7 +63,7 @@
         app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
 
     <Button
-        android:id="@+id/fragment_my_account_logout_button"
+        android:uid="@+uid/fragment_my_account_logout_button"
         android:layout_width="match_parent"
         android:layout_height="32dp"
         android:layout_centerHorizontal="true"

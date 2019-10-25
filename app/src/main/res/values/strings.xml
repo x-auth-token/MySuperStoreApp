@@ -54,6 +54,16 @@
     <string name="exit_prompt">Are you sure that you want to exit?</string>
     <string name="exit_warning">Exit</string>
     <string name="exit">Exit</string>
+    <string name="meat">Meat</string>
+    <string name="categories">Categories</string>
+    <string name="fish">Fish</string>
+    <string name="bakery">Bakery</string>
+    <string name="todo">TODO</string>
+    <string name="fruits">Fruits</string>
+    <string name="vegetables">Vegetables</string>
+    <string name="alcohol">Alcohol</string>
+    <string name="beverages">Beverages</string>
+    <string name="textview">TextView</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

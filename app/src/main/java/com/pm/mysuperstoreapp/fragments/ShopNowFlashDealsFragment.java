@@ -54,7 +54,7 @@ public class ShopNowFlashDealsFragment extends Fragment {
 
     private void populateBanner(final View view) {
 
-        FirebaseFirestore.getInstance().collection("store").document("banner").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        FirebaseFirestore.getInstance().collection("banner").document("banner").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {

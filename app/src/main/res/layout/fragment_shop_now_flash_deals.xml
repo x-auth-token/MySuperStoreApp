@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:id="@+id/fragment_shop_now_flash_deals"
+    android:uid="@+uid/fragment_shop_now_flash_deals"
 
     android:layout_height="match_parent">
     <!--AdapterViewFlipper
-        android:id="@+id/fCShopNowAdapterViewFlipper"
+        android:uid="@+uid/fCShopNowAdapterViewFlipper"
         android:layout_width="match_parent"
         android:autoStart="true"
         android:flipInterval="300"
         android:layout_height="match_parent"-->
     <ImageView
-        android:id="@+id/iVFlashDealsPicture"
+        android:uid="@+uid/iVFlashDealsPicture"
         android:layout_width="match_parent"
         android:scaleType="fitXY"
         android:layout_height="match_parent" />

@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:autoStart="true"
-        android:id="@+id/fCShopNowAdapterFlipperView"
+        android:uid="@+uid/fCShopNowAdapterFlipperView"
         android:flipInterval="10000"/>
 
 </LinearLayout>

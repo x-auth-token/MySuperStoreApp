@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_window"
+    android:uid="@+uid/main_window"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/grain"
@@ -12,40 +12,40 @@
     tools:context=".activities.MainActivity">
 
     <!--ImageView
-        android:id="@+id/image"
+        android:uid="@+uid/image"
         android:layout_width="match_parent" -->
     <!--<androidx.core.widget.NestedScrollView
 
         android:layout_width="match_parent"
         android:fillViewport="true"
-        android:id="@+id/mActivityNestedScrollView"
-        android:layout_above="@id/bottom_navigation_menu_panel"
+        android:uid="@+uid/mActivityNestedScrollView"
+        android:layout_above="@uid/bottom_navigation_menu_panel"
         android:layout_height="match_parent">-->
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/main_fragment_container" />
+            android:uid="@+uid/main_fragment_container" />
 
         <!--RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.viewpager.widget.ViewPager
-                android:id="@+id/top_view_pager"
+                android:uid="@+uid/top_view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
                 android:visibility="visible" />
 
             <androidx.viewpager.widget.ViewPager
-                android:id="@+id/middle_view_pager"
+                android:uid="@+uid/middle_view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
 
                 android:visibility="visible" />
 
             <androidx.viewpager.widget.ViewPager
-                android:id="@+id/bottom_view_pager"
+                android:uid="@+uid/bottom_view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
                 android:visibility="visible" />
@@ -53,7 +53,7 @@
     <!--</androidx.core.widget.NestedScrollView>-->
 
     <!--com.pm.mysuperstoreapp.custom_views.NoSwipeViewPager
-        android:id="@+id/main_view_pager"
+        android:uid="@+uid/main_view_pager"
         android:layout_width="match_parent"
 
 
@@ -64,7 +64,7 @@
     </com.pm.mysuperstoreapp.custom_views.NoSwipeViewPager-->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_menu_panel"
+        android:uid="@+uid/bottom_navigation_menu_panel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

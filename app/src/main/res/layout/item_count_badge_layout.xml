@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/item_count_badge_1"
+        android:uid="@+uid/item_count_badge_1"
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_gravity="center|end"

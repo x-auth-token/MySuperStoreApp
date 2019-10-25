@@ -90,11 +90,14 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             fragmentManager = getSupportFragmentManager();
 
+
             fragmentManager.beginTransaction().add(R.id.main_fragment_container, myAccountFragment, "MY_ACCOUNT_FRAGMENT").hide(myAccountFragment).commit();
             fragmentManager.beginTransaction().add(R.id.main_fragment_container, shoppingCartFragment, "SHOPPING_CART_FRAGMENT").hide(shoppingCartFragment).commit();
             fragmentManager.beginTransaction().add(R.id.main_fragment_container, favoritesFragment, "FAVORITES_FRAGMENT").hide(favoritesFragment).commit();
             fragmentManager.beginTransaction().add(R.id.main_fragment_container, hotDealsFragment, "HOT_DEALS_FRAGMENT").hide(hotDealsFragment).commit();
             fragmentManager.beginTransaction().add(R.id.main_fragment_container, shopNowFragment, "SHOP_NOW_FRAGMENT").commit();
+
+
 
 
 
