@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <ImageButton
-        android:uid="@+uid/iBGridSingleImage"
+        android:id="@+id/iBGridSingleImage"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="center_horizontal"
@@ -15,7 +15,7 @@
         android:scaleType="centerInside" />
 
     <LinearLayout
-        android:uid="@+uid/grid_single_product_inner_linear_layout"
+        android:id="@+id/grid_single_product_inner_linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -24,11 +24,11 @@
         android:weightSum="3">
 
         <ImageButton
-            android:uid="@+uid/grid_single_product_add_item"
+            android:id="@+id/grid_single_product_add_item"
             android:layout_width="30dp"
             android:layout_height="30dp"
 
-            android:layout_alignBaseline="@uid/tVGridSinglePrice"
+            android:layout_alignBaseline="@id/tVGridSinglePrice"
             android:layout_gravity="bottom"
             android:layout_marginEnd="7dp"
             android:layout_weight="1"
@@ -39,10 +39,10 @@
             android:src="@drawable/ic_add" />
 
         <TextView
-            android:uid="@+uid/grid_single_product_textview_item_quantity"
+            android:id="@+id/grid_single_product_textview_item_quantity"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignBaseline="@uid/grid_single_product_add_item"
+            android:layout_alignBaseline="@id/grid_single_product_add_item"
             android:layout_gravity="center"
             android:layout_marginEnd="7dp"
             android:layout_weight="1"
@@ -57,10 +57,10 @@
             android:textColor="#414040" />
 
         <ImageButton
-            android:uid="@+uid/grid_single_product_remove_item"
+            android:id="@+id/grid_single_product_remove_item"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignBaseline="@uid/tVGridSinglePrice"
+            android:layout_alignBaseline="@id/tVGridSinglePrice"
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
@@ -76,7 +76,7 @@
         android:weightSum="2">
 
         <TextView
-            android:uid="@+uid/tVGridSingleName"
+            android:id="@+id/tVGridSingleName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -88,7 +88,7 @@
             android:textAlignment="center" />
 
         <TextView
-            android:uid="@+uid/tVGridSinglePrice"
+            android:id="@+id/tVGridSinglePrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
@@ -99,7 +99,7 @@
     </LinearLayout>
 
     <ImageButton
-        android:uid="@+uid/grid_single_product_add_to_shopping_cart"
+        android:id="@+id/grid_single_product_add_to_shopping_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

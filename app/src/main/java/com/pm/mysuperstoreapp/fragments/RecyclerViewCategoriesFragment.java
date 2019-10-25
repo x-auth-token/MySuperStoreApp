@@ -44,7 +44,7 @@ public class RecyclerViewCategoriesFragment extends Fragment {
                     for (DocumentSnapshot document : documents) {
                         String name = document.getString("name");
 
-                        String id = document.getReference().getUid();
+                        String id = document.getReference().getId();
 
                         categories.add(name);
                     }

@@ -10,7 +10,7 @@
     android:orientation="vertical">
 
     <GridView
-        android:uid="@+uid/gVCategoryItems"
+        android:id="@+id/gVCategoryItems"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom|center"

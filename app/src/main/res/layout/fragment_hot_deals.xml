@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:uid="@+uid/fragment_hot_deals"
+    android:id="@+id/fragment_hot_deals"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="inherit"
@@ -16,7 +16,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:uid="@+uid/iVHotDealPic"
+            android:id="@+id/iVHotDealPic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -24,7 +24,7 @@
             android:layoutDirection="inherit" />
 
         <TextView
-            android:uid="@+uid/tVHotDealItemName"
+            android:id="@+id/tVHotDealItemName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

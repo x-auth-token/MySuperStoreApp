@@ -2,12 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:uid="@+uid/constraintLayout"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:uid="@+uid/tVCategoryName"
+        android:id="@+id/tVCategoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -21,20 +21,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:uid="@+uid/iBBack"
+        android:id="@+id/iBBack"
         android:layout_width="150px"
         android:layout_height="150px"
         android:layout_marginStart="8dp"
         android:background="@android:color/transparent"
         android:scaleType="fitStart"
-        app:layout_constraintEnd_toStartOf="@+uid/tVCategoryName"
+        app:layout_constraintEnd_toStartOf="@+id/tVCategoryName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+uid/tVCategoryName"
+        app:layout_constraintTop_toTopOf="@+id/tVCategoryName"
         app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
 
     <androidx.viewpager.widget.ViewPager
-        android:uid="@+uid/vPProducts"
+        android:id="@+id/vPProducts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="75dp"

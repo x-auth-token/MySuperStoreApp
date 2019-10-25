@@ -13,7 +13,7 @@
         android:weightSum="4">
 
         <ImageView
-            android:uid="@+uid/iVCategoryPic"
+            android:id="@+id/iVCategoryPic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -21,7 +21,7 @@
             app:srcCompat="@mipmap/app_ic_launcher" />
 
         <TextView
-            android:uid="@+uid/tVCategoryName"
+            android:id="@+id/tVCategoryName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"

@@ -4,29 +4,29 @@
 
 
     <item
-        android:uid="@+uid/nav_shop"
+        android:id="@+id/nav_shop"
         android:icon="@drawable/ic_shopping_basket_orange_24dp"
         android:title="Shop now" />
 
     <item
-        android:uid="@+uid/nav_hot_deals"
+        android:id="@+id/nav_hot_deals"
         android:icon="@drawable/ic_whatshot_black_24dp"
         android:title="Hot deals" />
 
     <item
-        android:uid="@+uid/nav_favorites"
+        android:id="@+id/nav_favorites"
         android:icon="@drawable/ic_favorite_black_24dp"
         android:title="My List" />
 
     <item
-        android:uid="@+uid/nav_shopping_cart"
+        android:id="@+id/nav_shopping_cart"
         android:icon="@drawable/ic_shopping_cart_black_24dp"
         android:title="Cart"
         app:showAsAction="always"
         />
 
     <item
-        android:uid="@+uid/nav_my_account"
+        android:id="@+id/nav_my_account"
         android:icon="@drawable/ic_account_circle_black_24dp"
         android:title="My Account" />
 

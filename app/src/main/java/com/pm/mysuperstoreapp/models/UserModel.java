@@ -26,11 +26,11 @@ public class UserModel {
         this.lastname = lastname;
     }
 
-    public double getUid() {
+    public double getId() {
         return uid;
     }
 
-    public void setUid(double uid) {
+    public void setId(double id) {
         this.uid = uid;
     }
 
