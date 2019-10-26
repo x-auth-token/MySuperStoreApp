@@ -1,54 +1,41 @@
 package com.pm.mysuperstoreapp.models;
 
+import java.util.Calendar;
+
 public class UserModel {
 
-    private double uid;
+    private String uid;
     private String email;
     private String profilePictureUrl;
-
-
-
     private String role;
     private String lastLogin;
+    private String displayName;
 
 
-
-    private String firstname;
-    private String lastname;
 
     public UserModel() {
 
     }
 
-   public UserModel(double uid, String email, String firstname, String lastname) {
+   public UserModel(String uid, String email, String displayName) {
         this.uid = uid;
-        this.firstname = firstname;
-        this.lastname = lastname;
+
+        this.displayName = displayName;
+        this.email = email;
+        this.role = "user";
+        this.lastLogin = Calendar.getInstance().getTime().toString();
+
     }
 
-    public double getId() {
+    public String getUid() {
         return uid;
     }
 
-    public void setId(double id) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
     public String getEmail() {
         return email;
     }
@@ -69,9 +56,7 @@ public class UserModel {
         return role;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+    //public void setRole(String role) { this.role = role; }
 
     public String getLastLogin() {
         return lastLogin;
@@ -80,4 +65,16 @@ public class UserModel {
     public void setLastLogin(String lastLogin) {
         this.lastLogin = lastLogin;
     }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+
+
+
 }

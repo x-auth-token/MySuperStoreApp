@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,15 +15,21 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.pm.mysuperstoreapp.R;
+import com.pm.mysuperstoreapp.models.UserModel;
 import com.pm.mysuperstoreapp.utils.Utils;
 
 
 public class RegisterActivity extends AppCompatActivity {
+
 
     private FirebaseAuth mAuth;
     private FirebaseUser user;
@@ -34,6 +41,8 @@ public class RegisterActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private Button btnRegister;
 
+    private static final String TAG = "Firestore_add_new_user";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +52,6 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         initViews();
-
 
 
     }
@@ -59,10 +67,10 @@ public class RegisterActivity extends AppCompatActivity {
         lastname = findViewById(R.id.activity_register_et_lname);
         email = findViewById(R.id.activity_register_et_email);
         password = findViewById(R.id.activity_register_et_password);
-        //notification = findViewById(R.id.activity_register_tv_notification);
         progressBar = findViewById(R.id.activity_register_pb_progress);
         //btnRegister = findViewById(R.id.activity_register_btn_register);
     }
+
     public void registerNewUser(View view) {
         if (!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
             mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
@@ -73,6 +81,9 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
 
                                 user = mAuth.getCurrentUser();
+                                String displayName = firstname.getText().toString() + " " + lastname.getText().toString();
+                                UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(displayName).build();
+                                user.updateProfile(profileChangeRequest);
                                 progressBar.setVisibility(View.VISIBLE);
                                 user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
 
@@ -80,12 +91,18 @@ public class RegisterActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
 
                                         if (task.isSuccessful()) {
+
+
+
                                             progressBar.setVisibility(View.GONE);
                                             Utils.makeToast(findViewById(R.id.activity_register_et_fname), getString(R.string.registration_success) + " " + getString(R.string.email_sent) + email.getText().toString(), "#FFFFFF");
+
+
 
                                             new Handler().postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
+                                                    saveUserToFirebase(user);
                                                     final Intent intent = new Intent(getApplicationContext(),
                                                             LoginActivity.class);
                                                     startActivity(intent);
@@ -156,5 +173,23 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    private void saveUserToFirebase(FirebaseUser user) {
+        String uid = user.getUid();
+        UserModel userModel = new UserModel(uid, user.getEmail(), user.getDisplayName());
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("users").document(uid).set(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "DocumentSnapshot successfully written!");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error writing document", e);
+            }
+        });
+    }
 
 }

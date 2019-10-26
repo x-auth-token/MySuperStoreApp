@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -34,13 +35,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.pm.mysuperstoreapp.R;
+import com.pm.mysuperstoreapp.models.UserModel;
 import com.pm.mysuperstoreapp.utils.Utils;
 
 import java.util.Arrays;
@@ -58,6 +63,8 @@ public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private LoginManager fbLoginManager;
     private Button btnEmailLogin;
+
+    private static final String TAG = "Firestore_add_new_user";
 
 
     @Override
@@ -273,6 +280,8 @@ public class LoginActivity extends AppCompatActivity {
 
         Utils.goToMainActivity(findViewById(android.R.id.content));
     }
+
+
     public void facebookLogin(View view) {
         fbLoginManager.registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
@@ -297,5 +306,22 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void saveUserToFirebase(FirebaseUser user) {
+        String uid = user.getUid();
+        UserModel userModel = new UserModel(uid, email.getText().toString(), user.getDisplayName());
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("users").document(uid).set(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "DocumentSnapshot successfully written!");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error writing document", e);
+            }
+        });
+    }
 }

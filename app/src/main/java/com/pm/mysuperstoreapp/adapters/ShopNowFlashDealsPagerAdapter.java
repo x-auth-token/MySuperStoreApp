@@ -38,7 +38,7 @@ public class ShopNowFlashDealsPagerAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    //TODO: Get images from Firebase Storage!
+
 
     @Override
     public int getCount() {
@@ -61,18 +61,10 @@ public class ShopNowFlashDealsPagerAdapter extends PagerAdapter {
 
 
 
-       //ImageView imageView = (ImageView) itemView.findViewById(R.id.iVHotDealPic);
-        //imageView.setImageResource(discountImagesUrls.get(position));
         Glide.with(this.context).load(pictures.get(position).getUrl()).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).placeholder(R.drawable.grain).into(imageView);
         container.addView(itemView);
 
-        //listening to image click
-        /*imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "you clicked image " + (position + 1), Toast.LENGTH_LONG).show();
-            }
-        });*/
+
 
         return itemView;
     }

@@ -51,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
     final Fragment shoppingCartFragment = new ShoppingCartFragment();
     final Fragment myAccountFragment = new MyAccountFragment();
 
+    private static final String MY_ACCOUNT_FRAGMENT_TAG = "MY_ACCOUNT_FRAGMENT";
+    private static final String SHOPPING_CART_FRAGMENT_TAG = "SHOPPING_CART_FRAGMENT";
+    private static final String FAVORITES_FRAGMENT_TAG = "FAVORITES_FRAGMENT";
+    private static final String HOT_DEALS_FRAGMENT_TAG = "HOT_DEALS_FRAGMENT";
+    private static final String SHOP_NOW_FRAGMENT_TAG = "SHOP_NOW_FRAGMENT";
+
     Fragment active = shopNowFragment;
 
 
@@ -89,13 +95,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             fragmentManager = getSupportFragmentManager();
-
-
-            fragmentManager.beginTransaction().add(R.id.main_fragment_container, myAccountFragment, "MY_ACCOUNT_FRAGMENT").hide(myAccountFragment).commit();
+            //fragmentManager.beginTransaction().add(R.id.main_fragment_container, shopNowFragment).addToBackStack(SHOP_NOW_FRAGMENT_TAG).commit();
+            replaceFragment(active, shopNowFragment);
+            /*fragmentManager.beginTransaction().add(R.id.main_fragment_container, myAccountFragment, "MY_ACCOUNT_FRAGMENT").hide(myAccountFragment).commit();
             fragmentManager.beginTransaction().add(R.id.main_fragment_container, shoppingCartFragment, "SHOPPING_CART_FRAGMENT").hide(shoppingCartFragment).commit();
             fragmentManager.beginTransaction().add(R.id.main_fragment_container, favoritesFragment, "FAVORITES_FRAGMENT").hide(favoritesFragment).commit();
             fragmentManager.beginTransaction().add(R.id.main_fragment_container, hotDealsFragment, "HOT_DEALS_FRAGMENT").hide(hotDealsFragment).commit();
-            fragmentManager.beginTransaction().add(R.id.main_fragment_container, shopNowFragment, "SHOP_NOW_FRAGMENT").commit();
+            fragmentManager.beginTransaction().add(R.id.main_fragment_container, shopNowFragment, "SHOP_NOW_FRAGMENT").commit();*/
 
 
 
@@ -118,7 +124,29 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void replaceFragment(Fragment activeFragment, Fragment newFragment) {
+        String fragmentTag = newFragment.getClass().getSimpleName();
 
+        //boolean fragmentPopped = fragmentManager.popBackStackImmediate(fragmentTag, 0);
+        //Fragment fragmentToSwitchTo = ;
+
+        //Fragment fragmentToSwitchFrom = fragmentManager.findFragmentByTag(activeFragmentTag);
+
+        if (fragmentManager.findFragmentByTag(fragmentTag) == null) {
+            //fragmentToSwitchTo = newFragment;
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.main_fragment_container, newFragment, fragmentTag);
+            fragmentTransaction.hide(activeFragment);
+            fragmentTransaction.show(newFragment);
+            fragmentTransaction.commit();
+            active = newFragment;
+        }  else {
+
+
+            fragmentManager.beginTransaction().hide(activeFragment).show(newFragment).commit();
+            active = newFragment;
+        }
+    }
 
     private boolean navigateToFragment(MenuItem menuItem) {
         int itemId = menuItem.getItemId();
@@ -126,43 +154,50 @@ public class MainActivity extends AppCompatActivity {
         switch (itemId) {
             case R.id.nav_shop:
 
-
-                fragmentManager.beginTransaction().hide(active).show(shopNowFragment).commit();
-                active = shopNowFragment;
+                //fragmentManager.beginTransaction().replace(R.id.main_fragment_container, shopNowFragment).addToBackStack(SHOP_NOW_FRAGMENT_TAG).commit();
+                replaceFragment(active, shopNowFragment);
+                /*fragmentManager.beginTransaction().hide(active).show(shopNowFragment).commit();
+                active = shopNowFragment;*/
 
                 return true;
             case R.id.nav_hot_deals:
 
-
-                fragmentManager.beginTransaction().hide(active).show(hotDealsFragment).commit();
-                active = hotDealsFragment;
+                //fragmentManager.beginTransaction().replace(R.id.main_fragment_container, hotDealsFragment).addToBackStack(HOT_DEALS_FRAGMENT_TAG).commit();
+                /*fragmentManager.beginTransaction().hide(active).show(hotDealsFragment).commit();
+                active = hotDealsFragment;*/
+                replaceFragment(active, hotDealsFragment);
                 return true;
             case R.id.nav_favorites:
-                if (!isAuthenticated()) {
+               /* if (!isAuthenticated()) {
                     Utils.goToLoginActivity(findViewById(android.R.id.content));
-                } else {
+                } else {*/
 
-                    fragmentManager.beginTransaction().hide(active).show(favoritesFragment).commit();
-                    active = favoritesFragment;
-                }
+                    //fragmentManager.beginTransaction().replace(R.id.main_fragment_container, favoritesFragment).addToBackStack(FAVORITES_FRAGMENT_TAG).commit();
+                    /*fragmentManager.beginTransaction().hide(active).show(favoritesFragment).commit();
+                    active = favoritesFragment;*/
+               // }
+                replaceFragment(active, favoritesFragment);
                 return true;
             case R.id.nav_shopping_cart:
 
-                fragmentManager.beginTransaction().hide(active).show(shoppingCartFragment).commit();
-                active = shoppingCartFragment;
+                //fragmentManager.beginTransaction().replace(R.id.main_fragment_container, shoppingCartFragment).addToBackStack(SHOPPING_CART_FRAGMENT_TAG).commit();
+                /*fragmentManager.beginTransaction().hide(active).show(shoppingCartFragment).commit();
+                active = shoppingCartFragment;*/
+                replaceFragment(active, shoppingCartFragment);
                 return true;
             case R.id.nav_my_account:
 
-                if (!isAuthenticated()) {
+                /*if (!isAuthenticated()) {
                     Utils.goToLoginActivity(findViewById(android.R.id.content));
                 } else {
 
+*/
+                    //fragmentManager.beginTransaction().replace(R.id.main_fragment_container, myAccountFragment).addToBackStack(MY_ACCOUNT_FRAGMENT_TAG).commit();
+                    /*fragmentManager.beginTransaction().hide(active).show(myAccountFragment).commit();
+                    active = myAccountFragment;*/
 
-
-                    fragmentManager.beginTransaction().hide(active).show(myAccountFragment).commit();
-                    active = myAccountFragment;
-
-                }
+                //}
+                replaceFragment(active, myAccountFragment);
                 return true;
 
             default:

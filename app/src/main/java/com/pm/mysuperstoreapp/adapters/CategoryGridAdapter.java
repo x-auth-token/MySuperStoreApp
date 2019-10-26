@@ -64,7 +64,7 @@ public class CategoryGridAdapter extends BaseAdapter {
             TextView tvName = convertView.findViewById(R.id.tVGridSingleName);
             TextView tvPrice = convertView.findViewById(R.id.tVGridSinglePrice);
 
-            Glide.with(convertView).load(itemList.get(position).getImageUrl()).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).signature(new ObjectKey("current")).into(iBtnCategoryButton);
+            Glide.with(convertView).load(itemList.get(position).getImageUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(iBtnCategoryButton);
             tvName.setText(itemList.get(position).getName());
             tvPrice.setText(itemList.get(position).getPrice());
         }
