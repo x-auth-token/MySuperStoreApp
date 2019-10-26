@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProviders;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,9 +26,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.signature.ObjectKey;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -45,6 +42,8 @@ import com.pm.mysuperstoreapp.R;
 import com.pm.mysuperstoreapp.activities.LoginActivity;
 import com.pm.mysuperstoreapp.activities.MainActivity;
 import com.pm.mysuperstoreapp.models.MyAccountViewModel;
+
+import java.util.HashMap;
 
 public class MyAccountFragment extends Fragment implements View.OnClickListener {
 
@@ -63,6 +62,8 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     private TextView tViewEmail;
     private FirebaseStorage firebaseStorage;
     private FirebaseFirestore db;
+    private Button btnUpdateProducts;
+    private ProductManagementFragment productManagementFragment;
 
 
     public static MyAccountFragment newInstance() {
@@ -75,20 +76,50 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
 
 
         View view = inflater.inflate(R.layout.fragment_my_account, container, false);
-        iViewAccountPhoto = view.findViewById(R.id.fragment_my_account_photo);
-        iViewAccountPhoto.setOnClickListener(this);
+        /*iViewAccountPhoto = view.findViewById(R.id.fragment_my_account_photo);
+        tViewDisplayName = view.findViewById(R.id.fragment_my_account_text_view_display_name);
+        tViewEmail = view.findViewById(R.id.fragment_my_account_text_view_email);
+        btnLogout = view.findViewById(R.id.fragment_my_account_logout_button);*/
+
+        /*btnLogout.setOnClickListener(this);
+        iViewAccountPhoto.setOnClickListener(this);*/
+
+
+
+        initViews(view);
+
+        setOnClickListeners(view);
+
+        productManagementFragment = new ProductManagementFragment();
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
         user = firebaseAuth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
+
+
+
+
+        if (user != null) {
+            populateUserProfile();
+
+        }
+
+        return view;
+    }
+
+    private void initViews(View view) {
+        iViewAccountPhoto = view.findViewById(R.id.fragment_my_account_photo);
         tViewDisplayName = view.findViewById(R.id.fragment_my_account_text_view_display_name);
         tViewEmail = view.findViewById(R.id.fragment_my_account_text_view_email);
         btnLogout = view.findViewById(R.id.fragment_my_account_logout_button);
+        btnUpdateProducts = view.findViewById(R.id.fragment_my_account_update_products_button);
+    }
+
+    private void setOnClickListeners(View view) {
+        iViewAccountPhoto.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
-
-
-
-        return view;
+        btnUpdateProducts.setOnClickListener(this);
     }
 
     @Override
@@ -97,29 +128,32 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
 
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
+
+
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-
                 FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
-                //if (!isHidden()) {
-                    if (user == null) {
-                        Intent intent = new Intent(getActivity(), LoginActivity.class);
-                        startActivity(intent);
-                        getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
-                        getActivity().finish();
-                    }
+
+                if (user == null) {
 
 
-                //}
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
+                    getActivity().finish();
+                } else {
+
+
+                }
+
+
             }
         };
 
-        populateUserProfile();
 
         mViewModel = ViewModelProviders.of(this).get(MyAccountViewModel.class);
-        //iViewAccountPhoto.setProfileId(FacebookContentProvider.getAttachmentUrl());
-        // TODO: Use the ViewModel
+
     }
 
     @Override
@@ -156,10 +190,8 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         //String filePath = "profile.png";
         firebaseStorage = FirebaseStorage.getInstance();
 
-        final StorageReference storageReference = firebaseStorage.getReference( "Users/" + uid + "/" + "profile.jpeg");
+        final StorageReference storageReference = firebaseStorage.getReference("Users/" + uid + "/" + "profile.jpeg");
         //storageReference.child("profile.jpeg");
-
-
 
 
         final UploadTask uploadTask = storageReference.putFile(selectedImage);
@@ -183,7 +215,6 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         });
 
 
-
     }
 
     private void saveURLToFirestore(String profilePictureURL) {
@@ -201,35 +232,6 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         });
     }
 
-    /*private Uri getProfilePictureURL(UploadTask uploadTask, StorageReference storageReference) {
-
-        final StorageReference sref = storageReference;
-
-        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (!task.isSuccessful()) {
-                    throw task.getException();
-                }
-
-                // Continue with the task to get the download URL
-                return sref.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
-                    Uri downloadUri = task.getResult();
-
-                } else {
-                    // Handle failures
-                    // ...
-                }
-            }
-        });
-
-        return null;
-    }*/
 
     @Override
     public void onStart() {
@@ -302,9 +304,15 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     }
 
     private void populateUserProfile() {
-        String uid = firebaseAuth.getCurrentUser().getUid();
 
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        String uid = "";
+        if (user != null) {
+            uid = user.getUid();
+        }
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
 
         db.collection("users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -315,6 +323,21 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                     if (result == null) {
                         Log.d(TAG, "onComplete: result is empty!");
                         return;
+                    }
+
+                    HashMap<String, Boolean> roles = (HashMap<String, Boolean>) result.get("role");
+
+                    boolean isAdmin = false;
+
+                    for (HashMap.Entry<String, Boolean> r : roles.entrySet()) {
+                        if (r.getKey().equals("admin") && r.getValue().booleanValue()) {
+                            isAdmin = true;
+                        }
+                    }
+                    if (isAdmin) {
+
+                        btnUpdateProducts.setVisibility(View.VISIBLE);
+                        Log.d("AdminCheck:", "\n\n\n\n\n\n\nIS ADMIN! IT WORKED!!!\n\n\n\n\n\n");
                     }
 
                     String profilePictureUrl;
@@ -331,14 +354,14 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                     tViewEmail.setText(result.getString("email"));
 
 
-
                 }
             }
         });
 
 
-
     }
+
+
 
     @Override
     public void onClick(View view) {
@@ -348,6 +371,10 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.fragment_my_account_photo:
                 setProfilePicture(view);
+                break;
+            case R.id.fragment_my_account_update_products_button:
+                getFragmentManager().beginTransaction().hide(this).commit();
+                getChildFragmentManager().beginTransaction().add(productManagementFragment, productManagementFragment.getClass().getSimpleName()).show(productManagementFragment).commit();
                 break;
             default:
                 break;

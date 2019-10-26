@@ -6,15 +6,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.pm.mysuperstoreapp.fragments.ProductFragment;
-import com.pm.mysuperstoreapp.models.ProductViewModel;
+import com.pm.mysuperstoreapp.models.ProductViewModelToRemove;
 
 import java.util.List;
 
 public class ProductsPagerAdapter extends FragmentPagerAdapter {
 
-    private List<ProductViewModel> productsList;
+    private List<ProductViewModelToRemove> productsList;
 
-    public ProductsPagerAdapter(List<ProductViewModel> productsList, FragmentManager childFragmentManager, int behavior) {
+    public ProductsPagerAdapter(List<ProductViewModelToRemove> productsList, FragmentManager childFragmentManager, int behavior) {
         super(childFragmentManager, behavior);
         this.productsList = productsList;
     }

@@ -26,16 +26,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.pm.mysuperstoreapp.R;
 
-import com.pm.mysuperstoreapp.custom_views.NoSwipeViewPager;
+
 import com.pm.mysuperstoreapp.fragments.FavoritesFragment;
 import com.pm.mysuperstoreapp.fragments.HotDealsFragment;
 import com.pm.mysuperstoreapp.fragments.MyAccountFragment;
-import com.pm.mysuperstoreapp.fragments.ProductPageFragment;
+
+import com.pm.mysuperstoreapp.fragments.ProductManagementFragment;
 import com.pm.mysuperstoreapp.fragments.ShopNowFragment;
 import com.pm.mysuperstoreapp.fragments.ShoppingCartFragment;
-import com.pm.mysuperstoreapp.utils.Utils;
+import com.pm.mysuperstoreapp.fragments.dummy.DummyContent;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements ProductManagementFragment.OnListFragmentInteractionListener {
 
 
 
@@ -262,6 +264,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
 
-
+    }
 }

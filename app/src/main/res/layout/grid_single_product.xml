@@ -6,12 +6,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/iBGridSingleImage"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="center_horizontal"
+        android:background="#2A313131"
         android:backgroundTint="#2A313131"
+        android:clickable="true"
         android:scaleType="centerInside" />
 
     <LinearLayout
@@ -24,10 +26,12 @@
         android:weightSum="3">
 
         <ImageButton
-            android:id="@+id/grid_single_product_add_item"
+            android:id="@+id/grid_single_product_increase_quantity"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:clickable="true"
 
+            android:focusable="true"
             android:layout_alignBaseline="@id/tVGridSinglePrice"
             android:layout_gravity="bottom"
             android:layout_marginEnd="7dp"
@@ -42,24 +46,24 @@
             android:id="@+id/grid_single_product_textview_item_quantity"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignBaseline="@id/grid_single_product_add_item"
+            android:layout_alignBaseline="@id/grid_single_product_increase_quantity"
             android:layout_gravity="center"
             android:layout_marginEnd="7dp"
             android:layout_weight="1"
-            android:background="#1EFFFFFF"
+            android:background="#FFD600"
             android:gravity="center"
-            android:inputType="numberDecimal"
             android:lineSpacingExtra="10sp"
-            android:numeric="decimal"
             android:singleLine="true"
-            android:text="11"
+            android:text=""
             android:textAlignment="center"
             android:textColor="#414040" />
 
         <ImageButton
-            android:id="@+id/grid_single_product_remove_item"
+            android:id="@+id/grid_single_product_decrease_quantity"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_alignBaseline="@id/tVGridSinglePrice"
             android:layout_gravity="bottom"
             android:layout_weight="1"
@@ -84,7 +88,6 @@
             android:layout_marginTop="120dp"
             android:gravity="center_horizontal"
             android:paddingStart="5dp"
-            android:text="TextView"
             android:textAlignment="center" />
 
         <TextView
@@ -94,7 +97,6 @@
             android:layout_gravity="center_horizontal|top"
             android:gravity="top"
             android:paddingStart="5dp"
-            android:text="TestView"
             android:textAlignment="center" />
     </LinearLayout>
 

@@ -14,17 +14,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.pm.mysuperstoreapp.R;
-import com.pm.mysuperstoreapp.models.ProductViewModel;
+import com.pm.mysuperstoreapp.models.ProductViewModelToRemove;
 
 public class ProductFragment extends Fragment {
 
-    private ProductViewModel product;
+    private ProductViewModelToRemove product;
 
     private TextView mTvProductName, mTvDescription, mTvPrice;
     private ImageView mIvProductImage;
     private Button mBtnAddProduct;
 
-    public ProductFragment(ProductViewModel productViewModel) {
+    public ProductFragment(ProductViewModelToRemove productViewModel) {
         product = productViewModel;
     }
 

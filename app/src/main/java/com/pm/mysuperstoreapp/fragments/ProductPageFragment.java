@@ -15,7 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.pm.mysuperstoreapp.R;
 import com.pm.mysuperstoreapp.adapters.ProductsPagerAdapter;
-import com.pm.mysuperstoreapp.models.ProductViewModel;
+import com.pm.mysuperstoreapp.models.ProductViewModelToRemove;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class ProductPageFragment extends Fragment {
     private ViewPager mVpProducts;
 
     public final static String argCategoryName = "CategoryName";
-    private List<ProductViewModel> productsList;
+    private List<ProductViewModelToRemove> productsList;
 
 
     @Nullable
@@ -49,9 +49,9 @@ public class ProductPageFragment extends Fragment {
                 mTvCategoryName.setText(categoryName);
                 //TODO get products from firebase based on category name (better id)
                 productsList = new ArrayList<>();
-                productsList.add(new ProductViewModel(1, "url1", 50, "cucumber", "tasty"));
-                productsList.add(new ProductViewModel(2, "url2", 30.2, "tomato", "green"));
-                productsList.add(new ProductViewModel(3, "url3", 230.23, "potato", "kartoshka"));
+                productsList.add(new ProductViewModelToRemove(1, "url1", 50, "cucumber", "tasty"));
+                productsList.add(new ProductViewModelToRemove(2, "url2", 30.2, "tomato", "green"));
+                productsList.add(new ProductViewModelToRemove(3, "url3", 230.23, "potato", "kartoshka"));
 
                 mVpProducts.setAdapter(new ProductsPagerAdapter(productsList, getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
             }

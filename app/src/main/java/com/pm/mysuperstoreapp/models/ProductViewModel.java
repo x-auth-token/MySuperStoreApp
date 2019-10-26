@@ -1,52 +1,43 @@
 package com.pm.mysuperstoreapp.models;
 
-import androidx.lifecycle.ViewModel;
+import androidx.annotation.NonNull;
 
-public class ProductViewModel extends ViewModel {
+public class ProductViewModel {
 
-    private int id;
-    private String imageURL;
-    private double price;
-    private String name;
-    private String description;
+    private String imageUrl, name, subCategory, price, quantity;
 
-    public String getDescription() {
-        return description;
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "name " + name + " price " + price + " quantity " + quantity + " sub " + subCategory;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getSubCategory() {
+        return subCategory;
     }
 
-    public ProductViewModel(int id, String imageURL, double price, String name, String description) {
-        this.id = id;
-        this.imageURL = imageURL;
-        this.price = price;
-        this.name = name;
-        this.description = description;
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
     }
 
-    public int getId() {
-        return id;
+    public ProductViewModel() {
+
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-    }
-
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -57,4 +48,13 @@ public class ProductViewModel extends ViewModel {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
 }
+

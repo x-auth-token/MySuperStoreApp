@@ -64,6 +64,8 @@
     <string name="alcohol">Alcohol</string>
     <string name="beverages">Beverages</string>
     <string name="textview">TextView</string>
+    <string name="update_products">Update Products</string>
+    <string name="logout">Logout</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

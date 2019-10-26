@@ -190,6 +190,18 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.w(TAG, "Error writing document", e);
             }
         });
+
+        /*db.collection("roles").document(uid).set(userModel.getRole()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "DocumentSnapshot successfully written!");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error writing document", e);
+            }
+        });*/
     }
 
 }

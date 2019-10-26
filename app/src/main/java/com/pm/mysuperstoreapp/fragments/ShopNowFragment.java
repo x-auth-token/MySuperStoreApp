@@ -1,7 +1,6 @@
 package com.pm.mysuperstoreapp.fragments;
 
 import android.os.Bundle;
-import android.print.PrintAttributes;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +25,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.pm.mysuperstoreapp.R;
-import com.pm.mysuperstoreapp.models.ItemModel;
+import com.pm.mysuperstoreapp.models.ProductViewModel;
 import com.pm.mysuperstoreapp.models.TestViewModel;
 
 import java.util.ArrayList;
@@ -223,7 +222,7 @@ public class ShopNowFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getItemList(String category) {
-        final List<ItemModel> itemList = new ArrayList<>();
+        final List<ProductViewModel> itemList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference store = db.collection(category.toLowerCase()); //store
         store.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -243,7 +242,7 @@ public class ShopNowFragment extends Fragment implements View.OnClickListener {
                                 String image_url = (String) data.get("image_url");
                                 String sub_category = (String) data.get("sub_category");
 
-                                ItemModel item = new ItemModel();
+                                ProductViewModel item = new ProductViewModel();
                                 item.setImageUrl(image_url);
                                 item.setName(name);
                                 item.setPrice(price);
@@ -260,10 +259,10 @@ public class ShopNowFragment extends Fragment implements View.OnClickListener {
                 }
 
 
-                //getFragmentManager().beginTransaction().add(R.id.fLShopNowMiddleFrameLayout, new CategoryGrid(itemList)).addToBackStack(null).commit();
+                //getFragmentManager().beginTransaction().add(R.id.fLShopNowMiddleFrameLayout, new CategoryGridFragment(itemList)).addToBackStack(null).commit();
 
                 FragmentTransaction transaction = childFragmentManager.beginTransaction();
-                transaction.replace(R.id.fLShopNowMiddleFrameLayout, new CategoryGrid(itemList), CATEGORY_GRID_FRAGMENT_TAG);
+                transaction.replace(R.id.fLShopNowMiddleFrameLayout, new CategoryGridFragment(itemList), CATEGORY_GRID_FRAGMENT_TAG);
                 transaction.addToBackStack(null);
                 transaction.commit();
                 childFragmentManager.executePendingTransactions();

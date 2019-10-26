@@ -20,6 +20,20 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            java {
+                exclude '**/ProductViewModelToRemove.java'
+                exclude '**/ProductFragment.java'
+                exclude '**/ProductPageFragment.java'
+                exclude '**/ProductsPagerAdapter.java'
+
+                exclude '**/RecyclerViewCategoriesFragment.java'
+                exclude '**/RecyclerViewCategoriesAdapter.java'
+            }
+        }
+    }
+
 
 }
 

@@ -7,7 +7,8 @@ public class UserModel {
     private String uid;
     private String email;
     private String profilePictureUrl;
-    private String role;
+    private RoleModel role;
+    //private String role;
     private String lastLogin;
     private String displayName;
 
@@ -22,7 +23,7 @@ public class UserModel {
 
         this.displayName = displayName;
         this.email = email;
-        this.role = "user";
+        this.role = new RoleModel();
         this.lastLogin = Calendar.getInstance().getTime().toString();
 
     }
@@ -52,8 +53,16 @@ public class UserModel {
         this.profilePictureUrl = profilePictureUrl;
     }
 
-    public String getRole() {
-        return role;
+    public RoleModel getRole() {
+        return this.role;
+    }
+
+    public String roleToString() {
+
+        if (role.isAdmin())
+            return "admin";
+
+        return "user";
     }
 
     //public void setRole(String role) { this.role = role; }
@@ -73,7 +82,6 @@ public class UserModel {
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
-
 
 
 
