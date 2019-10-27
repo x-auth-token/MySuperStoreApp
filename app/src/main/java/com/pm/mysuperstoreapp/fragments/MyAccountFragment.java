@@ -1,5 +1,6 @@
 package com.pm.mysuperstoreapp.fragments;
 
+import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.Manifest;
@@ -8,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,7 +46,12 @@ import com.pm.mysuperstoreapp.activities.LoginActivity;
 import com.pm.mysuperstoreapp.activities.MainActivity;
 import com.pm.mysuperstoreapp.models.MyAccountViewModel;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class MyAccountFragment extends Fragment implements View.OnClickListener {
 
@@ -64,6 +72,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     private FirebaseFirestore db;
     private Button btnUpdateProducts;
     private ProductManagementFragment productManagementFragment;
+    private String imageFilePath;
 
 
     public static MyAccountFragment newInstance() {
@@ -142,9 +151,6 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
                     getActivity().finish();
-                } else {
-
-
                 }
 
 
@@ -165,10 +171,14 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                 case CAMERA_REQUEST_CODE:
                     if (getActivity() != null) {
                         if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                            getActivity().requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
                         } else {
-                            Uri selectedCameraImage = data.getData();
-                            iViewAccountPhoto.setImageURI(selectedCameraImage);
+                            if (data != null && data.getExtras() != null) {
+                                Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
+                                iViewAccountPhoto.setImageBitmap(imageBitmap);
+                            //Uri selectedCameraImage = data.getData();
+                            //iViewAccountPhoto.setImageURI(selectedCameraImage)
+                            }
                         }
                     }
                     break;
@@ -182,6 +192,22 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                     break;
             }
         }
+    }
+    private File createImageFile() throws IOException {
+        String timeStamp =
+                new SimpleDateFormat("yyyyMMdd_HHmmss",
+                        Locale.getDefault()).format(new Date());
+        String imageFileName = "IMG_" + timeStamp + "_";
+        File storageDir =
+                getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        imageFilePath = image.getAbsolutePath();
+        return image;
     }
 
     private void uploadProfilePhotoToFirebaseStorage(Uri selectedImage) {
@@ -282,7 +308,24 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                 switch (i) {
                     case 0:
                         Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(takePicture, CAMERA_REQUEST_CODE);
+
+                        File photoFile = null;
+                        try {
+                            photoFile = createImageFile();
+                        } catch (IOException ex) {
+                            // Error occurred while creating the File
+
+                        }
+                        if (photoFile != null) {
+                            Uri photoURI = FileProvider.getUriForFile(getContext(), "com.pm.mysuperstoreapp.provider", photoFile);
+                            takePicture.putExtra(MediaStore.EXTRA_OUTPUT,
+                                    photoURI);
+                            if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                                getActivity().requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                            }
+                            
+                            startActivityForResult(takePicture, CAMERA_REQUEST_CODE);
+                        }
                         break;
                     case 1:
                         String[] mimeTypes = {"image/jpeg", "image/png", "image/jpg"};
