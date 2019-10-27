@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.fragments;
 
 import androidx.lifecycle.ViewModelProviders;
@@ -19,6 +27,7 @@ import com.pm.mysuperstoreapp.R;
 import com.pm.mysuperstoreapp.activities.LoginActivity;
 import com.pm.mysuperstoreapp.models.FavoritesViewModel;
 
+// Not fully implemented
 public class FavoritesFragment extends Fragment {
 
     private FavoritesViewModel mViewModel;
@@ -41,6 +50,7 @@ public class FavoritesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        // Constantly check if user authentication status changed
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {

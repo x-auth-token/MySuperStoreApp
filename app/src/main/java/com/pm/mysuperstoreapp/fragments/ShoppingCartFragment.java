@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.fragments;
 
 import androidx.lifecycle.ViewModelProviders;
@@ -15,6 +23,7 @@ import android.view.ViewGroup;
 import com.pm.mysuperstoreapp.R;
 import com.pm.mysuperstoreapp.models.ShoppingCartViewModel;
 
+//TODO: Implement This
 public class ShoppingCartFragment extends Fragment {
 
     private ShoppingCartViewModel mViewModel;

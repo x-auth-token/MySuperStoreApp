@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.fragments;
 
 import android.os.Bundle;
@@ -6,8 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,13 +25,13 @@ import com.pm.mysuperstoreapp.models.ProductViewModel;
 
 import java.util.List;
 
+// Grid Fragment to show products
 public class CategoryGridFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    List<ProductViewModel> items;
+    private List<ProductViewModel> items;
     public static final String TAG = "mytag";
 
     private GridView gridView;
-    private CategoryGridAdapter categoryGridAdapter;
 
 
     public CategoryGridFragment(List<ProductViewModel> itemList) {
@@ -41,7 +47,8 @@ public class CategoryGridFragment extends Fragment implements AdapterView.OnItem
 
         initViews(view);
 
-        categoryGridAdapter = new CategoryGridAdapter(requireActivity());
+        // Using GridAdapter to populate cells
+        CategoryGridAdapter categoryGridAdapter = new CategoryGridAdapter(requireActivity());
         categoryGridAdapter.addItems(items);
         gridView.setAdapter(categoryGridAdapter);
         categoryGridAdapter.notifyDataSetChanged();
@@ -53,29 +60,10 @@ public class CategoryGridFragment extends Fragment implements AdapterView.OnItem
         gridView = view.findViewById(R.id.gVCategoryItems);
 
 
-
     }
 
 
-
-    /*@Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-
-            case R.id.grid_single_product_increase_quantity:
-                System.out.println("TESTETSTET TETTST TETSt");
-            *//*case categoryGridAdapterR.id.fragment_my_account_logout_button:
-                //logout(view);
-                break;
-            case R.id.fragment_my_account_photo:
-                //setProfilePicture(view);
-                break;*//*
-
-            default:
-                break;
-        }
-    }*/
-
+    // TODO: Implement this
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (view.getId()) {

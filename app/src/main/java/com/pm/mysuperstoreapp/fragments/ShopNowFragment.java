@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.fragments;
 
 import android.os.Bundle;
@@ -31,27 +39,23 @@ import com.pm.mysuperstoreapp.models.TestViewModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+// Main ShopNow fragment
 public class ShopNowFragment extends Fragment implements View.OnClickListener {
 
 
     public static FragmentManager childFragmentManager;
-    private TestViewModel mViewModel;
-    private FrameLayout fLShopNowMiddleFrameLayout;
+    //private TestViewModel mViewModel;
     private SearchView fCShopNowSearch;
     private ImageButton iBMeat, iBFish, iBBakery, iBFruits, iBVegetables, iBAlcohol, iBBeverages;
     private android.widget.FrameLayout fLFlashDealsBanner;
-    public static final String TAG = "mytag";
-    public static final String FLASH_DEALS_TAG = "flash_deals_fragment";
+    private static final String TAG = "mytag";
+    private static final String FLASH_DEALS_TAG = "flash_deals_fragment";
     private TextView tVGategoryTitle;
     private Toolbar toolBar;
     private ImageButton iBBack;
     private String CATEGORY_GRID_FRAGMENT_TAG = "category_grid_fragment";
-
-
-/*    public static ShopNowFragment newInstance() {
-        return new ShopNowFragment();
-    }*/
 
 
     @Override
@@ -59,12 +63,12 @@ public class ShopNowFragment extends Fragment implements View.OnClickListener {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shop_now, container, false);
 
-        mViewModel = ViewModelProviders.of(this).get(TestViewModel.class);
+        //mViewModel = ViewModelProviders.of(this).get(TestViewModel.class);
 
         childFragmentManager = getChildFragmentManager();
         FragmentTransaction transaction = childFragmentManager.beginTransaction();
         transaction.add(R.id.fLShopNowFlashDealsBannerFragment, new ShopNowFlashDealsFragment(), FLASH_DEALS_TAG);
-        //transaction.add(R.id.fLFlashDeals, new ShopNowFlashDealsFragment());
+
 
         initViews(view);
 
@@ -73,9 +77,8 @@ public class ShopNowFragment extends Fragment implements View.OnClickListener {
         childFragmentManager.executePendingTransactions();
 
 
-
         return view;
-        //return inflater.inflate(R.layout.fragment_shop_now_flash_deals, container, false);
+
     }
 
     private void initViews(View view) {
@@ -91,7 +94,7 @@ public class ShopNowFragment extends Fragment implements View.OnClickListener {
         toolBar = view.findViewById(R.id.tBarShopNowFragment);
         iBBack = view.findViewById(R.id.iBGoBack);
 
-        fLShopNowMiddleFrameLayout = view.findViewById(R.id.fLShopNowMiddleFrameLayout);
+        FrameLayout fLShopNowMiddleFrameLayout = view.findViewById(R.id.fLShopNowMiddleFrameLayout);
         fLFlashDealsBanner = view.findViewById(R.id.fLShopNowFlashDealsBannerFragment);
         fCShopNowSearch = view.findViewById(R.id.fCShopNowSearch);
 
@@ -105,25 +108,11 @@ public class ShopNowFragment extends Fragment implements View.OnClickListener {
         iBBack.setOnClickListener(this);
 
 
-
-
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        /*mViewModel = ViewModelProviders.of(this).get(TestViewModel.class);
-
-        childFragmentManager = getChildFragmentManager();
-        FragmentTransaction transaction = childFragmentManager.beginTransaction();
-        transaction.add(R.id.fLShopNowFlashDealsBannerFragment, new ShopNowFlashDealsFragment());
-        //transaction.add(R.id.fLFlashDeals, new ShopNowFlashDealsFragment());
-
-
-
-        transaction.addToBackStack(null);
-        transaction.commit();
-        childFragmentManager.executePendingTransactions();*/
         // TODO: Use the ViewModel
     }
 
@@ -131,17 +120,17 @@ public class ShopNowFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
 
-
         if (v.getId() == R.id.iBGoBack) {
 
             goToMainFragment();
         } else {
-            makeRoom();
+            makeRoom(); // Remove Top Banner
 
             String category = null;
+
+            // Switch between categories
             switch (v.getId()) {
                 case R.id.fCShopNowMeatImageButton:
-
 
                     category = getString(R.string.meat);
                     updateCategoryTitle(category);
@@ -174,6 +163,7 @@ public class ShopNowFragment extends Fragment implements View.OnClickListener {
 
 
             }
+
             if (category != null) {
                 getItemList(category);
             }
@@ -181,9 +171,10 @@ public class ShopNowFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    // Allows going back to this fragment after quiting from categories
     private void goToMainFragment() {
         FragmentTransaction transaction = childFragmentManager.beginTransaction();
-        transaction.remove(childFragmentManager.findFragmentByTag(CATEGORY_GRID_FRAGMENT_TAG)).commit();
+        transaction.remove(Objects.requireNonNull(childFragmentManager.findFragmentByTag(CATEGORY_GRID_FRAGMENT_TAG))).commit();
 
         toolBar.setVisibility(View.INVISIBLE);
         tVGategoryTitle.setVisibility(View.GONE);
@@ -202,14 +193,16 @@ public class ShopNowFragment extends Fragment implements View.OnClickListener {
         childFragmentManager.executePendingTransactions();
     }
 
+    // Show category name on top toolbar
     private void updateCategoryTitle(String category) {
         TextView categoryTitle;
-        categoryTitle = getView().findViewById(R.id.tVCategoryTitle);
+        categoryTitle = Objects.requireNonNull(getView()).findViewById(R.id.tVCategoryTitle);
         categoryTitle.setText(category);
     }
 
+    // Remove TOP Banner and make room for products
     private void makeRoom() {
-        childFragmentManager.beginTransaction().remove(getChildFragmentManager().findFragmentByTag(FLASH_DEALS_TAG)).commit();
+        childFragmentManager.beginTransaction().remove(Objects.requireNonNull(getChildFragmentManager().findFragmentByTag(FLASH_DEALS_TAG))).commit();
         fLFlashDealsBanner.setVisibility(View.GONE);
 
         toolBar.setVisibility(View.VISIBLE);
@@ -218,9 +211,10 @@ public class ShopNowFragment extends Fragment implements View.OnClickListener {
 
         ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) fCShopNowSearch.getLayoutParams();
         marginLayoutParams.setMargins(10, 180, 10, 0);
-       fCShopNowSearch.setLayoutParams(marginLayoutParams);
+        fCShopNowSearch.setLayoutParams(marginLayoutParams);
     }
 
+    // Fetch products from Firestore
     private void getItemList(String category) {
         final List<ProductViewModel> itemList = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -257,9 +251,6 @@ public class ShopNowFragment extends Fragment implements View.OnClickListener {
                     }
 
                 }
-
-
-                //getFragmentManager().beginTransaction().add(R.id.fLShopNowMiddleFrameLayout, new CategoryGridFragment(itemList)).addToBackStack(null).commit();
 
                 FragmentTransaction transaction = childFragmentManager.beginTransaction();
                 transaction.replace(R.id.fLShopNowMiddleFrameLayout, new CategoryGridFragment(itemList), CATEGORY_GRID_FRAGMENT_TAG);

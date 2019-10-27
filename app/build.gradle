@@ -27,7 +27,7 @@ android {
                 exclude '**/ProductFragment.java'
                 exclude '**/ProductPageFragment.java'
                 exclude '**/ProductsPagerAdapter.java'
-
+                exclude '**/MainFragmentAdapter.java'
                 exclude '**/RecyclerViewCategoriesFragment.java'
                 exclude '**/RecyclerViewCategoriesAdapter.java'
             }

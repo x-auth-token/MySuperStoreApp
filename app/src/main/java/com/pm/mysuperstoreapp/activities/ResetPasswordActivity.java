@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.activities;
 
 import androidx.annotation.NonNull;
@@ -17,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.pm.mysuperstoreapp.R;
 import com.pm.mysuperstoreapp.utils.Utils;
 
+// Password reset activity
 public class ResetPasswordActivity extends AppCompatActivity {
 
     private EditText email;
@@ -41,6 +50,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     }
 
+    // Deaaling with hardware back button
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -51,18 +61,25 @@ public class ResetPasswordActivity extends AppCompatActivity {
         email = findViewById(R.id.activity_passreset_et_email);
         progressBar = findViewById(R.id.activity_passreset_pb_progress);
     }
+
+    // Validate email correctness
     public void emailInputValidation(View view) {
 
         InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        if (inputManager != null) {
+            inputManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        }
 
         if (Utils.isValidEmail(email, email)) {
-            inputManager.hideSoftInputFromWindow(email.getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+            if (inputManager != null) {
+                inputManager.hideSoftInputFromWindow(email.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
 
         }
 
     }
 
+    // Password reset mail
     public void resetPassword(View view) {
 
 
@@ -87,11 +104,12 @@ public class ResetPasswordActivity extends AppCompatActivity {
                             finish();
 
                         } else {
-                            Utils.makeToast(findViewById(R.id.activity_register_et_fname), getString(R.string.registration_success) + " " +  getString(R.string.email_sent) + email.getText().toString(), "#FFFFFF");
+                            Utils.makeToast(findViewById(R.id.activity_register_et_fname), getString(R.string.registration_success) + " " + getString(R.string.email_sent) + email.getText().toString(), "#FFFFFF");
                         }
                     }
                 });
     }
+
     public void cancel(View view) {
         Utils.goToLoginActivity(view);
     }

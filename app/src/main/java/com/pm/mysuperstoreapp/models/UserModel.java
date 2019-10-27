@@ -1,7 +1,17 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.models;
 
 import java.util.Calendar;
 
+
+// Represents user schema in Firestore Database
 public class UserModel {
 
     private String uid;
@@ -20,7 +30,6 @@ public class UserModel {
 
    public UserModel(String uid, String email, String displayName) {
         this.uid = uid;
-
         this.displayName = displayName;
         this.email = email;
         this.role = new RoleModel();
@@ -56,6 +65,7 @@ public class UserModel {
     public RoleModel getRole() {
         return this.role;
     }
+
 
     public String roleToString() {
 

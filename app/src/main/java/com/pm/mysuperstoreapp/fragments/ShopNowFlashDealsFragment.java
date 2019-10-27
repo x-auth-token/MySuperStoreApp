@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.fragments;
 
 import android.os.Bundle;
@@ -23,18 +31,20 @@ import com.pm.mysuperstoreapp.models.PictureViewModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
+// Flash deals Fragment
 public class ShopNowFlashDealsFragment extends Fragment {
 
     private List<String> discountImagesUrls;
-    public static final String TAG = "mytag";
+    private static final String TAG = "mytag";
     private AdapterViewFlipper adapterViewFlipper;
     private ViewPager viewPager;
-    private List<PictureViewModel>  pictures;
+    private List<PictureViewModel> pictures;
     private Timer timer;
 
 
@@ -52,8 +62,10 @@ public class ShopNowFlashDealsFragment extends Fragment {
         return view;
     }
 
+    // Adds images to the banner
     private void populateBanner(final View view) {
 
+        // Fetches URLs from Firestore
         FirebaseFirestore.getInstance().collection("banner").document("banner").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -64,13 +76,10 @@ public class ShopNowFlashDealsFragment extends Fragment {
                         return;
                     }
 
-
-                    //final List<DocumentSnapshot> documents = result.getDocuments();
-
-                    //discountImagesUrls = new ArrayList<>();
                     pictures = new ArrayList<>();
                     Map<String, Object> map = task.getResult().getData();
 
+                    // Create Images
                     if (map != null) {
                         for (Map.Entry<String, Object> entry : map.entrySet()) {
                             pictures.add(new PictureViewModel(entry.getValue().toString(), entry.getKey()));
@@ -79,53 +88,18 @@ public class ShopNowFlashDealsFragment extends Fragment {
 
 
                     viewPager = view.findViewById(R.id.fragment_shop_now_flash_deals_view_pager);
-                    viewPager.setAdapter(new ShopNowFlashDealsPagerAdapter(getContext(), pictures));
+                    viewPager.setAdapter(new ShopNowFlashDealsPagerAdapter(Objects.requireNonNull(getContext()), pictures));
 
                     CircleIndicator indicator = view.findViewById(R.id.fCShopNowCircleIndicator);
                     indicator.setViewPager(viewPager);
-                    viewPager.getAdapter().registerDataSetObserver(indicator.getDataSetObserver());
+                    Objects.requireNonNull(viewPager.getAdapter()).registerDataSetObserver(indicator.getDataSetObserver());
 
 
-                    //recyclerView.getAdapter().registerAdapterDataObserver(indicator.getAdapterDataObserver());
-
-                    /*adapterViewFlipper = view.findViewById(R.id.fCShopNowAdapterFlipperView);
-                    ShopNowFlashDealsViewFlipperAdapter adapter = new ShopNowFlashDealsViewFlipperAdapter(getContext(), pictures);
-                    adapterViewFlipper.setAdapter(adapter);*/
-
-
-                   /* RecyclerView recyclerView = view.findViewById(R.id.rVFlashDeals);
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
-                    recyclerView.setLayoutManager(layoutManager);
-
-
-                    recyclerView.setAdapter(new ShopNowFlashDealsRecyclerViewAdapter(getActivity(), pictures));*/
-
-                    /*RecyclerView.SmoothScroller smoothScroller = new LinearSmoothScroller(getActivity()) {
-                        @Override
-                        protected int getVerticalSnapPreference() {
-                            return LinearSmoothScroller.SNAP_TO_END;
-                        }
-                    };
-
-                    smoothScroller.setTargetPosition(pictures.size() + 1 );
-                    layoutManager.startSmoothScroll(smoothScroller);*/
-
-                    /*PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
-
-                    pagerSnapHelper.attachToRecyclerView(recyclerView);
-                    CircleIndicator2 indicator = view.findViewById(R.id.fCShopNowCircleIndicator);
-                    indicator.attachToRecyclerView(recyclerView,pagerSnapHelper);
-                    recyclerView.getAdapter().registerAdapterDataObserver(indicator.getAdapterDataObserver());*/
-
-                    //pagerAdapter.setLayoutManager(new LinearLayoutManager(getContext()));
                 } else {
                     Log.d(TAG, "onComplete: ERROR could not fetch collection " + task.getException());
                 }
             }
         });
-
-
-
 
 
     }
@@ -139,14 +113,14 @@ public class ShopNowFlashDealsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //timer.scheduleAtFixedRate(new SliderTimer(), 4000, 6000);
     }
 
+    // Switches images periodically
     private class SliderTimer extends TimerTask {
 
         @Override
         public void run() {
-            getActivity().runOnUiThread(new Runnable() {
+            Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     if (viewPager.getCurrentItem() < pictures.size() - 1) {

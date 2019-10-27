@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.data;
 
 import android.util.Log;
@@ -10,6 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.pm.mysuperstoreapp.models.UserModel;
 
+// Helper class for Firebase Integration
 public abstract class FirebaseHelper {
     private static final String TAG = "FIRESTORE_HELPER";
 
@@ -32,6 +41,8 @@ public abstract class FirebaseHelper {
                 Log.w(TAG, "Error writing document", e);
             }
         });
+
+
     /*final CollectionReference dbStoreCollection = FirebaseFirestore.getInstance().collection("store");
     final DocumentReference docStoreDiscountsDocument = dbStoreCollection.document("discounts");
 

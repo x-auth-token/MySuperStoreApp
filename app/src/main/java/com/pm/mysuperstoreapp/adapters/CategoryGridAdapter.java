@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.adapters;
 
 import android.content.Context;
@@ -11,28 +19,23 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.widget.NestedScrollView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
 import com.pm.mysuperstoreapp.R;
 import com.pm.mysuperstoreapp.models.ProductViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+// Grid adapter for showing products
 public class CategoryGridAdapter extends BaseAdapter  {
 
     private List<ProductViewModel> itemList;
     private LayoutInflater layoutInflater;
     private ImageButton iBIncreaseQuantity;
-    private ImageButton iBDecreaseQuantity;
-    private ImageButton iBAddToShoppingCart;
     private TextView tVItemQuantity;
-    private View convertView;
-    public static final String DEFAULT_QUANTITY = "0";
-    private ImageView iVProductImage;
+    private static final String DEFAULT_QUANTITY = "0";
     private String updatedQuantity = "0";
 
     public CategoryGridAdapter(Context context) {
@@ -41,14 +44,14 @@ public class CategoryGridAdapter extends BaseAdapter  {
         layoutInflater = LayoutInflater.from(context);
     }
 
-
+    // Adds items to the list
     public void addItems(List<ProductViewModel> itemList) {
         this.itemList = itemList;
     }
 
-    public void clearItems() {
+    /*public void clearItems() {
         this.itemList.clear();
-    }
+    }*/
 
     @Override
     public int getCount() {
@@ -69,23 +72,23 @@ public class CategoryGridAdapter extends BaseAdapter  {
     public View getView(int position, View convertView, final ViewGroup parent) {
         Log.d("mytag", "getView: " + position);
 
-        this.convertView = convertView;
+        View convertView1 = convertView;
         final int pos = position;
 
-        if (this.convertView == null) {
-            this.convertView = layoutInflater.inflate(R.layout.grid_single_product, parent, false);
+        if (convertView1 == null) {
+            convertView1 = layoutInflater.inflate(R.layout.grid_single_product, parent, false);
             //ImageButton iBtnCategoryButton = this.convertView.findViewById(R.id.iBGridSingleImage);
-            iVProductImage  = this.convertView.findViewById(R.id.iBGridSingleImage);
-            TextView tvName = this.convertView.findViewById(R.id.tVGridSingleName);
-            TextView tvPrice = this.convertView.findViewById(R.id.tVGridSinglePrice);
+            ImageView iVProductImage = convertView1.findViewById(R.id.iBGridSingleImage);
+            TextView tvName = convertView1.findViewById(R.id.tVGridSingleName);
+            TextView tvPrice = convertView1.findViewById(R.id.tVGridSinglePrice);
 
-            iBIncreaseQuantity = this.convertView.findViewById(R.id.grid_single_product_increase_quantity);
-            iBDecreaseQuantity = this.convertView.findViewById(R.id.grid_single_product_decrease_quantity);
-            iBAddToShoppingCart = this.convertView.findViewById(R.id.grid_single_product_add_to_shopping_cart);
-            tVItemQuantity = this.convertView.findViewById(R.id.grid_single_product_textview_item_quantity);
+            iBIncreaseQuantity = convertView1.findViewById(R.id.grid_single_product_increase_quantity);
+            ImageButton iBDecreaseQuantity = convertView1.findViewById(R.id.grid_single_product_decrease_quantity);
+            ImageButton iBAddToShoppingCart = convertView1.findViewById(R.id.grid_single_product_add_to_shopping_cart);
+            tVItemQuantity = convertView1.findViewById(R.id.grid_single_product_textview_item_quantity);
 
 
-            Glide.with(this.convertView).load(itemList.get(position).getImageUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(iVProductImage);
+            Glide.with(convertView1).load(itemList.get(position).getImageUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(iVProductImage);
             tvName.setText(itemList.get(position).getName());
             tvPrice.setText(itemList.get(position).getPrice());
         }
@@ -98,6 +101,7 @@ public class CategoryGridAdapter extends BaseAdapter  {
             System.out.println(tVItemQuantity.getText().toString());
         }
 
+        // Enables button clicks
         iBIncreaseQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,9 +110,10 @@ public class CategoryGridAdapter extends BaseAdapter  {
         });
         //iBDecreaseQuantity.setOnClickListener(this);
 
-        return this.convertView;
+        return convertView1;
     }
 
+    // Increases Items Quantity
     public void increaseQuantity(View view) {
         int quantity = Integer.parseInt(tVItemQuantity.getText().toString());
         updatedQuantity = (Integer.toString(++quantity));

@@ -1,7 +1,16 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,9 +22,10 @@ import com.pm.mysuperstoreapp.utils.Utils;
 
 public class ResendVerificationEmailActivity extends AppCompatActivity {
 
-    private String emailAddress;
     private TextView prompt;
     private FirebaseUser user;
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,10 +35,10 @@ public class ResendVerificationEmailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if (intent.hasExtra("emailAddress")) {
-            emailAddress = intent.getStringExtra("emailAddress");
+        if (intent.hasExtra("emailAddress")) { // Show email address if provided on previous screen
+            String emailAddress = intent.getStringExtra("emailAddress");
 
-            prompt.setText(getString(R.string.resend_verification_email_prompt) + emailAddress + "\n" + getString(R.string.resend_verification_now) );
+            prompt.setText(getString(R.string.resend_verification_email_prompt) + emailAddress + "\n" + getString(R.string.resend_verification_now));
 
         }
 
@@ -37,10 +47,9 @@ public class ResendVerificationEmailActivity extends AppCompatActivity {
         }
 
 
-
-
     }
 
+    // Deal with hardware back button
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -51,9 +60,10 @@ public class ResendVerificationEmailActivity extends AppCompatActivity {
         prompt = findViewById(R.id.activity_resend_verification_tv_prompt);
     }
 
+    // Main method to resend the verification email
     public void resendVerificationEmail(View view) {
         user.sendEmailVerification();
-        Utils.makeToast(findViewById(R.id.activity_resend_verification_tv_prompt), getString(R.string.email_sent) + user.getEmail().toString(), "#FFFFFF");
+        Utils.makeToast(findViewById(R.id.activity_resend_verification_tv_prompt), getString(R.string.email_sent) + user.getEmail(), "#FFFFFF");
 
         Intent intent = new Intent(getApplicationContext(),
                 LoginActivity.class);

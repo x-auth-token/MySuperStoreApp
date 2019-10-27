@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.fragments;
 
 import android.content.Context;
@@ -23,6 +31,8 @@ import com.pm.mysuperstoreapp.fragments.dummy.DummyContent.DummyItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
+
+// NOT IMPLEMENTED
 public class HotDealsFragment extends Fragment {
 
     // TODO: Customize parameter argument names

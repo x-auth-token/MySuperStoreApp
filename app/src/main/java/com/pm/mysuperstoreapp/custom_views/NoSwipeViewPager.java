@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.custom_views;
 
 import android.annotation.SuppressLint;
@@ -7,6 +15,7 @@ import android.view.MotionEvent;
 
 import androidx.viewpager.widget.ViewPager;
 
+// NOT USED CURRENTLY
 public class NoSwipeViewPager extends ViewPager {
 
     public NoSwipeViewPager(Context context) {

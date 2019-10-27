@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.adapters;
 
 import androidx.annotation.NonNull;
@@ -6,8 +14,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.pm.mysuperstoreapp.fragments.ShopNowFragment;
-import com.pm.mysuperstoreapp.fragments.Test1;
 
+@Deprecated
 public class MainFragmentAdapter extends FragmentPagerAdapter {
 
     public MainFragmentAdapter(@NonNull FragmentManager fm, int behavior) {
@@ -22,20 +30,10 @@ public class MainFragmentAdapter extends FragmentPagerAdapter {
             case 0:
 
                 return new ShopNowFragment();
-            case 1:
-                return new Test1();
-                /*
-            case 2:
-
-            case 3:
-
-            case 4:
-
-
-            default:
-                return null;*/
+             default:
+                return null;
         }
-        return null;
+
     }
 
     @Override

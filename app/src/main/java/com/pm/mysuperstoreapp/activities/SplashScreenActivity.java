@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +18,7 @@ import android.widget.ImageView;
 
 import com.pm.mysuperstoreapp.R;
 
+// Splash Screen to Show on Startup
 public class SplashScreenActivity extends AppCompatActivity {
 
     Animation anim;

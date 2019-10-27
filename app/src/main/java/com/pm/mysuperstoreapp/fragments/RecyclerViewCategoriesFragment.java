@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.fragments;
 
 import android.os.Bundle;
@@ -13,6 +21,7 @@ import com.pm.mysuperstoreapp.R;
 
 import java.util.List;
 
+@Deprecated
 public class RecyclerViewCategoriesFragment extends Fragment {
 
     private List<String> categories;

@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.models;
 
 import android.util.Log;
@@ -7,7 +15,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.HashMap;
 
-
+// Represents shopping cart
 public class ShoppingCartViewModel extends ViewModel {
 
 

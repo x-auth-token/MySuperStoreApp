@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.adapters;
 
 import android.content.Context;
@@ -23,6 +31,7 @@ import com.pm.mysuperstoreapp.models.PictureViewModel;
 
 import java.util.List;
 
+// NOt used currently
 
 public class ShopNowFlashDealsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

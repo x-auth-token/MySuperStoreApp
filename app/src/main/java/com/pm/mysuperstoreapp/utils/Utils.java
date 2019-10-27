@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.utils;
 
 
@@ -31,7 +39,7 @@ import java.util.regex.Pattern;
 import static android.app.PendingIntent.getActivity;
 import static androidx.core.content.ContextCompat.getSystemService;
 
-
+// Helper class for various shared methods
 public final class Utils {
 
     public static void makeToast(View view, String string, String color){

@@ -1,5 +1,14 @@
+/*
+ * Copyright (c) 2019
+ * Pavel Mayzenberg aka x-auth-token
+ * Timur Hertz
+ *
+ * All rights reserved.
+ */
+
 package com.pm.mysuperstoreapp.models;
 
+// Represents item in shopping cart
 public class ShoppingCartItemViewModel {
 
     private String productName;
