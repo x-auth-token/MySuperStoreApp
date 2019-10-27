@@ -379,7 +379,8 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                         }
 
                         // Fetch user roles
-                        HashMap<String, Boolean> roles = (HashMap<String, Boolean>) result.get("role");
+
+                            HashMap<String, Boolean> roles = (HashMap<String, Boolean>) result.get("role");
 
                         boolean isAdmin = false;
 
@@ -424,11 +425,13 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         final Intent resendEmailIntent = new Intent(getContext(),
                 ResendVerificationEmailActivity.class);
 
-        resendEmailIntent.putExtra("emailAddress", user.getEmail());
-        resendEmailIntent.putExtra("user", user);
+            if (user != null) {
+                resendEmailIntent.putExtra("emailAddress", user.getEmail());
+            }
+            resendEmailIntent.putExtra("user", user);
 
         startActivity(resendEmailIntent);
-        getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
+        Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
         getActivity().finish();
     }
     }
