@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.pm.mysuperstoreapp.R;
+import com.pm.mysuperstoreapp.data.FirebaseHelper;
 import com.pm.mysuperstoreapp.models.UserModel;
 import com.pm.mysuperstoreapp.utils.Utils;
 
@@ -102,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             new Handler().postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    saveUserToFirebase(user);
+                                                    FirebaseHelper.saveUserToFirebase(user);
                                                     final Intent intent = new Intent(getApplicationContext(),
                                                             LoginActivity.class);
                                                     startActivity(intent);
@@ -173,35 +174,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void saveUserToFirebase(FirebaseUser user) {
-        String uid = user.getUid();
-        UserModel userModel = new UserModel(uid, user.getEmail(), user.getDisplayName());
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        db.collection("users").document(uid).set(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d(TAG, "DocumentSnapshot successfully written!");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w(TAG, "Error writing document", e);
-            }
-        });
-
-        /*db.collection("roles").document(uid).set(userModel.getRole()).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d(TAG, "DocumentSnapshot successfully written!");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w(TAG, "Error writing document", e);
-            }
-        });*/
-    }
 
 }

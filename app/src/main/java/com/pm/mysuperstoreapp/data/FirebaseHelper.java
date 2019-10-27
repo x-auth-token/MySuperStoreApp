@@ -1,8 +1,37 @@
 package com.pm.mysuperstoreapp.data;
 
-public class FirebaseHelper {
+import android.util.Log;
 
-    //TODO:
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.pm.mysuperstoreapp.models.UserModel;
+
+public abstract class FirebaseHelper {
+    private static final String TAG = "FIRESTORE_HELPER";
+
+
+    // Save user to "users" collection on firestore
+    public static void saveUserToFirebase(FirebaseUser user) {
+        String uid = user.getUid();
+        UserModel userModel = new UserModel(uid, user.getEmail(), user.getDisplayName());
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("users").document(uid).set(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "DocumentSnapshot successfully written!");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error writing document", e);
+            }
+        });
     /*final CollectionReference dbStoreCollection = FirebaseFirestore.getInstance().collection("store");
     final DocumentReference docStoreDiscountsDocument = dbStoreCollection.document("discounts");
 
@@ -123,7 +152,5 @@ public class FirebaseHelper {
             }
         }*/
 
-        public void test() {
-
-        }
     }
+}

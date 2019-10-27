@@ -45,6 +45,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.pm.mysuperstoreapp.R;
+import com.pm.mysuperstoreapp.data.FirebaseHelper;
 import com.pm.mysuperstoreapp.models.UserModel;
 import com.pm.mysuperstoreapp.utils.Utils;
 
@@ -262,6 +263,8 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            FirebaseHelper.saveUserToFirebase(user);
                             Utils.goToMainActivity(findViewById(android.R.id.content));
 
                         } else {
