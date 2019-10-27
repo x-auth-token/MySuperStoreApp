@@ -68,9 +68,9 @@ public class CategoryGridFragment extends Fragment implements AdapterView.OnItem
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (view.getId()) {
 
-            case R.id.grid_single_product_increase_quantity:
+           /* case R.id.grid_single_product_increase_quantity:
                 System.out.println("TESTETSTET TETTST TETSt");
-                break;
+                break;*/
             default:
                 break;
         }

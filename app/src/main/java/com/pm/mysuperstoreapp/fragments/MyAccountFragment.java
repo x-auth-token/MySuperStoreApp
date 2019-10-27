@@ -276,6 +276,46 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         firebaseAuth.addAuthStateListener(authStateListener);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case MY_CAMERA_PERMISSION_CODE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                    File photoFile = null;
+                    try {
+                        photoFile = createImageFile();
+                    } catch (IOException ex) {
+                        // Error occurred while creating the File
+
+                    }
+                    if (photoFile != null) {
+                        Uri photoURI = FileProvider.getUriForFile(Objects.requireNonNull(getContext()), "com.pm.mysuperstoreapp.provider", photoFile);
+                        takePicture.putExtra(MediaStore.EXTRA_OUTPUT,
+                                photoURI);
+                        if (Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                            getActivity().requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                        } else {
+                            startActivityForResult(takePicture, CAMERA_REQUEST_CODE);
+                        }
+                    }
+                    return;
+
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
+    }
 
     @Override
     public void onStop() {
@@ -325,9 +365,9 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                                     photoURI);
                             if (Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                                 getActivity().requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                            } else {
+                                startActivityForResult(takePicture, CAMERA_REQUEST_CODE);
                             }
-
-                            startActivityForResult(takePicture, CAMERA_REQUEST_CODE);
                         }
                         break;
                     case 1:
