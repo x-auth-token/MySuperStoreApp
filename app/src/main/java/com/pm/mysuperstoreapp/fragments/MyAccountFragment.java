@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -56,7 +57,13 @@ import com.pm.mysuperstoreapp.activities.ResendVerificationEmailActivity;
 import com.pm.mysuperstoreapp.models.MyAccountViewModel;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -171,14 +178,30 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
             switch (requestCode) {
                 case CAMERA_REQUEST_CODE:
                     if (getActivity() != null) {
-                        if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                       /* if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                             getActivity().requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
-                        } else {
+                        } else {*/
                             if (data != null && data.getExtras() != null) {
-                                Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
+
+                                Uri photoUri = (Uri) data.getExtras().get(MediaStore.EXTRA_OUTPUT);
+
+                                InputStream is = null;
+
+                                try {
+                                    is = getActivity().getContentResolver().openInputStream(photoUri);
+                                } catch (FileNotFoundException e) {
+                                    e.printStackTrace();
+                                }
+
+                                //Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
+                                Bitmap imageBitmap = BitmapFactory.decodeStream(is);
+
+                                /*OutputStreamWriter osw = new OutputStreamWriter(photoUri);
+                                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, photoUri );*/
+                                uploadProfilePhotoToFirebaseStorage(data.getData());
                                 iViewAccountPhoto.setImageBitmap(imageBitmap);
                             }
-                        }
+                       // }
                     }
                     break;
                 case GALERY_REQUEST_CODE:
@@ -201,15 +224,19 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                 new SimpleDateFormat("yyyyMMdd_HHmmss",
                         Locale.getDefault()).format(new Date());
         String imageFileName = "IMG_" + timeStamp + "_";
-        File storageDir =
-                Objects.requireNonNull(getActivity()).getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
+        /*File storageDir =
+                Objects.requireNonNull(getActivity()).getExternalFilesDir(Environment.DIRECTORY_PICTURES);*/
 
-        String imageFilePath = image.getAbsolutePath();
+        File storageDir =
+                Objects.requireNonNull(getActivity()).getExte
+        /*File image = File.createTempFile(
+                imageFileName,  *//* prefix *//*
+                ".jpg",         *//* suffix *//*
+                storageDir      *//* directory */
+        File image = new File(getActivity().getExternalCacheDir(), imageFileName + "jpg");
+
+
+        //String imageFilePath = image.getAbsolutePath();
         return image;
     }
 
@@ -363,11 +390,11 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                             Uri photoURI = FileProvider.getUriForFile(Objects.requireNonNull(getContext()), "com.pm.mysuperstoreapp.provider", photoFile);
                             takePicture.putExtra(MediaStore.EXTRA_OUTPUT,
                                     photoURI);
-                            if (Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                            /*if (Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                                 getActivity().requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
-                            } else {
+                            } else {*/
                                 startActivityForResult(takePicture, CAMERA_REQUEST_CODE);
-                            }
+                           // }
                         }
                         break;
                     case 1:
