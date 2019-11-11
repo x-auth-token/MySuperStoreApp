@@ -12,14 +12,18 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.MediaRouteButton;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -65,8 +69,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -74,6 +80,7 @@ import java.util.Objects;
 public class MyAccountFragment extends Fragment implements View.OnClickListener {
 
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
+    private static final int PERMISSIONS_ALL_CODE = 1;
     private static final int CAMERA_REQUEST_CODE = 0;
     private static final int GALERY_REQUEST_CODE = 1;
     private static final String TAG = "MyAccPopUserProfile";
@@ -224,16 +231,15 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                 new SimpleDateFormat("yyyyMMdd_HHmmss",
                         Locale.getDefault()).format(new Date());
         String imageFileName = "IMG_" + timeStamp + "_";
-        /*File storageDir =
-                Objects.requireNonNull(getActivity()).getExternalFilesDir(Environment.DIRECTORY_PICTURES);*/
+        //File image =
+              //  Objects.requireNonNull(getActivity()).getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
-        File storageDir =
-                Objects.requireNonNull(getActivity()).getExte
+        
         /*File image = File.createTempFile(
                 imageFileName,  *//* prefix *//*
                 ".jpg",         *//* suffix *//*
                 storageDir      *//* directory */
-        File image = new File(getActivity().getExternalCacheDir(), imageFileName + "jpg");
+        File image = new File(getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES), imageFileName + "jpg");
 
 
         //String imageFilePath = image.getAbsolutePath();
@@ -367,8 +373,70 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         getActivity().finish();
     }
 
+
     // Gets picture from Galery or Camera and sets it as profile picture.
     private void setProfilePicture(View view) {
+
+        List<Intent> intents = new ArrayList<Intent>();
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+                    getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED  ) {
+                getActivity().requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSIONS_ALL_CODE);
+            }
+        }
+
+        File photoFile = null;
+        try {
+            photoFile = createImageFile();
+        } catch (IOException ex) {
+            // Error occurred while creating the File
+
+        }
+        if (photoFile != null) {
+            Uri photoURI = FileProvider.getUriForFile(Objects.requireNonNull(getContext()), "com.pm.mysuperstoreapp.provider", photoFile);
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                    photoURI);
+        }
+
+        PackageManager packageManager = getContext().getPackageManager();
+
+        final List<ResolveInfo> listCam = packageManager.queryIntentActivities(cameraIntent, 0);
+        for (ResolveInfo res : listCam) {
+            String packageName = res.activityInfo.packageName;
+            Intent intent = new Intent(cameraIntent);
+            intent.setComponent(
+                    new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+            intent.setPackage(packageName);
+            intents.add(intent);
+        }
+
+
+        String[] mimeTypes = {"image/jpeg", "image/png", "image/jpg"};
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        galleryIntent.setType("image/*"); // Make sure that only image gets selected
+        galleryIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes); // Only jpegs or pngs allowed
+
+        Intent chooser = Intent.createChooser(galleryIntent, "Select Source");
+        chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS,
+                intents.toArray(new Parcelable[intents.size()]));
+
+        // Verify the intent will resolve to at least one activity
+        if (chooser.resolveActivity(packageManager) != null) {
+            startActivity(chooser);
+        }
+
+
+
+
+
+    }
+
+
+    // Gets picture from Galery or Camera and sets it as profile picture.
+    /*private void setProfilePicture(View view) {
 
         final String[] options = {"Camera", "Gallery"};
 
@@ -390,9 +458,9 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                             Uri photoURI = FileProvider.getUriForFile(Objects.requireNonNull(getContext()), "com.pm.mysuperstoreapp.provider", photoFile);
                             takePicture.putExtra(MediaStore.EXTRA_OUTPUT,
                                     photoURI);
-                            /*if (Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                            *//*if (Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                                 getActivity().requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
-                            } else {*/
+                            } else {*//*
                                 startActivityForResult(takePicture, CAMERA_REQUEST_CODE);
                            // }
                         }
@@ -414,7 +482,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         }).show();
 
 
-    }
+    }*/
 
     // Populates user personal data from Firebase Firestore
     private void populateUserProfile() {
