@@ -10,15 +10,10 @@ package com.pm.mysuperstoreapp.fragments;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.MediaRouteButton;
 import android.content.ComponentName;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,7 +31,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -62,13 +56,7 @@ import com.pm.mysuperstoreapp.activities.ResendVerificationEmailActivity;
 import com.pm.mysuperstoreapp.models.MyAccountViewModel;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -85,6 +73,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     private static final int CAMERA_REQUEST_CODE = 0;
     private static final int GALERY_REQUEST_CODE = 1;
     private static final String TAG = "MyAccPopUserProfile";
+    private static final int REQUEST_CODE = 99;
     private ImageView iViewAccountPhoto;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseAuth firebaseAuth;
@@ -98,6 +87,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     private Button btnUpdateProducts;
     private ProductManagementFragment productManagementFragment;
     private ProgressBar progressBar;
+    private Uri photoURI;
 
 
     public static MyAccountFragment newInstance() {
@@ -179,55 +169,25 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        //super.onActivityResult(requestCode, resultCode, data);
 
         // Allows saving of profile picture
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
-                case CAMERA_REQUEST_CODE:
-                    if (getActivity() != null) {
-                       /* if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                            getActivity().requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
-                        } else {*/
-                            if (data != null && data.getExtras() != null) {
 
-                                Uri photoUri = (Uri) data.getExtras().get(MediaStore.EXTRA_OUTPUT);
-
-                                InputStream is = null;
-
-                                try {
-                                    is = getActivity().getContentResolver().openInputStream(photoUri);
-                                } catch (FileNotFoundException e) {
-                                    e.printStackTrace();
-                                }
-
-                                //Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
-                                Bitmap imageBitmap = BitmapFactory.decodeStream(is);
-
-                                /*OutputStreamWriter osw = new OutputStreamWriter(photoUri);
-                                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, photoUri );*/
-                                uploadProfilePhotoToFirebaseStorage(data.getData());
-                                iViewAccountPhoto.setImageBitmap(imageBitmap);
-                            }
-                       // }
-                    }
-                    break;
-                case GALERY_REQUEST_CODE:
+                case REQUEST_CODE:
 
 
-                    Uri selectedImage = null;
                     if (data != null) {
-                        selectedImage = data.getData();
+                        photoURI = data.getData();
                     }
-                    uploadProfilePhotoToFirebaseStorage(selectedImage);
-                    //Glide.with(getContext()).load(selectedImage).into(iViewAccountPhoto);
-                    iViewAccountPhoto.setImageURI(selectedImage);
+
+                    uploadProfilePhotoToFirebaseStorage(photoURI);
+                    iViewAccountPhoto.setImageURI(photoURI);
                     break;
             }
         }
     }
-
-
 
 
     @Override
@@ -291,11 +251,10 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         switch (requestCode) {
             case PERMISSIONS_ALL_CODE: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if ((grantResults.length > 0)
+                        && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
 
                     setProfilePicture(getView());
-
 
 
                 } else {
@@ -341,7 +300,6 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
 
-
         File photoFile = null;
         try {
             photoFile = createImageFile();
@@ -350,7 +308,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
 
         }
         if (photoFile != null) {
-            Uri photoURI = FileProvider.getUriForFile(Objects.requireNonNull(getContext()), "com.pm.mysuperstoreapp.provider", photoFile);
+            photoURI = FileProvider.getUriForFile(Objects.requireNonNull(getContext()), "com.pm.mysuperstoreapp.provider", photoFile);
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                     photoURI);
         }
@@ -380,12 +338,8 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
 
         // Verify the intent will resolve to at least one activity
         if (chooser.resolveActivity(packageManager) != null) {
-            startActivity(chooser);
+            startActivityForResult(chooser, REQUEST_CODE);
         }
-
-
-
-
 
     }
 
@@ -511,14 +465,12 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-
-
-
         /* if user exists, logged in and email verified then populate his personal data,
-        *  go to email verification page otherwise
-        * */
+         *  go to email verification page otherwise
+         *
+         * */
 
-        if (user != null && user.isEmailVerified()) {
+        if ((user != null) && user.isEmailVerified()) {
             String uid = user.getUid();
 
             FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -537,7 +489,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
 
                         // Fetch user roles
 
-                            HashMap<String, Boolean> roles = (HashMap<String, Boolean>) result.get("role");
+                        HashMap<String, Boolean> roles = (HashMap<String, Boolean>) result.get("role");
 
                         boolean isAdmin = false;
 
@@ -562,7 +514,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                         if (result.getString("profilePictureUrl") != null) {
                             profilePictureUrl = result.getString("profilePictureUrl");
 
-                            if (profilePictureUrl != null && !profilePictureUrl.isEmpty())
+                            if ((profilePictureUrl != null) && !profilePictureUrl.isEmpty())
                                 Glide.with(Objects.requireNonNull(getContext())).load(profilePictureUrl).diskCacheStrategy(DiskCacheStrategy.ALL).into(iViewAccountPhoto);
                         }
 
@@ -575,22 +527,22 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                 }
             });
 
-        }  else {
+        } else {
 
 
-        // move to email reverification page
-        final Intent resendEmailIntent = new Intent(getContext(),
-                ResendVerificationEmailActivity.class);
+            // move to email reverification page
+            final Intent resendEmailIntent = new Intent(getContext(),
+                    ResendVerificationEmailActivity.class);
 
             if (user != null) {
                 resendEmailIntent.putExtra("emailAddress", user.getEmail());
             }
             resendEmailIntent.putExtra("user", user);
 
-        startActivity(resendEmailIntent);
-        Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
-        getActivity().finish();
-    }
+            startActivity(resendEmailIntent);
+            Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left);
+            getActivity().finish();
+        }
     }
 
     // Deal with various buttons clicks
@@ -605,14 +557,13 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                 boolean noPermission = false;
                 if (Build.VERSION.SDK_INT >= 23) {
 
-                    noPermission = (getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
-                            getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
-                            getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED );
+                    noPermission = ((getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) ||
+                            (getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) ||
+                            (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED));
                 }
 
-                if (noPermission)  {
-                        requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, PERMISSIONS_ALL_CODE);
-
+                if (noPermission) {
+                    requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, PERMISSIONS_ALL_CODE);
 
                 } else {
                     setProfilePicture(view);
