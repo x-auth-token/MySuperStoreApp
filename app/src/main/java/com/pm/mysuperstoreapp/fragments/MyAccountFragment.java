@@ -36,6 +36,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -226,15 +227,177 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         }
     }
 
+
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        firebaseAuth.addAuthStateListener(authStateListener);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        firebaseAuth.addAuthStateListener(authStateListener);
+    }
+
+    /*@Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case MY_CAMERA_PERMISSION_CODE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                    File photoFile = null;
+                    try {
+                        photoFile = createImageFile();
+                    } catch (IOException ex) {
+                        // Error occurred while creating the File
+
+                    }
+                    if (photoFile != null) {
+                        Uri photoURI = FileProvider.getUriForFile(Objects.requireNonNull(getContext()), "com.pm.mysuperstoreapp.provider", photoFile);
+                        takePicture.putExtra(MediaStore.EXTRA_OUTPUT,
+                                photoURI);
+                        if (Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                            getActivity().requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                        } else {
+                            startActivityForResult(takePicture, CAMERA_REQUEST_CODE);
+                        }
+                    }
+                    return;
+
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
+    }*/
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSIONS_ALL_CODE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    setProfilePicture(getView());
+
+
+
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        firebaseAuth.removeAuthStateListener(authStateListener);
+    }
+
+    private void logout(View view) {
+
+
+        if (firebaseAuth != null) {
+            firebaseAuth.signOut();
+        }
+        if (googleSignInClient != null) {
+            googleSignInClient.signOut();
+        }
+
+        final Intent intent = new Intent(getContext(),
+                MainActivity.class);
+        startActivity(intent);
+        Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_right);
+        getActivity().finish();
+    }
+
+
+    // Gets picture from Galery or Camera and sets it as profile picture.
+    private void setProfilePicture(View view) {
+
+        List<Intent> intents = new ArrayList<Intent>();
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+
+
+        File photoFile = null;
+        try {
+            photoFile = createImageFile();
+        } catch (IOException ex) {
+            // Error occurred while creating the File
+
+        }
+        if (photoFile != null) {
+            Uri photoURI = FileProvider.getUriForFile(Objects.requireNonNull(getContext()), "com.pm.mysuperstoreapp.provider", photoFile);
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                    photoURI);
+        }
+
+        PackageManager packageManager = getContext().getPackageManager();
+
+        final List<ResolveInfo> listCam = packageManager.queryIntentActivities(cameraIntent, 0);
+        for (ResolveInfo res : listCam) {
+            String packageName = res.activityInfo.packageName;
+            Intent intent = new Intent(cameraIntent);
+            intent.setComponent(
+                    new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+            intent.setPackage(packageName);
+            intents.add(intent);
+        }
+
+
+        String[] mimeTypes = {"image/jpeg", "image/png", "image/jpg"};
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        galleryIntent.setType("image/*"); // Make sure that only image gets selected
+        galleryIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes); // Only jpegs or pngs allowed
+
+        Intent chooser = Intent.createChooser(galleryIntent, "Select Source");
+        chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS,
+                intents.toArray(new Parcelable[intents.size()]));
+
+        // Verify the intent will resolve to at least one activity
+        if (chooser.resolveActivity(packageManager) != null) {
+            startActivity(chooser);
+        }
+
+
+
+
+
+    }
+
     private File createImageFile() throws IOException {
         String timeStamp =
                 new SimpleDateFormat("yyyyMMdd_HHmmss",
                         Locale.getDefault()).format(new Date());
         String imageFileName = "IMG_" + timeStamp + "_";
         //File image =
-              //  Objects.requireNonNull(getActivity()).getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        //  Objects.requireNonNull(getActivity()).getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
-        
+
         /*File image = File.createTempFile(
                 imageFileName,  *//* prefix *//*
                 ".jpg",         *//* suffix *//*
@@ -293,147 +456,6 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
             }
         });
     }
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        firebaseAuth.addAuthStateListener(authStateListener);
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        firebaseAuth.addAuthStateListener(authStateListener);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case MY_CAMERA_PERMISSION_CODE: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-                    File photoFile = null;
-                    try {
-                        photoFile = createImageFile();
-                    } catch (IOException ex) {
-                        // Error occurred while creating the File
-
-                    }
-                    if (photoFile != null) {
-                        Uri photoURI = FileProvider.getUriForFile(Objects.requireNonNull(getContext()), "com.pm.mysuperstoreapp.provider", photoFile);
-                        takePicture.putExtra(MediaStore.EXTRA_OUTPUT,
-                                photoURI);
-                        if (Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                            getActivity().requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
-                        } else {
-                            startActivityForResult(takePicture, CAMERA_REQUEST_CODE);
-                        }
-                    }
-                    return;
-
-                } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
-
-            // other 'case' lines to check for other
-            // permissions this app might request.
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        firebaseAuth.removeAuthStateListener(authStateListener);
-    }
-
-    private void logout(View view) {
-
-
-        if (firebaseAuth != null) {
-            firebaseAuth.signOut();
-        }
-        if (googleSignInClient != null) {
-            googleSignInClient.signOut();
-        }
-
-        final Intent intent = new Intent(getContext(),
-                MainActivity.class);
-        startActivity(intent);
-        Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_right);
-        getActivity().finish();
-    }
-
-
-    // Gets picture from Galery or Camera and sets it as profile picture.
-    private void setProfilePicture(View view) {
-
-        List<Intent> intents = new ArrayList<Intent>();
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
-                    getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED  ) {
-                getActivity().requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSIONS_ALL_CODE);
-            }
-        }
-
-        File photoFile = null;
-        try {
-            photoFile = createImageFile();
-        } catch (IOException ex) {
-            // Error occurred while creating the File
-
-        }
-        if (photoFile != null) {
-            Uri photoURI = FileProvider.getUriForFile(Objects.requireNonNull(getContext()), "com.pm.mysuperstoreapp.provider", photoFile);
-            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                    photoURI);
-        }
-
-        PackageManager packageManager = getContext().getPackageManager();
-
-        final List<ResolveInfo> listCam = packageManager.queryIntentActivities(cameraIntent, 0);
-        for (ResolveInfo res : listCam) {
-            String packageName = res.activityInfo.packageName;
-            Intent intent = new Intent(cameraIntent);
-            intent.setComponent(
-                    new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
-            intent.setPackage(packageName);
-            intents.add(intent);
-        }
-
-
-        String[] mimeTypes = {"image/jpeg", "image/png", "image/jpg"};
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        galleryIntent.setType("image/*"); // Make sure that only image gets selected
-        galleryIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes); // Only jpegs or pngs allowed
-
-        Intent chooser = Intent.createChooser(galleryIntent, "Select Source");
-        chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS,
-                intents.toArray(new Parcelable[intents.size()]));
-
-        // Verify the intent will resolve to at least one activity
-        if (chooser.resolveActivity(packageManager) != null) {
-            startActivity(chooser);
-        }
-
-
-
-
-
-    }
-
 
     // Gets picture from Galery or Camera and sets it as profile picture.
     /*private void setProfilePicture(View view) {
@@ -579,7 +601,22 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                 logout(view);
                 break;
             case R.id.fragment_my_account_photo:
-                setProfilePicture(view);
+
+                boolean noPermission = false;
+                if (Build.VERSION.SDK_INT >= 23) {
+
+                    noPermission = (getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+                            getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+                            getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED );
+                }
+
+                if (noPermission)  {
+                        requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, PERMISSIONS_ALL_CODE);
+
+
+                } else {
+                    setProfilePicture(view);
+                }
                 break;
             case R.id.fragment_my_account_update_products_button:
                 if (getFragmentManager() != null) {
